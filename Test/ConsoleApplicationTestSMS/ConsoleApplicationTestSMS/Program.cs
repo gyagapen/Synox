@@ -47,10 +47,9 @@ namespace ConsoleApplicationTestSMS
             //on affiche la reponse
             //Console.Out.WriteLine("Message du modem : "+modSMS.Recv());
             //Console.Out.WriteLine("Message du modem : " + modSMS.Recv());
-            Console.Out.WriteLine("Lecture effectue");
+
+            Console.Out.WriteLine("Appuyez sur une touche pour quitter...");
             Console.Read();
-
-
         }
 
 
