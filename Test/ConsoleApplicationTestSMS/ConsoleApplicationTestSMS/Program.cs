@@ -19,6 +19,7 @@ namespace ConsoleApplicationTestSMS
             modSMS.connectToModem();
 
             
+            //on supprime tous les messages
 
            for (int i = 1; i <= 3; i++)
             {
@@ -28,7 +29,7 @@ namespace ConsoleApplicationTestSMS
 
             }
 
-          //modSMS.sendSMSPDU("Du the ? 1/1000 msg(s) envoye", "0625123338");
+           modSMS.sendSMSPDU("Du the ? 1/1000 msg(s) envoye", "0604655154");
            /*modSMS.sendSMSPDU("Du the ? 2/1000 msg(s) envoye", "0622031216");
            modSMS.sendSMSPDU("Du the ? 3/1000 msg(s) envoye", "0622031216");*/
             
@@ -37,7 +38,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.sendSMSPDU("toto");
            //modSMS.Send("ATE1");
            //modSMS.Recv();
-            modSMS.readAllSMS();
+            modSMS.readPDUMessage();
 
            //Console.Out.WriteLine("encodage pdu : "+modSMS.encodeMsgPDU("toto", "0675610118"));
 

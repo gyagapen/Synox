@@ -104,12 +104,17 @@ namespace ConsoleApplicationTestSMS
         }
 
 
+        public void readAllSMSText()
+        {
+            //mode text
+            Send("AT+CMGF=1");
+
+            readAllSMS();
+        }
+
         //lecture des messages en mode texte
         public void readAllSMS()
         {
-
-            //mode text
-            Send("AT+CMGF=1");
 
             Send("AT+CSCA?");
 
@@ -191,6 +196,15 @@ namespace ConsoleApplicationTestSMS
 
         }
 
+
+        public void readPDUMessage()
+        {
+            //passage en mode PDU
+            Send("AT+CMGF=0");
+
+            readAllSMS();
+        }
+
         public string encodeMsgPDU(string message, string no)
         {
             SMS sms = new SMS();
@@ -213,5 +227,35 @@ namespace ConsoleApplicationTestSMS
         }
 
 
+        public void decodeSMSPDU(string message)
+        {
+            //on determine le type du sms recu
+            SMSType smsType = SMSBase.GetSMSType(message);
+
+            //si c'est un sms classique
+            if (smsType == SMSType.SMS)
+            {
+                //on recupere le sms
+                SMS sms = new SMS();
+                SMS.Fetch(sms, ref message);
+
+                Console.Out.WriteLine("Message "+sms.Message);
+            }
+            else // c'est un accuse de recpetion
+            {
+                //on recupere l'accuse
+                SMSStatusReport smsStatus = new SMSStatusReport();
+                SMSStatusReport.Fetch(smsStatus, ref message);
+                Console.Out.WriteLine("Accuse de reception " + smsStatus.MessageReference);
+            }
+        }
+
+
+        //supprime tous les messages de la sim
+        public void deleteAllSMS()
+        {
+            Console.Out.WriteLine("Deleting all messages");
+            Send("AT+CMGD=1,4");
+        }
     }
 }
