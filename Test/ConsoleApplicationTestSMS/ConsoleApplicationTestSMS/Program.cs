@@ -28,8 +28,8 @@ namespace ConsoleApplicationTestSMS
 
             }
 
-          /* modSMS.sendSMSPDU("Du the ? 1/1000 msg(s) envoye", "0622031216");
-           modSMS.sendSMSPDU("Du the ? 2/1000 msg(s) envoye", "0622031216");
+          //modSMS.sendSMSPDU("Du the ? 1/1000 msg(s) envoye", "0625123338");
+           /*modSMS.sendSMSPDU("Du the ? 2/1000 msg(s) envoye", "0622031216");
            modSMS.sendSMSPDU("Du the ? 3/1000 msg(s) envoye", "0622031216");*/
             
 
@@ -39,7 +39,7 @@ namespace ConsoleApplicationTestSMS
            //modSMS.Recv();
             modSMS.readAllSMS();
 
-          
+           //Console.Out.WriteLine("encodage pdu : "+modSMS.encodeMsgPDU("toto", "0675610118"));
 
             //modSMS.ExecCommand("AT", 300, "No phone connected");
             //modSMS.writeOnPort("ATI");

@@ -114,14 +114,49 @@ namespace ConsoleApplicationTestSMS
 					_validityPeriod = (byte) (value.Hours * 12 + value.Minutes / 5 - 1);
 				else {
 					_validityPeriodFormat = ValidityPeriodFormat.FieldNotPresent;
-					
+				
+
 					return;
 				}
 
 				_validityPeriodFormat = ValidityPeriodFormat.Relative;
+
+                    //int TP_VP_value = calculValidityPeriod(value);
+
+                    //_validityPeriod = (byte)(TP_VP_value);
 			}
+
+
 		}
 
+        public int calculValidityPeriod(TimeSpan value)
+        {
+            int result;
+
+            //si plus de 4 semaines
+            if (value.Days >= 35)
+            {
+                result = (int)(value.Days / 7) + 192;
+            }
+            else if (value.Days >= 2)
+            {
+                result = (int)(value.Days + 166);
+            }
+            else if (value.Hours >= 12)
+            {
+                result = (int)((value.Hours - 12) * 2 + 143 + (int)(value.Minutes / 30));
+            }
+            else
+            {
+                result = (int)(value.Minutes / 5 - 1 + value.Hours * 12);
+            }
+
+            Console.Out.WriteLine("Valeur TP VP : " + result);
+
+            return result;
+        }
+
+        
 		public virtual byte[] UserDataHeader { get { return _userDataHeader; } }
 
 		#region "in parts" message properties
