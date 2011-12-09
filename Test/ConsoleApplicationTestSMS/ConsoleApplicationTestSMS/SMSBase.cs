@@ -101,7 +101,7 @@ namespace ConsoleApplicationTestSMS
             byte mask = 0;
             byte shiftedMask = 0;
             byte bitsRequired = 0;
-            byte invertMask = 0;
+            //byte invertMask = 0;
             int encodedMessageIndex = 0;
             int shiftCount = 0;
             //calculating new encoded message length

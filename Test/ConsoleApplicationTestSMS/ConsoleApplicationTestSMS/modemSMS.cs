@@ -172,7 +172,6 @@ namespace ConsoleApplicationTestSMS
         public void Send(string query, int estLu = 0)
         {
             byte[] buffer = Encoding.Default.GetBytes(query + "\r");
-            int cpt = 0;
             if (PortCom.IsOpen)
             {
                 //nettoyage des buffers
