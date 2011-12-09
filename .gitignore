@@ -4,6 +4,7 @@
 *.o
 *.so
 *.suo
+*.pdb
 
 # OS generated files #
 ######################
