@@ -18,36 +18,29 @@ namespace ConsoleApplicationTestSMS
             modemSMS modSMS = new modemSMS("COM2");
             modSMS.connectToModem();
 
+            modSMS.Send("ATE0");
             
             //on supprime tous les messages
+            //modSMS.deleteAllSMS();
+
 
            for (int i = 1; i <= 3; i++)
             {
-                //Console.Out.WriteLine("no :"+i);
                 //modSMS.sendSMS("0675610118", i+" Galaxy Tab a vendre ! ");
-                //modSMS.sendSMSPDU(i+" salami(s)", "0675610118");
-
             }
 
-           modSMS.sendSMSPDU("Du the ? 1/1000 msg(s) envoye", "0604655154");
-           /*modSMS.sendSMSPDU("Du the ? 2/1000 msg(s) envoye", "0622031216");
-           modSMS.sendSMSPDU("Du the ? 3/1000 msg(s) envoye", "0622031216");*/
-            
 
 
-            //modSMS.sendSMSPDU("toto");
-           //modSMS.Send("ATE1");
-           //modSMS.Recv();
+
+
+          // modSMS.sendSMSPDU("toto2", "0604655154");
+
+
             modSMS.readPDUMessage();
 
-           //Console.Out.WriteLine("encodage pdu : "+modSMS.encodeMsgPDU("toto", "0675610118"));
+            
+           //modSMS.readAllSMSText();
 
-            //modSMS.ExecCommand("AT", 300, "No phone connected");
-            //modSMS.writeOnPort("ATI");
-
-            //on affiche la reponse
-            //Console.Out.WriteLine("Message du modem : "+modSMS.Recv());
-            //Console.Out.WriteLine("Message du modem : " + modSMS.Recv());
 
             Console.Out.WriteLine("Appuyez sur une touche pour quitter...");
             Console.Read();

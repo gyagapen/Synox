@@ -109,17 +109,14 @@ namespace ConsoleApplicationTestSMS
             //mode text
             Send("AT+CMGF=1");
 
-            readAllSMS();
+            readAllSMS("\"ALL\"");
         }
 
         //lecture des messages en mode texte
-        public void readAllSMS()
+        public void readAllSMS(string typeLecture, int reponseAutomatique = 0 )
         {
-
-            Send("AT+CSCA?");
-
             Send("AT+CPMS=\"SM\"");
-            Send("AT+CMGL=\"ALL\"");
+            Send("AT+CMGL="+typeLecture,reponseAutomatique);
          
         }
 
@@ -172,7 +169,7 @@ namespace ConsoleApplicationTestSMS
 
 
         //envoie des commandes AT au modem
-        public void Send(string query)
+        public void Send(string query, int estLu = 0)
         {
             byte[] buffer = Encoding.Default.GetBytes(query + "\r");
             int cpt = 0;
@@ -186,9 +183,12 @@ namespace ConsoleApplicationTestSMS
                 receiveNow.Reset();
 
                 PortCom.Write(buffer, 0, buffer.Length);
-                
-                //on affiche la reponse de la commande
-                Console.Out.WriteLine(Recv());
+
+                if (estLu == 0)
+                {
+                    //on affiche la reponse de la commande
+                    Console.Out.WriteLine(Recv());
+                }
 
 
             }
@@ -202,7 +202,16 @@ namespace ConsoleApplicationTestSMS
             //passage en mode PDU
             Send("AT+CMGF=0");
 
-            readAllSMS();
+            readAllSMS("4", 1);
+
+            //on recupere les reponses a decoder
+            string[] tabRep = decouperChaineLecturePDU(Recv());
+
+            //on decode chaque reponse
+            for (int i = 0; i < tabRep.Length; i++)
+            {
+                decodeSMSPDU(tabRep[i]);
+            }
         }
 
         public string encodeMsgPDU(string message, string no)
@@ -255,7 +264,30 @@ namespace ConsoleApplicationTestSMS
         public void deleteAllSMS()
         {
             Console.Out.WriteLine("Deleting all messages");
-            Send("AT+CMGD=1,4");
+            Send("AT+CMGD=0,4");
+        }
+
+
+        //on decoupe la reponse du modem lorsqu'on veut lire des sms en mode PDU
+        //on retourne un tableau de chaines PDU
+        public string[] decouperChaineLecturePDU(string reponse)
+        {
+            string[] temp = reponse.Split('\n');
+            List<string> tabRep = new List<string>();
+
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (!temp[i].Contains("+") && !temp[i].Contains("OK") && temp[i] != null && temp[i] != "" && temp[i] != "\r" && temp[i] != "\n")
+                {
+                    //on ajoute au tableau
+                    tabRep.Add(temp[i]);
+
+                    //Console.Out.WriteLine("A DECODER :" + temp[i]);
+                }
+            }
+
+
+            return tabRep.ToArray(); 
         }
     }
 }
