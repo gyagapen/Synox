@@ -15,7 +15,7 @@ namespace ConsoleApplicationTestSMS
         {
             //ouverture de la connexion
 
-            modemSMS modSMS = new modemSMS("COM5");
+            modemSMS modSMS = new modemSMS("COM2");
             modSMS.connectToModem();
 
             modSMS.Send("ATE0");
