@@ -1,0 +1,5 @@
+c:\users\gui\documents\visual studio 2010\Projects\ConsoleApplicationTestSMS\ConsoleApplicationTestSMS\obj\x86\Debug\ResolveAssemblyReference.cache
+c:\users\gui\documents\visual studio 2010\Projects\ConsoleApplicationTestSMS\ConsoleApplicationTestSMS\bin\Debug\ConsoleApplicationTestSMS.exe
+c:\users\gui\documents\visual studio 2010\Projects\ConsoleApplicationTestSMS\ConsoleApplicationTestSMS\bin\Debug\ConsoleApplicationTestSMS.pdb
+c:\users\gui\documents\visual studio 2010\Projects\ConsoleApplicationTestSMS\ConsoleApplicationTestSMS\obj\x86\Debug\ConsoleApplicationTestSMS.exe
+c:\users\gui\documents\visual studio 2010\Projects\ConsoleApplicationTestSMS\ConsoleApplicationTestSMS\obj\x86\Debug\ConsoleApplicationTestSMS.pdb
