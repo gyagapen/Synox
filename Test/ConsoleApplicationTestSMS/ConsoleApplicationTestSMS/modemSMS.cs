@@ -19,7 +19,7 @@ namespace ConsoleApplicationTestSMS
         public modemSMS(String port)
         {
             serialPortName = port;
-           
+
         }
 
 
@@ -77,16 +77,16 @@ namespace ConsoleApplicationTestSMS
         //envoi d'un sms en mode texte
         public void sendSMS(string no, string message)
         {
-            Send("AT+CMGS=\""+no+"\"");
-            
+            Send("AT+CMGS=\"" + no + "\"");
+
             Send(message + char.ConvertFromUtf32(26));
-            
+
         }
 
         //envoi d'un sms en mode pdu
-        public void sendSMSPDU(string message, string no)
+        public void sendSMSPDU(string message, string no, Boolean receipt)
         {
-            string pduMSG = encodeMsgPDU(message, no);
+            string pduMSG = encodeMsgPDU(message, no, receipt);
 
 
             //mode pdu
@@ -97,10 +97,10 @@ namespace ConsoleApplicationTestSMS
             int lenght = (pduMSG.Length - 2) / 2;
 
             //on envoie le sms
-            Send("AT+CMGS="+lenght);
-            
+            Send("AT+CMGS=" + lenght);
+
             Send(pduMSG + char.ConvertFromUtf32(26));
-            
+
         }
 
 
@@ -113,11 +113,11 @@ namespace ConsoleApplicationTestSMS
         }
 
         //lecture des messages en mode texte
-        public void readAllSMS(string typeLecture, int reponseAutomatique = 0 )
+        public void readAllSMS(string typeLecture, int reponseAutomatique = 0)
         {
             Send("AT+CPMS=\"SM\"");
-            Send("AT+CMGL="+typeLecture,reponseAutomatique);
-         
+            Send("AT+CMGL=" + typeLecture, reponseAutomatique);
+
         }
 
 
@@ -125,7 +125,7 @@ namespace ConsoleApplicationTestSMS
         public int countSMSOnSim()
         {
             Send("AT+CPMS?");
-            
+
             return 0;
         }
 
@@ -134,7 +134,7 @@ namespace ConsoleApplicationTestSMS
         {
 
             string response = "";
-            
+
             do //tantque la reponse n'est pas complete
             {
                 //si le signal comme quoi on a recu un message est active dans la prochaine demie seconde
@@ -151,11 +151,11 @@ namespace ConsoleApplicationTestSMS
                 else
                 {
                     if (response.Length > 0)
-         
+
                         throw new ApplicationException("Response received is incomplete.");
                     else
                         throw new ApplicationException("No data received from phone.");
-                    
+
                 }
 
             }
@@ -213,7 +213,7 @@ namespace ConsoleApplicationTestSMS
             }
         }
 
-        public string encodeMsgPDU(string message, string no)
+        public string encodeMsgPDU(string message, string no, Boolean receipt)
         {
             SMS sms = new SMS();
 
@@ -226,13 +226,14 @@ namespace ConsoleApplicationTestSMS
             sms.Message = message;
 
             //accuse de recepetion
-            sms.StatusReportIndication = true;
+            sms.StatusReportIndication = receipt;
 
             //periode de validite de deux jours
-            sms.ValidityPeriod = new TimeSpan(0,0,5,0,0);
-            
+            sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+
             return sms.Compose(SMS.SMSEncoding._7bit);
         }
+
 
 
         public void decodeSMSPDU(string message)
@@ -247,9 +248,9 @@ namespace ConsoleApplicationTestSMS
                 SMS sms = new SMS();
                 SMS.Fetch(sms, ref message);
 
-                Console.Out.WriteLine("Message "+sms.Message);
+                Console.Out.WriteLine("Message " + sms.Message);
             }
-            else // c'est un accuse de recpetion
+            else // c'est un accuse de reception
             {
                 //on recupere l'accuse
                 SMSStatusReport smsStatus = new SMSStatusReport();
@@ -258,8 +259,9 @@ namespace ConsoleApplicationTestSMS
             }
         }
 
-
+        //
         //supprime tous les messages de la sim
+        //
         public void deleteAllSMS()
         {
             Console.Out.WriteLine("Deleting all messages");
@@ -284,9 +286,10 @@ namespace ConsoleApplicationTestSMS
                     //Console.Out.WriteLine("A DECODER :" + temp[i]);
                 }
             }
-
-
-            return tabRep.ToArray(); 
+            return tabRep.ToArray();
         }
+
+
+        //
     }
 }
