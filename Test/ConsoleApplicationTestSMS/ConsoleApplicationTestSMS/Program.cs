@@ -35,7 +35,14 @@ namespace ConsoleApplicationTestSMS
 
             ///modSMS.readPDUMessage();
 
-            modSMS.readAllSMSText();
+
+          modSMS.sendSMSText("test mode text", "0604655154");
+
+
+            //modSMS.readPDUMessage();
+
+            
+           //modSMS.readAllSMSText();
 
 
             Console.Out.WriteLine("Appuyez sur une touche pour quitter...");
