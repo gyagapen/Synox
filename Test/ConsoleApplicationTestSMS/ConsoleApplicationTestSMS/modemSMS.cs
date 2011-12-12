@@ -75,8 +75,12 @@ namespace ConsoleApplicationTestSMS
 
 
         //envoi d'un sms en mode texte
-        public void sendSMS(string no, string message)
+        public void sendSMSText(string no, string message)
         {
+
+            //mode text
+            Send("AT+CMGF=1");
+
             Send("AT+CMGS=\""+no+"\"");
             
             Send(message + char.ConvertFromUtf32(26));

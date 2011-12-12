@@ -33,10 +33,10 @@ namespace ConsoleApplicationTestSMS
 
 
 
-          // modSMS.sendSMSPDU("toto2", "0604655154");
+          modSMS.sendSMSText("test mode text", "0604655154");
 
 
-            modSMS.readPDUMessage();
+            //modSMS.readPDUMessage();
 
             
            //modSMS.readAllSMSText();
