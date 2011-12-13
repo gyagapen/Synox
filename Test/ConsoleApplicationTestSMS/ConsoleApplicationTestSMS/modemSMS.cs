@@ -89,10 +89,12 @@ namespace ConsoleApplicationTestSMS
             Console.WriteLine("Juste après l'envoi texte");
         }
 
-        //envoi d'un sms en mode pdu
-        public void sendSMSPDU(string message, string no, Boolean receipt)
+        //envoi d'un sms en mode pdu, receipt = accuse de reception
+        public void sendSMSPDU(string no, string message, Boolean receipt = false)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt);
+
+            Console.Out.WriteLine("Code PDU a envoyer : " + pduMSG);
 
             //mode pdu
             Send("AT+CMGF=0");
@@ -207,8 +209,13 @@ namespace ConsoleApplicationTestSMS
 
             readAllSMS("4", 1);
 
+            //messages en text brut
+            string message = Recv();
+
+            //Console.Out.WriteLine("Message brut : " + message);
+
             //on recupere les reponses a decoder
-            string[] tabRep = decouperChaineLecturePDU(Recv());
+            string[] tabRep = decouperChaineLecturePDU(message);
 
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
@@ -233,7 +240,7 @@ namespace ConsoleApplicationTestSMS
             sms.StatusReportIndication = receipt;
 
             //periode de validite de deux jours
-            sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+            sms.ValidityPeriod = new TimeSpan(2, 0, 0, 0, 0);
 
             return sms.Compose(SMS.SMSEncoding._7bit);
         }
@@ -251,8 +258,8 @@ namespace ConsoleApplicationTestSMS
                 //on recupere le sms
                 SMS sms = new SMS();
                 SMS.Fetch(sms, ref message);
-
-                Console.Out.WriteLine("Message " + sms.Message);
+                afficherContenuMessagePDU(sms);
+                
             }
             else // c'est un accuse de reception
             {
@@ -261,6 +268,19 @@ namespace ConsoleApplicationTestSMS
                 SMSStatusReport.Fetch(smsStatus, ref message);
                 Console.Out.WriteLine("Accuse de reception " + smsStatus.MessageReference);
             }
+        }
+
+
+        //fonction qui affiche le contenu d'un message PDU
+        public void afficherContenuMessagePDU(SMS unSMS)
+        {
+            Console.Out.WriteLine("--------- Contenu message PDU ------------");
+            Console.Out.WriteLine("Expediteur : " + unSMS.PhoneNumber);
+            Console.Out.WriteLine("Message : " + unSMS.Message);
+            Console.Out.WriteLine("Message2 : " + unSMS.StatusReportIndication);
+            Console.Out.WriteLine("Type de message : " + unSMS.Type);
+            
+
         }
 
         //
@@ -287,7 +307,6 @@ namespace ConsoleApplicationTestSMS
                     //on ajoute au tableau
                     tabRep.Add(temp[i]);
 
-                    //Console.Out.WriteLine("A DECODER :" + temp[i]);
                 }
             }
             return tabRep.ToArray();
