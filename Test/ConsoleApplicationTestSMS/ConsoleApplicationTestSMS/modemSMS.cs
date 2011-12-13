@@ -81,9 +81,12 @@ namespace ConsoleApplicationTestSMS
             Send("AT+CMGF=1");
 
             Send("AT+CMGS=\""+no+"\"");
+
+            Console.WriteLine("Juste avant l'envoi texte : " + message + char.ConvertFromUtf32(26));
             
             Send(message + char.ConvertFromUtf32(26));
 
+            Console.WriteLine("Juste après l'envoi texte");
         }
 
         //envoi d'un sms en mode pdu
@@ -91,9 +94,7 @@ namespace ConsoleApplicationTestSMS
         {
             string pduMSG = encodeMsgPDU(message, no, receipt);
 
-
             //mode pdu
-
             Send("AT+CMGF=0");
 
             //longueur du message 
