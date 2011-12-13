@@ -13,6 +13,8 @@ namespace ConsoleApplicationTestSMS
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
 
+        //TEST
+
         static void Main(string[] args)
         {
             //ouverture de la connexion
