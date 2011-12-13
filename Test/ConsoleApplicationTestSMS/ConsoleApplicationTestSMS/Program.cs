@@ -12,6 +12,7 @@ namespace ConsoleApplicationTestSMS
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
+        const string statutSyagapen = "Andouille !";
 
         //TEST
 
