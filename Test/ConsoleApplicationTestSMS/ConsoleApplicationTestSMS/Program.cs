@@ -25,7 +25,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("ATE0");
 
             // Paramètre le modem pour les accusés de réception
-            modSMS.Send("AT+CSMP=17,167,0,16");
+            //modSMS.Send("AT+CSMP=17,167,0,0");
 
             //on supprime tous les messages
             //modSMS.deleteAllSMS();
@@ -33,14 +33,25 @@ namespace ConsoleApplicationTestSMS
 
             for (int i = 1; i <= 10; i++)
             {
-                modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
+                //modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
             }
 
 
+            modSMS.Send("AT+CSMP=49,167,0,0");
+            modSMS.Send("AT+CNMI=2,2,3,2,1");
 
-            modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 15h", false);
+            //modSMS.sendSMSPDU("0988899000988789", "Test accusé réception PDU 17h", true);
+            //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 18h", true);
+            //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");
+            //modSMS.readPDUMessage();
             //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");
 
+            //modSMS.Send("AT+CMGF=0");
+            //modSMS.Send("AT+CPMS=\"SR\"");
+            //modSMS.Send("AT+CMGL=\"ALL\""); 
+            //modSMS.Send("AT+CMGL=4");
+
+            modSMS.readDeliveryReport();
 
             //modSMS.readPDUMessage();
             //modSMS.readAllSMSText();
@@ -48,9 +59,11 @@ namespace ConsoleApplicationTestSMS
 
             //modSMS.sendSMSText(numeroM, "test mode texte");
 
-
+            //modSMS.Recv();
             Console.Out.WriteLine("Appuyez sur une touche pour quitter...");
+            
             Console.Read();
+            
         }
 
     }

@@ -124,9 +124,11 @@ namespace ConsoleApplicationTestSMS
         public void readAllSMS(string typeLecture, int reponseAutomatique = 0)
         {
             Send("AT+CPMS=\"SM\"");
+            //Send("AT+CPMS=\"SR\"");
             Send("AT+CMGL=" + typeLecture, reponseAutomatique);
 
         }
+
 
 
         //compte le nombre de message présent sur la sim
@@ -226,6 +228,36 @@ namespace ConsoleApplicationTestSMS
             }
         }
 
+
+        public void readDeliveryReport()
+        {
+            //passage en mode PDU
+            Send("AT+CMGF=0");
+
+            Send("AT+CPMS=\"SR\"");
+            //Send("AT+CPMS=\"SR\"");
+            Send("AT+CMGL=4", 1);
+            
+
+            //messages en text brut
+            string message = Recv();
+
+            Console.Out.WriteLine("Message brut : " + message);
+
+            //on recupere les reponses a decoder
+            string[] tabRep = decouperChaineLecturePDU(message);
+
+            //on decode chaque reponse
+            for (int i = 0; i < tabRep.Length; i++)
+            {
+                //decodeSMSPDU(tabRep[i]);
+
+                SMSStatusReport smsStatus = new SMSStatusReport();
+                //SMSStatusReport.Fetch(smsStatus, ref tabRep[i]);
+                //Console.Out.WriteLine("Accuse de reception " + smsStatus.MessageReference);
+            }
+        }
+
         public string encodeMsgPDU(string message, string no, Boolean receipt)
         {
             SMS sms = new SMS();
@@ -242,7 +274,7 @@ namespace ConsoleApplicationTestSMS
             sms.StatusReportIndication = receipt;
 
             //periode de validite de deux jours
-            sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+            //sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
 
             return sms.Compose(SMS.SMSEncoding._7bit);
         }
@@ -254,9 +286,12 @@ namespace ConsoleApplicationTestSMS
             //on determine le type du sms recu
             SMSType smsType = SMSBase.GetSMSType(message);
 
+            
+
             //si c'est un sms classique
             if (smsType == SMSType.SMS)
             {
+                Console.Out.WriteLine("OK2");
                 //on recupere le sms
                 SMS sms = new SMS();
                 SMS.Fetch(sms, ref message);
@@ -279,7 +314,7 @@ namespace ConsoleApplicationTestSMS
             Console.Out.WriteLine("--------- Contenu message PDU ------------");
             Console.Out.WriteLine("Expediteur : " + unSMS.PhoneNumber);
             Console.Out.WriteLine("Message : " + unSMS.Message);
-            Console.Out.WriteLine("Message2 : " + unSMS.StatusReportIndication);
+            Console.Out.WriteLine("Accuse reception : " + unSMS.StatusReportIndication);
             Console.Out.WriteLine("Type de message : " + unSMS.Type);
             
 
