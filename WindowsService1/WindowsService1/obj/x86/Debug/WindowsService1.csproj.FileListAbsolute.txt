@@ -1,0 +1,9 @@
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe.config
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.pdb
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\WindowsService1.ProjectInstaller.resources
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\WindowsService1.exe
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\obj\x86\Debug\WindowsService1.pdb
