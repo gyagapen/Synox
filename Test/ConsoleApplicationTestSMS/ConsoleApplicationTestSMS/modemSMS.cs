@@ -5,6 +5,7 @@ using System.Text;
 using System.IO.Ports;
 using System.Threading;
 
+
 namespace ConsoleApplicationTestSMS
 {
     class modemSMS
@@ -80,10 +81,10 @@ namespace ConsoleApplicationTestSMS
             //mode text
             Send("AT+CMGF=1");
 
-            Send("AT+CMGS=\""+no+"\"");
+            Send("AT+CMGS=\"" + no + "\"");
 
             Console.WriteLine("Juste avant l'envoi texte : " + message + char.ConvertFromUtf32(26));
-            
+
             Send(message + char.ConvertFromUtf32(26));
 
             Console.WriteLine("Juste après l'envoi texte");
@@ -232,29 +233,23 @@ namespace ConsoleApplicationTestSMS
         public void readDeliveryReport()
         {
             //passage en mode PDU
-            Send("AT+CMGF=0");
+            Send("AT+CMGF=1");
 
             Send("AT+CPMS=\"SR\"");
             //Send("AT+CPMS=\"SR\"");
-            Send("AT+CMGL=4", 1);
-            
+            Send("AT+CMGL=\"ALL\"", 1);
+
 
             //messages en text brut
             string message = Recv();
 
-            Console.Out.WriteLine("Message brut : " + message);
-
             //on recupere les reponses a decoder
-            string[] tabRep = decouperChaineLecturePDU(message);
+            string[] tabRep = message.Split('\n');
 
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
             {
-                //decodeSMSPDU(tabRep[i]);
-
-                SMSStatusReport smsStatus = new SMSStatusReport();
-                //SMSStatusReport.Fetch(smsStatus, ref tabRep[i]);
-                //Console.Out.WriteLine("Accuse de reception " + smsStatus.MessageReference);
+                decoderDeliveryReport(tabRep[i]);
             }
         }
 
@@ -286,17 +281,16 @@ namespace ConsoleApplicationTestSMS
             //on determine le type du sms recu
             SMSType smsType = SMSBase.GetSMSType(message);
 
-            
+
 
             //si c'est un sms classique
             if (smsType == SMSType.SMS)
             {
-                Console.Out.WriteLine("OK2");
                 //on recupere le sms
                 SMS sms = new SMS();
                 SMS.Fetch(sms, ref message);
                 afficherContenuMessagePDU(sms);
-                
+
             }
             else // c'est un accuse de reception
             {
@@ -316,7 +310,7 @@ namespace ConsoleApplicationTestSMS
             Console.Out.WriteLine("Message : " + unSMS.Message);
             Console.Out.WriteLine("Accuse reception : " + unSMS.StatusReportIndication);
             Console.Out.WriteLine("Type de message : " + unSMS.Type);
-            
+
 
         }
 
@@ -350,6 +344,19 @@ namespace ConsoleApplicationTestSMS
         }
 
 
-        //
+        public void decoderDeliveryReport(string message)
+        {
+            //on enleve toutes les reponses non pertinentes
+            if (message.StartsWith("+"))
+            {
+                String[] tabAttributs = message.Split(',');
+
+                Console.Out.WriteLine("--------- Contenu Accuse reception------------");
+                Console.Out.WriteLine("Reference"+tabAttributs[3]);
+                Console.Out.WriteLine("Destinataire"+tabAttributs[4]);
+                Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
+                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
+            }
+        }
     }
 }

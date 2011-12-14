@@ -41,7 +41,7 @@ namespace ConsoleApplicationTestSMS
             modSMS.Send("AT+CNMI=2,2,3,2,1");
 
             //modSMS.sendSMSPDU("0988899000988789", "Test accusé réception PDU 17h", true);
-            //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 18h", true);
+            //modSMS.sendSMSPDU(numeroG, "Test accusé réception PDU 18h", true);
             //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");
             //modSMS.readPDUMessage();
             //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");

@@ -14,3 +14,16 @@ Restauration de l'état précédent du journal des événements pour la source S
 Une exception s'est produite lors de la phase de restauration du programme d'installation System.Diagnostics.EventLogInstaller.
 System.Security.SecurityException: La source est introuvable mais certains ou l'ensemble des journaux des événements n'ont pas pu faire l'objet d'une recherche. Journaux inaccessibles : Security.
 Une exception s'est produite lors de la phase de restauration de l'installation. Cette exception est ignorée et la restauration se poursuit. Cependant, l'ordinateur ne sera pas totalement restauré à son état initial à la fin de la restauration.
+Installation de l'assembly 'F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Installation du service Service1 en cours...
+Création d'une source EventLog Service1 dans le journal Application...
+Restauration de l'assembly 'F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = F:\Internet\public_space\Polytech\Synox\GitHub\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Restauration de l'état précédent du journal des événements pour la source Service1.
