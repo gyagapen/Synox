@@ -240,7 +240,7 @@ namespace ConsoleApplicationTestSMS
             sms.StatusReportIndication = receipt;
 
             //periode de validite de deux jours
-            sms.ValidityPeriod = new TimeSpan(2, 0, 0, 0, 0);
+            sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
 
             return sms.Compose(SMS.SMSEncoding._7bit);
         }

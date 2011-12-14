@@ -25,22 +25,21 @@ namespace ConsoleApplicationTestSMS
 
             //modSMS.Send("ATE0");
 
-            //modSMS.Send("AT+CSMP?");
             // Paramètre le modem pour les accusés de réception
-            modSMS.Send("AT+CSMP=7,167,0,0");
+            modSMS.Send("AT+CSMP=17,167,0,16");
 
             //on supprime tous les messages
             //modSMS.deleteAllSMS();
 
 
-            for (int i = 1; i <= 3; i++)
+            for (int i = 1; i <= 10; i++)
             {
-                //modSMS.sendSMS(numero, i+" Galaxy Tab a vendre ! ");
+                modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
             }
 
 
-            modSMS.sendSMSPDU("Test accusé réception PDU 15h", numeroM, false);
-            //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");
+            //modSMS.sendSMSPDU(numeroG, "Test durée de validité");
+            //modSMS.sendSMSText(numeroG, "Mouahahahaah ! Spam Flash !");
 
 
             //modSMS.readPDUMessage();
