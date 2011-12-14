@@ -8,11 +8,10 @@ namespace ConsoleApplicationTestSMS
 {
     class Program
     {
-        const string portCom = "COM5";
+        const string portCom = "COM2";
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
-        const string statutSyagapen = "Andouille !";
 
         //TEST 3
 
@@ -38,12 +37,13 @@ namespace ConsoleApplicationTestSMS
             }
 
 
-            //modSMS.sendSMSPDU(numeroG, "Test durée de validité");
-            //modSMS.sendSMSText(numeroG, "Mouahahahaah ! Spam Flash !");
+
+            modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 15h", false);
+            //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");
 
 
             //modSMS.readPDUMessage();
-            modSMS.readAllSMSText();
+            //modSMS.readAllSMSText();
 
 
             //modSMS.sendSMSText(numeroM, "test mode texte");
