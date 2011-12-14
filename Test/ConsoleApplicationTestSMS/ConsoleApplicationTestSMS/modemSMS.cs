@@ -94,6 +94,8 @@ namespace ConsoleApplicationTestSMS
         {
             string pduMSG = encodeMsgPDU(message, no, receipt);
 
+            //pduMSG = "0605040B8423F025060803AE81EAAF82B48401056A0045C60C037761702E7961686F6F2E636F6D000801034120574150205075736820746F20746865205961686F6F2073697465000101";
+
             Console.Out.WriteLine("Code PDU a envoyer : " + pduMSG);
 
             //mode pdu

@@ -404,6 +404,7 @@ namespace ConsoleApplicationTestSMS
 			encodedData += EncodePhoneNumber(PhoneNumber);
 			encodedData += "00"; //Protocol identifier (Short Message Type 0)
 			encodedData += Convert.ToString((int) messageEncoding, 16).PadLeft(2, '0'); //Data coding scheme
+            //encodedData += "10"; //Data coding scheme
 
 			if (_validityPeriodFormat != ValidityPeriodFormat.FieldNotPresent)
 				encodedData += Convert.ToString(_validityPeriod, 16).PadLeft(2, '0'); //Validity Period
