@@ -1,0 +1,26 @@
+﻿Installation de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Installation du service Service1 en cours...
+Création d'une source EventLog Service1 dans le journal Application...
+Restauration de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Restauration de l'état précédent du journal des événements pour la source Service1.
+Installation de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Installation du service Service1 en cours...
+Création d'une source EventLog Service1 dans le journal Application...
+Restauration de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\WindowsService1\WindowsService1\bin\Debug\WindowsService1.exe
+Restauration de l'état précédent du journal des événements pour la source Service1.
