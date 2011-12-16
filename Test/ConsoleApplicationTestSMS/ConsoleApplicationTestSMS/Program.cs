@@ -8,7 +8,11 @@ namespace ConsoleApplicationTestSMS
 {
     class Program
     {
+<<<<<<< HEAD
         const string portCom = "COM3";
+=======
+        const string portCom = "COM11";
+>>>>>>> 4e055197d97e3d08560ccb164b76a75be0eb821d
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
@@ -43,6 +47,7 @@ namespace ConsoleApplicationTestSMS
 
             modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
             //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
+
             //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");
             //modSMS.readPDUMessage();
             //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");
@@ -52,7 +57,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("AT+CMGL=\"ALL\""); 
             //modSMS.Send("AT+CMGL=4");
 
-            //modSMS.readDeliveryReport();
+            modSMS.readDeliveryReport();
 
             //modSMS.readPDUMessage();
             //modSMS.readAllSMSText();
