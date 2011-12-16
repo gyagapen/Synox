@@ -8,7 +8,7 @@ namespace ConsoleApplicationTestSMS
 {
     class Program
     {
-        const string portCom = "COM5";
+        const string portCom = "COM11";
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
@@ -34,15 +34,16 @@ namespace ConsoleApplicationTestSMS
             for (int i = 1; i <= 5; i++)
             {
                 //modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
-                modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
+                //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
             }
 
 
             //modSMS.Send("AT+CSMP=49,167,0,0");
             //modSMS.Send("AT+CNMI=2,2,3,2,1");
 
-            //modSMS.sendSMSPDU("0988899000988789", "Test accusé réception PDU 17h", true);
-            //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
+            //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
+            modSMS.sendSMSPDU(numeroG, "Test accents : éèçà", true);
+            //modSMS.sendSMSPDU(numeroY, "Alors, ca fait quoi d'etre spamme ?", true);
             //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");
             //modSMS.readPDUMessage();
             //modSMS.sendSMSText(numeroG, "Test accuse reception Texte");
@@ -52,7 +53,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("AT+CMGL=\"ALL\""); 
             //modSMS.Send("AT+CMGL=4");
 
-            //modSMS.readDeliveryReport();
+            modSMS.readDeliveryReport();
 
             //modSMS.readPDUMessage();
             //modSMS.readAllSMSText();
