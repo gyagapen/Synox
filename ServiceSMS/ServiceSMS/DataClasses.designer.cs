@@ -23,16 +23,13 @@ namespace ServiceSMS
 	
 	
 	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="SMS_DB")]
-	public partial class DataClasses1DataContext : System.Data.Linq.DataContext
+	public partial class DataClassesDataContext : System.Data.Linq.DataContext
 	{
 		
 		private static System.Data.Linq.Mapping.MappingSource mappingSource = new AttributeMappingSource();
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnCreated();
-    partial void InsertEncodage(Encodage instance);
-    partial void UpdateEncodage(Encodage instance);
-    partial void DeleteEncodage(Encodage instance);
     partial void InsertMessage(Message instance);
     partial void UpdateMessage(Message instance);
     partial void DeleteMessage(Message instance);
@@ -45,44 +42,39 @@ namespace ServiceSMS
     partial void InsertStatut(Statut instance);
     partial void UpdateStatut(Statut instance);
     partial void DeleteStatut(Statut instance);
+    partial void InsertEncodage(Encodage instance);
+    partial void UpdateEncodage(Encodage instance);
+    partial void DeleteEncodage(Encodage instance);
     #endregion
 		
-		public DataClasses1DataContext() : 
+		public DataClassesDataContext() : 
 				base(global::ServiceSMS.Properties.Settings.Default.SMS_DBConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection) : 
+		public DataClassesDataContext(string connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection) : 
+		public DataClassesDataContext(System.Data.IDbConnection connection) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataClassesDataContext(string connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
 		}
 		
-		public DataClasses1DataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
+		public DataClassesDataContext(System.Data.IDbConnection connection, System.Data.Linq.Mapping.MappingSource mappingSource) : 
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<Encodage> Encodage
-		{
-			get
-			{
-				return this.GetTable<Encodage>();
-			}
 		}
 		
 		public System.Data.Linq.Table<Message> Message
@@ -116,119 +108,13 @@ namespace ServiceSMS
 				return this.GetTable<Statut>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Encodage")]
-	public partial class Encodage : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idEncodage;
-		
-		private string _libelleEncodage;
-		
-		private EntitySet<Message> _Message;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidEncodageChanging(int value);
-    partial void OnidEncodageChanged();
-    partial void OnlibelleEncodageChanging(string value);
-    partial void OnlibelleEncodageChanged();
-    #endregion
-		
-		public Encodage()
-		{
-			this._Message = new EntitySet<Message>(new Action<Message>(this.attach_Message), new Action<Message>(this.detach_Message));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idEncodage
+		public System.Data.Linq.Table<Encodage> Encodage
 		{
 			get
 			{
-				return this._idEncodage;
+				return this.GetTable<Encodage>();
 			}
-			set
-			{
-				if ((this._idEncodage != value))
-				{
-					this.OnidEncodageChanging(value);
-					this.SendPropertyChanging();
-					this._idEncodage = value;
-					this.SendPropertyChanged("idEncodage");
-					this.OnidEncodageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleEncodage", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string libelleEncodage
-		{
-			get
-			{
-				return this._libelleEncodage;
-			}
-			set
-			{
-				if ((this._libelleEncodage != value))
-				{
-					this.OnlibelleEncodageChanging(value);
-					this.SendPropertyChanging();
-					this._libelleEncodage = value;
-					this.SendPropertyChanged("libelleEncodage");
-					this.OnlibelleEncodageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Message", ThisKey="idEncodage", OtherKey="idEncodage")]
-		public EntitySet<Message> Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				this._Message.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Message(Message entity)
-		{
-			this.SendPropertyChanging();
-			entity.Encodage = this;
-		}
-		
-		private void detach_Message(Message entity)
-		{
-			this.SendPropertyChanging();
-			entity.Encodage = null;
 		}
 	}
 	
@@ -258,9 +144,9 @@ namespace ServiceSMS
 		
 		private EntityRef<MessageRecu> _MessageRecu;
 		
-		private EntityRef<Encodage> _Encodage;
-		
 		private EntityRef<Statut> _Statut;
+		
+		private EntityRef<Encodage> _Encodage;
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnLoaded();
@@ -288,8 +174,8 @@ namespace ServiceSMS
 		{
 			this._MessageEnvoi = default(EntityRef<MessageEnvoi>);
 			this._MessageRecu = default(EntityRef<MessageRecu>);
-			this._Encodage = default(EntityRef<Encodage>);
 			this._Statut = default(EntityRef<Statut>);
+			this._Encodage = default(EntityRef<Encodage>);
 			OnCreated();
 		}
 		
@@ -519,40 +405,6 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Encodage", ThisKey="idEncodage", OtherKey="idEncodage", IsForeignKey=true)]
-		public Encodage Encodage
-		{
-			get
-			{
-				return this._Encodage.Entity;
-			}
-			set
-			{
-				Encodage previousValue = this._Encodage.Entity;
-				if (((previousValue != value) 
-							|| (this._Encodage.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Encodage.Entity = null;
-						previousValue.Message.Remove(this);
-					}
-					this._Encodage.Entity = value;
-					if ((value != null))
-					{
-						value.Message.Add(this);
-						this._idEncodage = value.idEncodage;
-					}
-					else
-					{
-						this._idEncodage = default(int);
-					}
-					this.SendPropertyChanged("Encodage");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Statut_Message", Storage="_Statut", ThisKey="idStatut", OtherKey="idStatut", IsForeignKey=true)]
 		public Statut Statut
 		{
@@ -583,6 +435,40 @@ namespace ServiceSMS
 						this._idStatut = default(int);
 					}
 					this.SendPropertyChanged("Statut");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Encodage", ThisKey="idEncodage", OtherKey="idEncodage", IsForeignKey=true)]
+		public Encodage Encodage
+		{
+			get
+			{
+				return this._Encodage.Entity;
+			}
+			set
+			{
+				Encodage previousValue = this._Encodage.Entity;
+				if (((previousValue != value) 
+							|| (this._Encodage.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Encodage.Entity = null;
+						previousValue.Message.Remove(this);
+					}
+					this._Encodage.Entity = value;
+					if ((value != null))
+					{
+						value.Message.Add(this);
+						this._idEncodage = value.idEncodage;
+					}
+					else
+					{
+						this._idEncodage = default(int);
+					}
+					this.SendPropertyChanged("Encodage");
 				}
 			}
 		}
@@ -1045,6 +931,120 @@ namespace ServiceSMS
 		{
 			this.SendPropertyChanging();
 			entity.Statut = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Encodage")]
+	public partial class Encodage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idEncodage;
+		
+		private string _libelleEncodage;
+		
+		private EntitySet<Message> _Message;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidEncodageChanging(int value);
+    partial void OnidEncodageChanged();
+    partial void OnlibelleEncodageChanging(string value);
+    partial void OnlibelleEncodageChanged();
+    #endregion
+		
+		public Encodage()
+		{
+			this._Message = new EntitySet<Message>(new Action<Message>(this.attach_Message), new Action<Message>(this.detach_Message));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idEncodage
+		{
+			get
+			{
+				return this._idEncodage;
+			}
+			set
+			{
+				if ((this._idEncodage != value))
+				{
+					this.OnidEncodageChanging(value);
+					this.SendPropertyChanging();
+					this._idEncodage = value;
+					this.SendPropertyChanged("idEncodage");
+					this.OnidEncodageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleEncodage", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string libelleEncodage
+		{
+			get
+			{
+				return this._libelleEncodage;
+			}
+			set
+			{
+				if ((this._libelleEncodage != value))
+				{
+					this.OnlibelleEncodageChanging(value);
+					this.SendPropertyChanging();
+					this._libelleEncodage = value;
+					this.SendPropertyChanged("libelleEncodage");
+					this.OnlibelleEncodageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Message", ThisKey="idEncodage", OtherKey="idEncodage")]
+		public EntitySet<Message> Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				this._Message.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Message(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.Encodage = this;
+		}
+		
+		private void detach_Message(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.Encodage = null;
 		}
 	}
 }

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+  </configSections>
+  <connectionStrings>
+    <add name="SMS_DBEntities" connectionString="metadata=res://*/Model_SMS.csdl|res://*/Model_SMS.ssdl|res://*/Model_SMS.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=GUILLAUME-PC\SQL_SERVER_SYNOX;Initial Catalog=SMS_DB;Integrated Security=True;MultipleActiveResultSets=True&quot;"
+      providerName="System.Data.EntityClient" />
+    <add name="ServiceSMS.Properties.Settings.SMS_DBConnectionString"
+      connectionString="Data Source=GUILLAUME-PC\SQL_SERVER_SYNOX;Initial Catalog=SMS_DB;Integrated Security=True"
+      providerName="System.Data.SqlClient" />
+  </connectionStrings>
+</configuration>

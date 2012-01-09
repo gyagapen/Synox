@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1">
+  <asmv1:assemblyIdentity name="ServiceSMS.exe" version="1.0.0.0" publicKeyToken="2a367df349fcea5f" language="neutral" processorArchitecture="x86" type="win32" />
+  <application />
+  <entryPoint>
+    <assemblyIdentity name="ServiceSMS" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+    <commandLine file="ServiceSMS.exe" parameters="" />
+  </entryPoint>
+  <trustInfo>
+    <security>
+      <applicationRequestMinimum>
+        <PermissionSet Unrestricted="true" ID="Custom" SameSite="site" />
+        <defaultAssemblyRequest permissionSetReference="Custom" />
+      </applicationRequestMinimum>
+      <requestedPrivileges xmlns="urn:schemas-microsoft-com:asm.v3">
+        <!--
+          Options du manifeste de contrôle de compte d'utilisateur
+          Si vous souhaitez modifier le niveau du contrôle de compte d'utilisateur Windows, remplacez le 
+          nœud requestedExecutionLevel par l'une des propositions suivantes :
+
+        <requestedExecutionLevel  level="asInvoker" uiAccess="false" />
+        <requestedExecutionLevel  level="requireAdministrator" uiAccess="false" />
+        <requestedExecutionLevel  level="highestAvailable" uiAccess="false" />
+
+         Si vous souhaitez utiliser la virtualisation de fichiers et du Registre pour la 
+         compatibilité descendante, supprimez le nœud requestedExecutionLevel.
+    -->
+        <requestedExecutionLevel level="asInvoker" uiAccess="false" />
+      </requestedPrivileges>
+    </security>
+  </trustInfo>
+  <dependency>
+    <dependentOS>
+      <osVersionInfo>
+        <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+      </osVersionInfo>
+    </dependentOS>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Core" version="3.5.0.0" publicKeyToken="b77a5c561934e089" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="System.Data.Entity" version="3.5.0.0" publicKeyToken="b77a5c561934e089" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+      <assemblyIdentity name="WindowsBase" version="3.0.0.0" publicKeyToken="31bf3856ad364e35" language="neutral" processorArchitecture="msil" />
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServiceSMS.exe" size="19968">
+      <assemblyIdentity name="ServiceSMS" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+        <dsig:DigestValue>QTy3Xu3jQJUpc5ToLnAQYh5oEE0=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <file name="ServiceSMS.exe.config" size="766">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+      <dsig:DigestValue>u/PTDHeUsF1tfQjNEhqa0t6naFU=</dsig:DigestValue>
+    </hash>
+  </file>
+<publisherIdentity name="CN=Guillaume-PC\Guillaume" issuerKeyHash="137c261554de36e51a4ad7c0016c0c0b88fff237" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>+aKEaqal92XjQWmopHihxbzJpZs=</DigestValue></Reference></SignedInfo><SignatureValue>FP6AJChBoipT7txA2K0p7Rkf/s988wneZJhsvfM+aWyDvX0tGIB8j3vppZxBx3mJ5anTowO/bp1LJQZQznzQGd5vYQXRuA5tfBbLlqhpSNLXH2vHKHTX30S/kZj129apUxW9M4d4DHCm48wwdZJciCqPckHUeG5vUTjpNSzGYYo=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>35JU+WVot91ywTZYXx82CUvoU5QXKIq0eElHDuu6okNHi7burcw2uUS71ijwYC8rrzFwg0CV4Fs+dRWVNZsc0R/aaepYD4RLLbsDjCDE6meaNIb7sJUv2LJradnTTcoRY3vw6+4Uf9Mr6K+CSaUT2pcKnlBx34XHnzvJTK8mSUk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="9ba5c9bcc5a178a4a86941e365f7a5a66a84a2f9" Description="" Url=""><as:assemblyIdentity name="ServiceSMS.exe" version="1.0.0.0" publicKeyToken="2a367df349fcea5f" language="neutral" processorArchitecture="x86" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=Guillaume-PC\Guillaume</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>93SLo4t8stGcXQPEBg1ufJHSThs=</DigestValue></Reference></SignedInfo><SignatureValue>Kd2GgaPCihi8i6FEQ9G8S3qDzMmCDihLBdNeBkEIW64/ZU6xAyslf1jBh7aFsJhmTXTK8MTSm/GY9mKim7fm7g3uiraxEpmTNbfEXVRSYxeKVMwLrJYCVvtBU2F4a8zyjZD1bDtPfBqtdIgZ9k4ct8HitRGlAf67H9D7rBD3yM4=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>35JU+WVot91ywTZYXx82CUvoU5QXKIq0eElHDuu6okNHi7burcw2uUS71ijwYC8rrzFwg0CV4Fs+dRWVNZsc0R/aaepYD4RLLbsDjCDE6meaNIb7sJUv2LJradnTTcoRY3vw6+4Uf9Mr6K+CSaUT2pcKnlBx34XHnzvJTK8mSUk=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIB8TCCAVqgAwIBAgIQbgV5i9K3BY1NKvtF3ThEcjANBgkqhkiG9w0BAQUFADA3MTUwMwYDVQQDHiwARwB1AGkAbABsAGEAdQBtAGUALQBQAEMAXABHAHUAaQBsAGwAYQB1AG0AZTAeFw0xMjAxMDkxNjE5NDRaFw0xMzAxMDgyMjE5NDRaMDcxNTAzBgNVBAMeLABHAHUAaQBsAGwAYQB1AG0AZQAtAFAAQwBcAEcAdQBpAGwAbABhAHUAbQBlMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDfklT5ZWi33XLBNlhfHzYJS+hTlBcoirR4SUcO67qiQ0eLtu6tzDa5RLvWKPBgLyuvMXCDQJXgWz51FZU1mxzRH9pp6lgPhEstuwOMIMTqZ5o0hvuwlS/Ysmtp2dNNyhFje/Dr7hR/0yvor4JJpRPalwqeUHHfhcefO8lMryZJSQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBAE1HapRRFgHwGcuY3CRPf1qcqO4I0VJ78zXLsVVo3NrxQZCtNPh2YCAv5g00hpbo7LTGzwXwIvwFh+ywCGNb3+BYbwpd3nlejgygca8SZvdFEEB0blpqtYQmfcHDZuBpNI+i+plCIxd0/Y4OQubkLzxUyxas9ZYoz6rmMIiYA628</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>
