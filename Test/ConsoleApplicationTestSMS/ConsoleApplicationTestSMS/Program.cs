@@ -26,7 +26,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("ATE0");
 
             // Paramètre le modem pour les accusés de réception
-            //modSMS.Send("AT+CSMP=17,167,0,0");
+            modSMS.Send("AT+CSMP=17,167,0,0");
 
             //on supprime tous les messages
             //modSMS.deleteAllSMS();
@@ -35,9 +35,15 @@ namespace ConsoleApplicationTestSMS
             for (int i = 1; i <= 5; i++)
             {
                 //modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
+<<<<<<< HEAD
+                //modSMS.sendSMSPDU("0642065354", "Alors, ca fait quoi d'etre spamme ?", true);
+=======
                 //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
+>>>>>>> f0f1058e196f5ad971c7d6f7ce9b16b6915500ad
             }
 
+            //modSMS.Send("AT+CSMP=17,167,0,16");
+            //modSMS.sendSMSPDU(numeroG, "Alors, ca fait quoi d'etre flashe ?", true);
 
             //modSMS.Send("AT+CSMP=49,167,0,0");
             //modSMS.Send("AT+CNMI=2,2,3,2,1");
