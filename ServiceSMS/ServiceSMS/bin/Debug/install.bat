@@ -1,0 +1,1 @@
+installutil ServiceSMS.exeRead
