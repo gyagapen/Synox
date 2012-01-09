@@ -95,6 +95,7 @@ namespace ConsoleApplicationTestSMS
         {
             string pduMSG = encodeMsgPDU(message, no, receipt);
 
+            //pduMSG = "0041000B913376650111F800042E0B05040B84C0020003F001010A060403B081EA02066A008509036D6F62696C65746964696E67732E636F6D2F0001";
             //pduMSG = "0605040B8423F025060803AE81EAAF82B48401056A0045C60C037761702E7961686F6F2E636F6D000801034120574150205075736820746F20746865205961686F6F2073697465000101";
 
             Console.Out.WriteLine("Code PDU a envoyer : " + pduMSG);
@@ -271,7 +272,7 @@ namespace ConsoleApplicationTestSMS
             //periode de validite de deux jours
             //sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
 
-            return sms.Compose(SMS.SMSEncoding._7bit);
+            return sms.Compose(SMS.SMSEncoding.UCS2);
         }
 
 
