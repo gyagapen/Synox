@@ -19,6 +19,8 @@ namespace ServiceSMS
 				new ServiceSMS() 
 			};
             ServiceBase.Run(ServicesToRun);
+
+            // Yo !
         }
     }
 }

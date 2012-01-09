@@ -49,11 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-<<<<<<< HEAD
-    <ManifestCertificateThumbprint>A468E41B9940887561FCEA45F15AD7920DF6E114</ManifestCertificateThumbprint>
-=======
     <ManifestCertificateThumbprint>0BE1F0258F4000DA975679DB731BB6DA073FE615</ManifestCertificateThumbprint>
->>>>>>> a1f1c3bf29b399723a588998b8259376207f3b39
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>ServiceSMS_TemporaryKey.pfx</ManifestKeyFile>
@@ -125,13 +121,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <None Include="App.Config" />
-=======
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
->>>>>>> a1f1c3bf29b399723a588998b8259376207f3b39
     <None Include="DataClasses.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses.designer.cs</LastGenOutput>

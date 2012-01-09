@@ -64,29 +64,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< HEAD
-        <dsig:DigestValue>Wnn3+FYqtPaQvQJZJeTz5R5bW74=</dsig:DigestValue>
-      </hash>
-    </dependentAssembly>
-  </dependency>
-  <file name="ServiceSMS.exe.config" size="757">
-=======
         <dsig:DigestValue>2A2f/xWAPVJWogM1CbjxoKEkDs0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <file name="ServiceSMS.exe.config" size="766">
->>>>>>> a1f1c3bf29b399723a588998b8259376207f3b39
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-<<<<<<< HEAD
-      <dsig:DigestValue>XenzRVVG/xP1J9ntUezT86/5lik=</dsig:DigestValue>
-=======
       <dsig:DigestValue>u/PTDHeUsF1tfQjNEhqa0t6naFU=</dsig:DigestValue>
->>>>>>> a1f1c3bf29b399723a588998b8259376207f3b39
     </hash>
   </file>
 </asmv1:assembly>
