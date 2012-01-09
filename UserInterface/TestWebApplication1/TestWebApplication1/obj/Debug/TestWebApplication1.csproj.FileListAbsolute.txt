@@ -1,0 +1,5 @@
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\TestWebApplication1\TestWebApplication1\bin\TestWebApplication1.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\TestWebApplication1\TestWebApplication1\bin\TestWebApplication1.pdb
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\TestWebApplication1\TestWebApplication1\obj\Debug\ResolveAssemblyReference.cache
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\TestWebApplication1\TestWebApplication1\obj\Debug\TestWebApplication1.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\TestWebApplication1\TestWebApplication1\obj\Debug\TestWebApplication1.pdb

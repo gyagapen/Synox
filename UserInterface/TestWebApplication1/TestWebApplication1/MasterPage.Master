@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs"
+    Inherits="TestWebApplication1.MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link href="Default.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <!- Zone : En tete ->
+    <div class="header">
+        <!- Zone : menu en haut de la page ->
+        <div class="menua">
+            Plan du site | Contactez nous | Ajoutez aux favoris</div>
+        <!- Zone panneau publicitaire ->
+        <div class="rotator">
+            <asp:AdRotator ID="AdRotator1" runat="server" AdvertisementFile="~/PublicationsBanniere.xml" />
+        </div>
+        <!- Zone barre de navigation ->
+        <div class="nav">
+        </div>
+    </div>
+    
+    <!- Zone : Centre ->
+    <div class="page">
+        <!- Zone : Zone de navigation a gauche de la page ->
+        <div id="sidebar">
+            <!- Zone : Espace membre ->
+            <h1>
+                Espace membre</h1>
+        </div>
+        <hr />
+        <div id="liensEspaceMembre">
+            <!- Zone : Services des annonces porposes par le site ->
+            <h1>
+                Nos annonces</h1>
+            <h2>
+                Consultez toutes nos annonces et passez vos annonces en ligne</h2>
+        </div>
+        <!- Zone : Zone contenant le contenu des pages enfants dans un controle ->
+        
+        <asp:ContentPlaceHolder runat=server ID="Main">
+        
+        </asp:ContentPlaceHolder>
+        <div id="content">
+
+        </div>
+    </div>
+    
+    <!- Zone : Pied de page ->
+    <div class=footer>
+        <asp:Literal ID="ltlPiedDePage" runat="server" Text="AffairesSansRiaque | Adresse | Tel : 0 800 888 888"></asp:Literal>
+    </div>
+
+    </form>
+</body>
+</html>

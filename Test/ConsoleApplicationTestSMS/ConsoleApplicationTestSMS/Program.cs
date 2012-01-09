@@ -8,11 +8,8 @@ namespace ConsoleApplicationTestSMS
 {
     class Program
     {
-<<<<<<< HEAD
-        const string portCom = "COM3";
-=======
-        const string portCom = "COM11";
->>>>>>> 4e055197d97e3d08560ccb164b76a75be0eb821d
+
+        const string portCom = "COM12";
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";

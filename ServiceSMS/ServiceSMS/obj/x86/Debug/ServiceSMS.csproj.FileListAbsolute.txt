@@ -1,10 +1,10 @@
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.config
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.pdb
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.pdb
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.manifest
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.application
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.pdb
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe.manifest
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.application
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.pdb

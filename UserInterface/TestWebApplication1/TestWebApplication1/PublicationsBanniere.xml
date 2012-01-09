@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+
+  <Ad>
+    <ImageUrl>Images\banniereAgilcom.gif</ImageUrl>
+    <NavigateUrl>http://www.agilcom.info</NavigateUrl>
+    <AlternateText>Site web de Agilcom</AlternateText>
+    <Keyword>Agilcom</Keyword>
+  </Ad>
+
+  <Ad>
+    <ImageUrl>Images\banniereRD.gif</ImageUrl>
+    <NavigateUrl>http://msdn.microsoft.com/isv/rd/</NavigateUrl>
+    <AlternateText>Site web des MSDN Regional Directors</AlternateText>
+    <Keyword>Regional Director</Keyword>
+  </Ad>
+
+</Advertisements>
