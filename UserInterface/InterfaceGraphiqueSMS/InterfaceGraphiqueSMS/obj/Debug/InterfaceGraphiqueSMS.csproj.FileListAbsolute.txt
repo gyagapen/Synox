@@ -1,0 +1,5 @@
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.pdb
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\ResolveAssemblyReference.cache
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.pdb
