@@ -1,19 +1,29 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Base.Master.cs" Inherits="InterfaceGraphiqueSMS.Site1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Gestion de l'envoi et la r&eacute;ception des SMS</title>
-    <link href=ThemeSMS.css rel=Stylesheet type="text/css" />
+    <link href="ThemeSMS.css" rel="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
+    <!- Zone : En tete ->
+    <div class="header">
+        <!- Zone : Menu ->
+        <div id="navbar_ex8">
+            <ul>
+                <li id="current"><a id="active8" href="#">Ecrire SMS</a></li>
+                <li><a href="#">Lire SMS</a></li>
+                <li><a href="#">V&eacute;rifier statut SMS</a></li>
+            </ul>
+        </div>
+    </div>
+    <!- Zone : Contenu ->
+    <div class="contenu">
         <asp:ContentPlaceHolder ID="Main" runat="server">
-        
         </asp:ContentPlaceHolder>
     </div>
     </form>
