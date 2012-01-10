@@ -35,11 +35,7 @@ namespace ConsoleApplicationTestSMS
             for (int i = 1; i <= 5; i++)
             {
                 //modSMS.sendSMSText("0630854796", i+" saucisson(s) d'Auvergne ! ");
-<<<<<<< HEAD
-                //modSMS.sendSMSPDU("0642065354", "Alors, ca fait quoi d'etre spamme ?", true);
-=======
-                //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
->>>>>>> f0f1058e196f5ad971c7d6f7ce9b16b6915500ad
+
             }
 
             //modSMS.Send("AT+CSMP=17,167,0,16");
