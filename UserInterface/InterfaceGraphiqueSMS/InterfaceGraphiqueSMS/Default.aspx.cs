@@ -26,6 +26,14 @@ namespace InterfaceGraphiqueSMS
             msg.messagePDU = contenuSMS.Text;
             msg.noDestinataire = numDestinataire.Text;
 
+            //selectionne ascii comme encodage
+            Encodage enc = (from en in dbContext.Encodage select en).First();
+            msg.Encodage = enc;
+
+            //selectionne statut en attente
+            Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
+            msg.Statut = stat;
+
             dbContext.Message.InsertOnSubmit(msg);
             dbContext.SubmitChanges();
 
