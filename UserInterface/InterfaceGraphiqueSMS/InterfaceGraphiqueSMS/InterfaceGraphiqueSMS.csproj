@@ -61,6 +61,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="LireSMS.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -82,6 +83,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SMSBD.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="LireSMS.aspx.cs">
+      <DependentUpon>LireSMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LireSMS.aspx.designer.cs">
+      <DependentUpon>LireSMS.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

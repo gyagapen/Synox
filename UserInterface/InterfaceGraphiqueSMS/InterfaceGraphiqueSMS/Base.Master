@@ -12,11 +12,12 @@
     <form id="form1" runat="server">
     <!- Zone : En tete ->
     <div class="header">
+        <!--h1>Gestion des SMS</h1-->
         <!- Zone : Menu ->
         <div id="navbar_ex8">
             <ul>
-                <li id="current"><a id="active8" href="#">Ecrire SMS</a></li>
-                <li><a href="#">Lire SMS</a></li>
+                <li id="current"><a id="active8" href="EcrireSMS.aspx">Ecrire SMS</a></li>
+                <li><a href="LireSMS.aspx">Lire SMS</a></li>
                 <li><a href="#">V&eacute;rifier statut SMS</a></li>
             </ul>
         </div>
