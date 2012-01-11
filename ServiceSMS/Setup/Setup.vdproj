@@ -15,14 +15,14 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1669ECC4CA2B4043B11D1F69A26EE5B9"
+        "MsmKey" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_1669ECC4CA2B4043B11D1F69A26EE5B9"
+        "OwnerKey" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -43,6 +43,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -59,12 +80,89 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
     }
     "Deployable"
     {
         "CustomAction"
         {
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_229662E8F99C4F57AD69BA5AF11E4009"
+            {
+            "Name" = "8:Sortie principale de ServiceSMS (Actif)"
+            "Condition" = "8:"
+            "Object" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
+            "FileType" = "3:2"
+            "InstallAction" = "3:3"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_6285C461_06D3_4E2D_AF79_775804D6BA80"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_2ED0A4555A7C457E991E182341BDE5A0"
+            {
+            "Name" = "8:Sortie principale de ServiceSMS (Actif)"
+            "Condition" = "8:"
+            "Object" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
+            "FileType" = "3:2"
+            "InstallAction" = "3:4"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_6651FE12_657D_439F_AF6F_45009CFF2A95"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_3056C28789414B4BB703EDE1145ADFB6"
+            {
+            "Name" = "8:Sortie principale de ServiceSMS (Actif)"
+            "Condition" = "8:"
+            "Object" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
+            "FileType" = "3:2"
+            "InstallAction" = "3:1"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_2D7E21C4_4C48_4DF6_9FD5_B88DAF8E8720"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
+            "{4AA51A2D-7D85-4A59-BA75-B0809FC8B380}:_904EC414E22842F886140D9526E078A5"
+            {
+            "Name" = "8:Sortie principale de ServiceSMS (Actif)"
+            "Condition" = "8:"
+            "Object" = "8:_F8891572AD9043C0913E2ADA0DC63C30"
+            "FileType" = "3:2"
+            "InstallAction" = "3:2"
+            "Arguments" = "8:"
+            "EntryPoint" = "8:"
+            "Sequence" = "3:1"
+            "Identifier" = "8:_EACB0207_6EF0_4E09_8716_E718BE91ACC4"
+            "InstallerClass" = "11:TRUE"
+            "CustomActionData" = "8:"
+            }
         }
         "DefaultFeature"
         {
@@ -145,11 +243,11 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{A9A9196C-A1D6-4A14-8676-4E28B95324F4}"
-        "PackageCode" = "8:{0A3AA708-DC31-48FD-A538-3B6D738917A2}"
+        "PackageCode" = "8:{10D5E12D-9F56-4082-9C17-BB511DA54B84}"
         "UpgradeCode" = "8:{9C2537D3-4A62-4CC9-A977-8680E64CE6EA}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:1.0.0"
@@ -664,7 +762,7 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_1669ECC4CA2B4043B11D1F69A26EE5B9"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_F8891572AD9043C0913E2ADA0DC63C30"
             {
             "SourcePath" = "8:..\\ServiceSMS\\obj\\x86\\Debug\\ServiceSMS.exe"
             "TargetName" = "8:"
