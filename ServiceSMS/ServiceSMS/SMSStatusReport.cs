@@ -1,6 +1,6 @@
 using System;
 
-namespace ConsoleApplicationTestSMS
+namespace ServiceSMS
 {
 
 	public enum ReportStatus

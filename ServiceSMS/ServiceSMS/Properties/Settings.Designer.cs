@@ -26,11 +26,21 @@ namespace ServiceSMS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GUILLAUME-PC\\SQL_SERVER_SYNOX;Initial Catalog=SMS_DB;Integrated Secur" +
-            "ity=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=SMS_DB;Integrated Security=True")]
         public string SMS_DBConnectionString {
             get {
                 return ((string)(this["SMS_DBConnectionString"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GUI-PC\\SQLEXPRESS;Initial Catalog=SMS_DB;user ID=SYNOX; password=syno" +
+            "x")]
+        public string SMS_DBConnectionString1 {
+            get {
+                return ((string)(this["SMS_DBConnectionString1"]));
             }
         }
     }

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SYNOX_SMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="SYNOX_SMSModelStoreContainer">
+    <EntitySet Name="NumeroGsmProjet" EntityType="SYNOX_SMSModel.Store.NumeroGsmProjet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Projet" EntityType="SYNOX_SMSModel.Store.Projet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Sms" EntityType="SYNOX_SMSModel.Store.Sms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SmsReception" EntityType="SYNOX_SMSModel.Store.SmsReception" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SmsStatut" EntityType="SYNOX_SMSModel.Store.SmsStatut" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_NumeroGsmProjet_Projet" Association="SYNOX_SMSModel.Store.FK_NumeroGsmProjet_Projet">
+      <End Role="Projet" EntitySet="Projet" />
+      <End Role="NumeroGsmProjet" EntitySet="NumeroGsmProjet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sms_Projet" Association="SYNOX_SMSModel.Store.FK_Sms_Projet">
+      <End Role="Projet" EntitySet="Projet" />
+      <End Role="Sms" EntitySet="Sms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sms_SmsStatut" Association="SYNOX_SMSModel.Store.FK_Sms_SmsStatut">
+      <End Role="SmsStatut" EntitySet="SmsStatut" />
+      <End Role="Sms" EntitySet="Sms" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SmsReception_Projet" Association="SYNOX_SMSModel.Store.FK_SmsReception_Projet">
+      <End Role="Projet" EntitySet="Projet" />
+      <End Role="SmsReception" EntitySet="SmsReception" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="NumeroGsmProjet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjetId" Type="int" />
+    <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="BaseDeDonnes" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="FonctionName" Type="nvarchar" Nullable="false" MaxLength="2000" />
+    <Property Name="DateCreation" Type="datetime" Nullable="false" />
+    <Property Name="Suppression" Type="bit" Nullable="false" />
+    <Property Name="Push" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Projet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Sms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="160" />
+    <Property Name="DateDemande" Type="datetime" Nullable="false" />
+    <Property Name="DateEnvoi" Type="datetime" />
+    <Property Name="SmsStatutId" Type="int" />
+    <Property Name="ProjetId" Type="int" />
+    <Property Name="RouteurMsgId" Type="int" />
+  </EntityType>
+  <EntityType Name="SmsReception">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="160" />
+    <Property Name="DateReception" Type="datetime" Nullable="false" />
+    <Property Name="DateLecture" Type="datetime" />
+    <Property Name="Commentaire" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ProjetId" Type="int" />
+  </EntityType>
+  <EntityType Name="SmsStatut">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_NumeroGsmProjet_Projet">
+    <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+    <End Role="NumeroGsmProjet" Type="SYNOX_SMSModel.Store.NumeroGsmProjet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="NumeroGsmProjet">
+        <PropertyRef Name="ProjetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sms_Projet">
+    <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+    <End Role="Sms" Type="SYNOX_SMSModel.Store.Sms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sms">
+        <PropertyRef Name="ProjetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sms_SmsStatut">
+    <End Role="SmsStatut" Type="SYNOX_SMSModel.Store.SmsStatut" Multiplicity="0..1" />
+    <End Role="Sms" Type="SYNOX_SMSModel.Store.Sms" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SmsStatut">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Sms">
+        <PropertyRef Name="SmsStatutId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SmsReception_Projet">
+    <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+    <End Role="SmsReception" Type="SYNOX_SMSModel.Store.SmsReception" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SmsReception">
+        <PropertyRef Name="ProjetId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

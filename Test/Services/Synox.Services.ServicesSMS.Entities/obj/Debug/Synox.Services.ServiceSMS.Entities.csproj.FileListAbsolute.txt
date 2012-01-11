@@ -1,0 +1,11 @@
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\ResolveAssemblyReference.cache
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\Synox.Services.ServiceSMS.Entities.Properties.Resources.resources
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\GenerateResource.read.1.tlog
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\GenerateResource.write.1.tlog
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\bin\Debug\Synox.Services.ServicesSMS.Entities.dll.config
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\bin\Debug\Synox.Services.ServicesSMS.Entities.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\bin\Debug\Synox.Services.ServicesSMS.Entities.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\bin\Debug\Synox.Core.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\bin\Debug\Synox.Core.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\Synox.Services.ServicesSMS.Entities.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServicesSMS.Entities\obj\Debug\Synox.Services.ServicesSMS.Entities.pdb

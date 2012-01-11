@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SYNOX_SMSModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="Sms">
+      <EntityTypeMapping TypeName="SYNOX_SMSModel.Sms">
+        <MappingFragment StoreEntitySet="Sms">
+          <ScalarProperty Name="RouteurMsgId" ColumnName="RouteurMsgId" />
+          <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DateDemande" ColumnName="DateDemande" />
+          <ScalarProperty Name="DateEnvoi" ColumnName="DateEnvoi" />
+          <ScalarProperty Name="SmsStatutId" ColumnName="SmsStatutId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SmsReception">
+      <EntityTypeMapping TypeName="SYNOX_SMSModel.SmsReception">
+        <MappingFragment StoreEntitySet="SmsReception">
+          <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+          <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DateReception" ColumnName="DateReception" />
+          <ScalarProperty Name="DateLecture" ColumnName="DateLecture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SmsStatut">
+      <EntityTypeMapping TypeName="SYNOX_SMSModel.SmsStatut">
+        <MappingFragment StoreEntitySet="SmsStatut">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projet">
+      <EntityTypeMapping TypeName="SYNOX_SMSModel.Projet">
+        <MappingFragment StoreEntitySet="Projet">
+          <ScalarProperty Name="Nom" ColumnName="Nom" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NumeroGsmProjet">
+      <EntityTypeMapping TypeName="SYNOX_SMSModel.NumeroGsmProjet">
+        <MappingFragment StoreEntitySet="NumeroGsmProjet">
+          <ScalarProperty Name="FonctionName" ColumnName="FonctionName" />
+          <ScalarProperty Name="Push" ColumnName="Push" />
+          <ScalarProperty Name="Suppression" ColumnName="Suppression" />
+          <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+          <ScalarProperty Name="BaseDeDonnes" ColumnName="BaseDeDonnes" />
+          <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+          <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

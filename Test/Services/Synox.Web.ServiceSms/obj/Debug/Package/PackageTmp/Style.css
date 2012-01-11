@@ -1,0 +1,589 @@
+﻿/* Layout */
+
+html
+{
+	background: #d1efff;
+	color: #000000;
+	font: 10pt Arial, Helvetica, sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+body
+{
+	background: #d1efff;
+	color: #000000;
+	font: 10pt Arial, Helvetica, sans-serif;
+	margin: 0px;
+	padding: 0px;
+	width: 100%;
+	height: 100%;
+}
+
+#page
+{
+	width: 800px;
+	margin: 20px auto 0;
+	padding: 20px;
+}
+
+/* Basic styles */
+
+h1
+{
+	color: #C0C0C0;
+	font: normal 260% Arial, sans-serif;
+	margin: 0.5em 0em 0.2em 0em;
+	padding: 0px;
+}
+
+h2
+{
+	color: #A0A0A0;
+	font: normal 200% Arial, sans-serif;
+	margin: 1.2em 0em 0.2em 0em;
+	padding: 0px;
+}
+
+h1 + h2
+{
+	margin-top: 0.4em;
+}
+
+h3
+{
+	color: #8a8a8a;
+	font: italic 140% Arial, sans-serif;
+	margin: 1.2em 0em 0.2em 0em;
+	padding: 0px;
+}
+
+h2 + h3
+{
+	margin-top: 0.6em;
+}
+
+h4
+{
+	color: lightblue;
+	font-family: Arial,sans-serif;
+	font-size: 110%;
+	font-size-adjust: none;
+	font-stretch: normal;
+	font-style: normal;
+	font-variant: small-caps;
+	font-weight: normal;
+	letter-spacing: 0.15em;
+	line-height: normal;
+	margin: 1em 0 0.2em;
+	padding: 0;
+}
+
+h3 + h4
+{
+	margin-top: 1em;
+}
+
+p
+{
+	margin: 0em 0em 1.2em 0em;
+	padding: 0px;
+}
+
+ul
+{
+	margin-top: 0px;
+	margin-bottom: 1.2em;
+}
+
+ol
+{
+	margin-top: 0px;
+	margin-bottom: 1.2em;
+}
+
+.img
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	padding: 0px;
+	margin: 0px;
+	width: 64px;
+	height: 64px;
+}
+
+.img.small
+{
+	border-style: none;
+	border-color: inherit;
+	border-width: medium;
+	padding: 0px;
+	margin: 0px;
+	width: 29px;
+	height: 29px;
+}
+
+a
+{
+	text-decoration: none;
+}
+/*
+a:link {
+	color: #df2014;
+}
+
+a:visited {
+	color: #A1A3A5;
+}
+
+a:active {
+	color: #1090da;
+}
+
+a:hover {
+	color: #1090da;
+	text-decoration: underline;
+}
+*/
+.cssMultiUpload
+{
+	color: CornflowerBlue;
+	text-decoration: none;
+}
+.cssHoverMultiUpload
+{
+	color: CornflowerBlue;
+	text-decoration: underline;
+}
+
+table.tableau
+{
+	font: 8pt Arial, Helvetica, sans-serif;
+	line-height: 150%;
+	border: solid thin #68c0e8;
+	margin: 0;
+	padding: 0;
+}
+tr.tableau
+{
+	border-style: solid;
+	border-color: #68c0e8;
+	border-width: thin;
+	padding: 0 5px 0 5px;
+}
+tr.tableautitre
+{
+	border-style: solid;
+	border-color: #68c0e8;
+	border-width: thin;
+	color: #959595;
+	font-weight: bold;
+	text-align: center;
+	font-size: 10pt;
+}
+th.tableau
+{
+	background-color: #eef9fe;
+	color: #0979c2;
+	font-weight: bold;
+	border-style: solid;
+	border-color: #68c0e8;
+	border-width: thin;
+	text-align: center;
+}
+tr.odd
+{
+	background-color: #ffffff;
+}
+tr.even
+{
+	background-color: #eef9fe;
+}
+td.tableau
+{
+	border-style: solid;
+	border-color: #68c0e8;
+	border-width: thin;
+	padding: 5px 5px 5px 5px;
+}
+td.ImageButton
+{
+	border-style: solid;
+	border-color: #68c0e8;
+	border-width: thin;
+	padding: 0 5px 0 5px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+}
+td.ImageButton.input
+{
+	width: 30px;
+	height: 30px;
+}
+table.filtre
+{
+	background-repeat: repeat;
+	border: solid 0px black;
+	text-align: left;
+	width: 620px;
+	margin-left: 0px;
+	padding: 10px;
+}
+div.PanelFiltre
+{
+	border: solid 1px #66CCFF;
+}
+table.FormulaireConsultation
+{
+}
+tr.FormulaireConsultationImpair
+{
+	background-color: #eef9fe;
+	border: 1px solid black;
+}
+tr.FormulaireConsultationPair
+{
+	background-color: #ffffff;
+}
+tr.FormulaireConsultationEntete td
+{
+	background-color: #eef9fe;
+	color: #0979c2;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 5px 5px 5px;
+	border-bottom: 1px solid lightblue;
+}
+tr.FormulaireConsultationPair td
+{
+	border-bottom: 1px solid lightblue;
+	font-style: normal;
+}
+tr.FormulaireConsultationImpair td
+{
+	border-bottom: 1px solid lightblue;
+	font-style: normal;
+}
+tr.FormulaireConsultationImpair span
+{
+	font-style: normal;
+	padding: 2px 5px 2px 5px;
+}
+tr.FormulaireConsultationPair span
+{
+	font-style: normal;
+	padding: 2px 5px 2px 5px;
+}
+div.RepeaterPager
+{
+	color: #959595;
+	font-weight: bold;
+	text-align: center;
+	font-size: 10pt;
+}
+
+div.PanelFormulaire
+{
+	background-color: lightblue;
+}
+div.PanelFormulaireContent
+{
+	background-color: white;
+}
+div.FonctionsPanel
+{
+	background-color: #eef9fe;
+	padding: 5px;
+	width: 400px;
+}
+div.FonctionsPanel th
+{
+	background-color: #eef9fe;
+	padding: 5px;
+	width: 400px;
+	text-align: center;
+}
+div.ContenuPanelAction
+{
+	margin: 0px;
+	padding: 0px;
+	height: 28px;
+	text-align: center;
+	border: none;
+	background-image: url("../../Images/menu_second_gris_14x35.png");
+}
+td.CelluleActionGauche
+{
+	width: 30px;
+	height: 28px;
+	border: solid 2px lightblue;
+	border-right: solid 0px lightblue;
+	text-align: center;
+	vertical-align: middle;
+}
+td.CelluleActionCentre
+{
+	width: 30px;
+	height: 28px;
+	border: solid 2px lightblue;
+	border-left: solid 0px lightblue;
+	border-right: solid 0px lightblue;
+	text-align: center;
+	vertical-align: middle;
+}
+td.CelluleActionDroite
+{
+	width: 30px;
+	height: 28px;
+	border: solid 2px lightblue;
+	border-left: solid 0px lightblue;
+	text-align: center;
+	vertical-align: middle;
+}
+td.CelluleActionUnique
+{
+	width: 30px;
+	height: 28px;
+	border: solid 2px lightblue;
+	text-align: center;
+	vertical-align: middle;
+}
+/* End Basic styles */
+
+/* Form */
+/*
+form {
+	margin: 0px;
+	padding: 0px;
+}
+
+.formBox {
+	border: 1px solid #C0C0C0;
+	margin: 1.2em 0 1.2em 0;
+	padding: 4px;
+	width: 95%;
+}
+
+.formBox form {
+	background: #eef9fe;
+	padding: 10px;
+}
+
+.formBox form h4:first-child {
+	margin-top: 0.2em;
+}
+
+.formBox form h4 {
+	margin-top: 1.4em;
+	color: #0979c2;
+}
+
+.formBox form textarea, 
+.formBox form input.text {
+	width: 98.4%;
+}
+
+.formBox form p {
+	line-height: 1.8em;
+	margin: 0em 0em 0.8em 0em;
+}
+
+.errorFrame {
+	background-color: #FFFFFF;
+	border: 2px dotted #CB001C;
+	color: #CB001C;
+	padding: 4px 4px 4px 6px;
+}
+
+.errorLabel {
+	color: #CB001C;
+	font-weight: bold;
+}
+
+.errorMessage {
+	color: #CB001C;
+}
+
+input,
+textarea {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #909090;
+	border-top: 1px solid #C0C0C0;
+	border-bottom: 1px solid #909090;
+	background-color:#FFF;
+		font: 9pt Arial, Helvetica, sans-serif;
+		margin: 1px;
+		padding: 0px;
+	top: -21px;
+	width: 337px;
+	text-align: left;
+	left: -445px;
+	height: 55px;
+}
+
+input[type="text"] {
+	background: transparent url(../../Images/text1.png) no-repeat 0 0;
+	border:0;
+	padding:3px 5px;
+	margin:3px 0 2px 1px;
+}
+
+input.choice {
+	background: transparent;
+	border: none;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	background: transparent;
+	border: none;
+}
+
+input[type="submit"] {
+	overflow:visible;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+input.btn { 
+	color:#7b7b7b; 
+	font: bold 84% arial,helvetica,sans-serif; 
+	background: transparent url(../../Images/btn.png) repeat-x top; 
+	border:1px solid; 
+	border-color: #72a5c6 #68c0e8 #68c0e8 #72a5c6;
+	padding: 2px;
+} 
+select {
+	border: 1px solid;
+	border-color: #909090 #C0C0C0 #C0C0C0 #909090;
+	font: 8pt Arial, Helvetica, sans-serif;
+	margin: 1px;
+	padding: 0px;
+}
+input[type="checkbox"] {
+	color: #c91a0e;
+}
+
+
+
+/* Les menus */
+
+span
+{
+	color: Black;
+	font: italic 100% Arial, sans-serif;
+	margin: 0px;
+	padding: 0px;
+}
+
+span.title1
+{
+	color: #0979c2;
+	font-size: medium;
+	font-weight: bold;
+	text-align: left;
+}
+
+span.title2
+{
+	color: #0979c2;
+	font-weight: bold;
+	text-align: left;
+}
+
+span.title3
+{
+	color: #0979c2;
+	font-weight: normal;
+	text-align: left;
+}
+
+.padding10
+{
+	padding-left: 25px;
+}
+
+.ItemPrincipalOFF
+{
+	color: White;
+	border: none;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
+	font-weight: bold;
+	font-style: oblique;
+}
+
+.ItemSecondaireOFF
+{
+	height: 24px;
+	color: Black;
+	border: none;
+	padding-left: 5px;
+	padding-right: 5px;
+	text-align: center;
+	font-weight: normal;
+	font-style: normal;
+	font-size: inherit;
+}
+
+
+.UpdateProgressBar
+{
+	text-align: right;
+	width: 200px;
+	vertical-align: middle;
+}
+
+/* Z-index of #mask must lower than #boxes .window */
+#mask
+{
+	position: absolute;
+	z-index: 9000;
+	background-color: #000;
+	display: none;
+}
+
+#boxes .window
+{
+	position: absolute;
+	width: 440px;
+	height: 200px;
+	display: none;
+	z-index: 9999;
+	padding: 20px;
+}
+
+/* Customize your modal window here, you can add background image too */
+#boxes #dialog
+{
+	width: 375px;
+	height: 203px;
+}
+
+
+
+.h3
+{
+	color: #8a8a8a;
+	font: italic 140% Arial, sans-serif;
+	margin: 1.2em 0em 0.2em 0em;
+	padding: 0px;
+}
+
+
+.modalBackground
+{
+	background-color: black;
+	filter: alpha(opacity=70);
+	opacity: 0.7;
+}
+div.ImageLoaderFormulaire
+{
+	z-index: 100000;
+	position: absolute;
+	text-align: center;
+	vertical-align: middle;
+}
+
+

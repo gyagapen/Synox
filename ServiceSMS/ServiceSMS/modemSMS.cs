@@ -6,7 +6,7 @@ using System.IO.Ports;
 using System.Threading;
 
 
-namespace ConsoleApplicationTestSMS
+namespace ServiceSMS
 {
     class modemSMS
     {
@@ -73,6 +73,20 @@ namespace ConsoleApplicationTestSMS
             Console.Out.WriteLine("Modem Connecte");
 
         }
+        //fonction pour connecter le modem
+        public void disconnectToModem()
+        {
+            if (PortCom != null)
+            {
+                PortCom.Close();
+                PortCom.Dispose();
+                PortCom = null;
+            }
+
+
+            Console.Out.WriteLine("Modem Deconnecte");
+
+        }
 
 
         //envoi d'un sms en mode texte
@@ -94,11 +108,6 @@ namespace ConsoleApplicationTestSMS
         public void sendSMSPDU(string no, string message, Boolean receipt = false)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt);
-
-            //pduMSG = "0041000B913376650111F800042E0B05040B84C0020003F001010A060403B081EA02066A008509036D6F62696C65746964696E67732E636F6D2F0001";
-            //pduMSG = "0605040B8423F025060803AE81EAAF82B48401056A0045C60C037761702E7961686F6F2E636F6D000801034120574150205075736820746F20746865205961686F6F2073697465000101";
-
-            Console.Out.WriteLine("Code PDU a envoyer : " + pduMSG);
 
             //mode pdu
             Send("AT+CMGF=0");

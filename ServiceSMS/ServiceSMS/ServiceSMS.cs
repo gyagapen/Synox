@@ -13,9 +13,12 @@ namespace ServiceSMS
 {
     public partial class ServiceSMS : ServiceBase
     {
+
+        public ServiceManager manager;
         public ServiceSMS()
         {
             InitializeComponent();
+            manager = new ServiceManager();
         }
 
         protected override void OnShutdown()
@@ -34,20 +37,21 @@ namespace ServiceSMS
         }
 
 
-
-        private Timer t = null;
+        
 
         protected override void OnStart(string[] args)
         {
-            t = new Timer(10000); // Timer de 10 secondes.
-            t.Elapsed += new ElapsedEventHandler(t_Elapsed);
-            t.Start();
+            manager.Start();
+            
         }
 
         protected override void OnStop()
         {
-            t.Stop();
+            manager.Stop();
+            manager.Dispose();
+
         }
+
 
         protected void t_Elapsed(object sender, EventArgs e)
         {

@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SYNOX_SMSModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SYNOX_SMSModelStoreContainer">
+          <EntitySet Name="NumeroGsmProjet" EntityType="SYNOX_SMSModel.Store.NumeroGsmProjet" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Projet" EntityType="SYNOX_SMSModel.Store.Projet" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sms" EntityType="SYNOX_SMSModel.Store.Sms" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsReception" EntityType="SYNOX_SMSModel.Store.SmsReception" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SmsStatut" EntityType="SYNOX_SMSModel.Store.SmsStatut" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_NumeroGsmProjet_Projet" Association="SYNOX_SMSModel.Store.FK_NumeroGsmProjet_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="NumeroGsmProjet" EntitySet="NumeroGsmProjet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sms_Projet" Association="SYNOX_SMSModel.Store.FK_Sms_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Sms" EntitySet="Sms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sms_SmsStatut" Association="SYNOX_SMSModel.Store.FK_Sms_SmsStatut">
+            <End Role="SmsStatut" EntitySet="SmsStatut" />
+            <End Role="Sms" EntitySet="Sms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SmsReception_Projet" Association="SYNOX_SMSModel.Store.FK_SmsReception_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="SmsReception" EntitySet="SmsReception" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="NumeroGsmProjet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProjetId" Type="int" />
+          <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="BaseDeDonnes" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="FonctionName" Type="nvarchar" Nullable="false" MaxLength="2000" />
+          <Property Name="DateCreation" Type="datetime" Nullable="false" />
+          <Property Name="Suppression" Type="bit" Nullable="false" />
+          <Property Name="Push" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Sms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="160" />
+          <Property Name="DateDemande" Type="datetime" Nullable="false" />
+          <Property Name="DateEnvoi" Type="datetime" />
+          <Property Name="SmsStatutId" Type="int" />
+          <Property Name="ProjetId" Type="int" />
+          <Property Name="RouteurMsgId" Type="int" />
+        </EntityType>
+        <EntityType Name="SmsReception">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroGsm" Type="nvarchar" Nullable="false" MaxLength="20" />
+          <Property Name="Message" Type="nvarchar" Nullable="false" MaxLength="160" />
+          <Property Name="DateReception" Type="datetime" Nullable="false" />
+          <Property Name="DateLecture" Type="datetime" />
+          <Property Name="Commentaire" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ProjetId" Type="int" />
+        </EntityType>
+        <EntityType Name="SmsStatut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Nom" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_NumeroGsmProjet_Projet">
+          <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+          <End Role="NumeroGsmProjet" Type="SYNOX_SMSModel.Store.NumeroGsmProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NumeroGsmProjet">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sms_Projet">
+          <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+          <End Role="Sms" Type="SYNOX_SMSModel.Store.Sms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sms">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sms_SmsStatut">
+          <End Role="SmsStatut" Type="SYNOX_SMSModel.Store.SmsStatut" Multiplicity="0..1" />
+          <End Role="Sms" Type="SYNOX_SMSModel.Store.Sms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsStatut">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sms">
+              <PropertyRef Name="SmsStatutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SmsReception_Projet">
+          <End Role="Projet" Type="SYNOX_SMSModel.Store.Projet" Multiplicity="0..1" />
+          <End Role="SmsReception" Type="SYNOX_SMSModel.Store.SmsReception" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsReception">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SYNOX_SMSModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sms" EntityType="SYNOX_SMSModel.Sms" />
+          <EntitySet Name="SmsReception" EntityType="SYNOX_SMSModel.SmsReception" />
+          <EntitySet Name="SmsStatut" EntityType="SYNOX_SMSModel.SmsStatut" />
+          <AssociationSet Name="FK_Sms_SmsStatut" Association="SYNOX_SMSModel.FK_Sms_SmsStatut">
+            <End Role="SmsStatut" EntitySet="SmsStatut" />
+            <End Role="Sms" EntitySet="Sms" />
+          </AssociationSet>
+          <EntitySet Name="Projet" EntityType="SYNOX_SMSModel.Projet" />
+          <AssociationSet Name="FK_Sms_Projet" Association="SYNOX_SMSModel.FK_Sms_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="Sms" EntitySet="Sms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SmsReception_Projet" Association="SYNOX_SMSModel.FK_SmsReception_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="SmsReception" EntitySet="SmsReception" />
+          </AssociationSet>
+          <EntitySet Name="NumeroGsmProjet" EntityType="SYNOX_SMSModel.NumeroGsmProjet" />
+          <AssociationSet Name="FK_NumeroGsmProjet_Projet" Association="SYNOX_SMSModel.FK_NumeroGsmProjet_Projet">
+            <End Role="Projet" EntitySet="Projet" />
+            <End Role="NumeroGsmProjet" EntitySet="NumeroGsmProjet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Sms">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroGsm" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="160" Unicode="true" FixedLength="false" />
+          <Property Name="DateDemande" Type="DateTime" Nullable="false" />
+          <Property Name="DateEnvoi" Type="DateTime" />
+          <Property Name="SmsStatutId" Type="Int32" />
+          <NavigationProperty Name="SmsStatut" Relationship="SYNOX_SMSModel.FK_Sms_SmsStatut" FromRole="Sms" ToRole="SmsStatut" />
+          <Property Type="Int32" Name="ProjetId" />
+          <NavigationProperty Name="Projet" Relationship="SYNOX_SMSModel.FK_Sms_Projet" FromRole="Sms" ToRole="Projet" />
+          <Property Type="Int32" Name="RouteurMsgId" />
+        </EntityType>
+        <EntityType Name="SmsReception">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroGsm" Type="String" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="160" Unicode="true" FixedLength="false" />
+          <Property Name="DateReception" Type="DateTime" Nullable="false" />
+          <Property Name="DateLecture" Type="DateTime" />
+          <Property Type="String" Name="Commentaire" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="ProjetId" />
+          <NavigationProperty Name="Projet" Relationship="SYNOX_SMSModel.FK_SmsReception_Projet" FromRole="SmsReception" ToRole="Projet" />
+        </EntityType>
+        <EntityType Name="SmsStatut">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Nom" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Sms" Relationship="SYNOX_SMSModel.FK_Sms_SmsStatut" FromRole="SmsStatut" ToRole="Sms" />
+        </EntityType>
+        <Association Name="FK_Sms_SmsStatut">
+          <End Role="SmsStatut" Type="SYNOX_SMSModel.SmsStatut" Multiplicity="0..1" />
+          <End Role="Sms" Type="SYNOX_SMSModel.Sms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SmsStatut">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sms">
+              <PropertyRef Name="SmsStatutId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Projet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Nom" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Sms" Relationship="SYNOX_SMSModel.FK_Sms_Projet" FromRole="Projet" ToRole="Sms" />
+          <NavigationProperty Name="SmsReception" Relationship="SYNOX_SMSModel.FK_SmsReception_Projet" FromRole="Projet" ToRole="SmsReception" />
+          <NavigationProperty Name="NumeroGsmProjet" Relationship="SYNOX_SMSModel.FK_NumeroGsmProjet_Projet" FromRole="Projet" ToRole="NumeroGsmProjet" />
+        </EntityType>
+        <Association Name="FK_Sms_Projet">
+          <End Type="SYNOX_SMSModel.Projet" Role="Projet" Multiplicity="0..1" />
+          <End Type="SYNOX_SMSModel.Sms" Role="Sms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sms">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SmsReception_Projet">
+          <End Type="SYNOX_SMSModel.Projet" Role="Projet" Multiplicity="0..1" />
+          <End Type="SYNOX_SMSModel.SmsReception" Role="SmsReception" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SmsReception">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="NumeroGsmProjet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="ProjetId" />
+          <Property Type="String" Name="NumeroGsm" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BaseDeDonnes" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DateCreation" Nullable="false" />
+          <Property Type="Boolean" Name="Suppression" Nullable="false" />
+          <NavigationProperty Name="Projet" Relationship="SYNOX_SMSModel.FK_NumeroGsmProjet_Projet" FromRole="NumeroGsmProjet" ToRole="Projet" />
+          <Property Type="Boolean" Name="Push" Nullable="false" />
+          <Property Type="String" Name="FonctionName" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_NumeroGsmProjet_Projet">
+          <End Type="SYNOX_SMSModel.Projet" Role="Projet" Multiplicity="0..1" />
+          <End Type="SYNOX_SMSModel.NumeroGsmProjet" Role="NumeroGsmProjet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Projet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="NumeroGsmProjet">
+              <PropertyRef Name="ProjetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SYNOX_SMSModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Sms"><EntityTypeMapping TypeName="SYNOX_SMSModel.Sms"><MappingFragment StoreEntitySet="Sms">
+            <ScalarProperty Name="RouteurMsgId" ColumnName="RouteurMsgId" />
+                <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+            <ScalarProperty Name="Message" ColumnName="Message" />
+            <ScalarProperty Name="DateDemande" ColumnName="DateDemande" />
+            <ScalarProperty Name="DateEnvoi" ColumnName="DateEnvoi" />
+            <ScalarProperty Name="SmsStatutId" ColumnName="SmsStatutId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SmsReception"><EntityTypeMapping TypeName="SYNOX_SMSModel.SmsReception"><MappingFragment StoreEntitySet="SmsReception">
+            <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+                <ScalarProperty Name="Commentaire" ColumnName="Commentaire" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+            <ScalarProperty Name="Message" ColumnName="Message" />
+            <ScalarProperty Name="DateReception" ColumnName="DateReception" />
+            <ScalarProperty Name="DateLecture" ColumnName="DateLecture" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SmsStatut"><EntityTypeMapping TypeName="SYNOX_SMSModel.SmsStatut"><MappingFragment StoreEntitySet="SmsStatut">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Nom" ColumnName="Nom" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Projet">
+            <EntityTypeMapping TypeName="SYNOX_SMSModel.Projet">
+              <MappingFragment StoreEntitySet="Projet">
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NumeroGsmProjet">
+            <EntityTypeMapping TypeName="SYNOX_SMSModel.NumeroGsmProjet">
+              <MappingFragment StoreEntitySet="NumeroGsmProjet">
+                <ScalarProperty Name="FonctionName" ColumnName="FonctionName" />
+                <ScalarProperty Name="Push" ColumnName="Push" />
+                <ScalarProperty Name="Suppression" ColumnName="Suppression" />
+                <ScalarProperty Name="DateCreation" ColumnName="DateCreation" />
+                <ScalarProperty Name="BaseDeDonnes" ColumnName="BaseDeDonnes" />
+                <ScalarProperty Name="NumeroGsm" ColumnName="NumeroGsm" />
+                <ScalarProperty Name="ProjetId" ColumnName="ProjetId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SmsEntity">
+        <EntityTypeShape EntityType="SYNOX_SMSModel.Sms" Width="1.5" PointX="3" PointY="0.875" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SYNOX_SMSModel.SmsReception" Width="1.5" PointX="0.75" PointY="4.75" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="SYNOX_SMSModel.SmsStatut" Width="1.5" PointX="0.75" PointY="1.25" Height="1.4279589843749994" IsExpanded="true" />
+        <AssociationConnector Association="SYNOX_SMSModel.FK_Sms_SmsStatut" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.047841796875" />
+          <ConnectorPoint PointX="3" PointY="2.047841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SYNOX_SMSModel.Projet" Width="1.5" PointX="3.375" PointY="4.75" Height="1.4033821614583335" />
+        <AssociationConnector Association="SYNOX_SMSModel.FK_Sms_Projet" >
+          <ConnectorPoint PointX="3.9375" PointY="4.75" />
+          <ConnectorPoint PointX="3.9375" PointY="3.8167936197916661" />
+        </AssociationConnector>
+        <AssociationConnector Association="SYNOX_SMSModel.FK_SmsReception_Projet" >
+          <ConnectorPoint PointX="3.375" PointY="5.7401432291666659" />
+          <ConnectorPoint PointX="2.25" PointY="5.7401432291666659" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SYNOX_SMSModel.NumeroGsmProjet" Width="1.5" PointX="5.625" PointY="4.5" Height="2.7494921874999996" />
+        <AssociationConnector Association="SYNOX_SMSModel.FK_NumeroGsmProjet_Projet" >
+          <ConnectorPoint PointX="4.875" PointY="5.7401432291666659" />
+          <ConnectorPoint PointX="5.625" PointY="5.7401432291666659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

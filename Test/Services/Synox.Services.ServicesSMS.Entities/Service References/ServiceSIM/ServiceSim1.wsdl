@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://services.m2mfrance.fr/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://services.m2mfrance.fr/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://services.m2mfrance.fr/">
+      <s:element name="GetICCIDFromGsmNumber">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="gsmNumber" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetICCIDFromGsmNumberResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetICCIDFromGsmNumberResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SoapHeaderAuthentification" type="tns:SoapHeaderAuthentification" />
+      <s:complexType name="SoapHeaderAuthentification">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Login" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Complement" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetICCIDFromGsmNumberSoapIn">
+    <wsdl:part name="parameters" element="tns:GetICCIDFromGsmNumber" />
+  </wsdl:message>
+  <wsdl:message name="GetICCIDFromGsmNumberSoapOut">
+    <wsdl:part name="parameters" element="tns:GetICCIDFromGsmNumberResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetICCIDFromGsmNumberSoapHeaderAuthentification">
+    <wsdl:part name="SoapHeaderAuthentification" element="tns:SoapHeaderAuthentification" />
+  </wsdl:message>
+  <wsdl:portType name="ServiceSIMSoap">
+    <wsdl:operation name="GetICCIDFromGsmNumber">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Donne le N° d'ICCID en fonction du N° de Téléphone GSM</wsdl:documentation>
+      <wsdl:input message="tns:GetICCIDFromGsmNumberSoapIn" />
+      <wsdl:output message="tns:GetICCIDFromGsmNumberSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceSIMSoap" type="tns:ServiceSIMSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetICCIDFromGsmNumber">
+      <soap:operation soapAction="http://services.m2mfrance.fr/GetICCIDFromGsmNumber" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetICCIDFromGsmNumberSoapHeaderAuthentification" part="SoapHeaderAuthentification" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceSIMSoap12" type="tns:ServiceSIMSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetICCIDFromGsmNumber">
+      <soap12:operation soapAction="http://services.m2mfrance.fr/GetICCIDFromGsmNumber" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetICCIDFromGsmNumberSoapHeaderAuthentification" part="SoapHeaderAuthentification" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceSIM">
+    <wsdl:port name="ServiceSIMSoap" binding="tns:ServiceSIMSoap">
+      <soap:address location="https://extranet.m2mfrance.fr/WebServices/ServiceSim.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ServiceSIMSoap12" binding="tns:ServiceSIMSoap12">
+      <soap12:address location="https://extranet.m2mfrance.fr/WebServices/ServiceSim.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

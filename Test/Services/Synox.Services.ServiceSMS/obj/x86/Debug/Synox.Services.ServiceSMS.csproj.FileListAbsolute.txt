@@ -1,0 +1,10 @@
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\ServiceSMS.exe.config
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\ServiceSMS.exe
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\ServiceSMS.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\Synox.Core.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\Synox.Core.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Debug\ServiceSMS.exe
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Debug\ServiceSMS.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\Synox.Services.ServicesSMS.Entity.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Debug\Synox.Services.ServicesSMS.Entity.pdb

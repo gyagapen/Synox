@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Collections.Generic;
 
-namespace ConsoleApplicationTestSMS
+namespace ServiceSMS
 {
 
 	public enum SMSDirection
@@ -242,8 +242,9 @@ namespace ConsoleApplicationTestSMS
 
 			byte smsType = (byte) ((pduType & 3) >> 1);
 
-			if (!Enum.IsDefined(typeof(SMSType), (int) smsType))
-				throw new UnknownSMSTypeException(pduType);
+            if (!Enum.IsDefined(typeof(SMSType), (int)smsType))
+                //throw new UnknownSMSTypeException(pduType);
+                throw new Exception();
 
 			return (SMSType) smsType;
         }

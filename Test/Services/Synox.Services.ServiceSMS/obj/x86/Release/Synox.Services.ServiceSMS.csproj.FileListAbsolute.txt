@@ -1,0 +1,11 @@
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\ServiceSMS.exe.config
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\ServiceSMS.exe
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\ServiceSMS.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\Synox.Core.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\Synox.Core.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Release\ResolveAssemblyReference.cache
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Release\ServiceSMS.exe
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\obj\x86\Release\ServiceSMS.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\Synox.Services.ServicesSMS.Entity.dll
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\Synox.Services.ServicesSMS.Entity.pdb
+D:\TFS_JVER\Portail Synox\Main\Services\Synox.Services.ServiceSMS\bin\Release\Synox.Services.ServicesSMS.Entity.XmlSerializers.dll

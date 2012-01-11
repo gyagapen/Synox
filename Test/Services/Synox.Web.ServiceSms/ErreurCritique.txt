@@ -1,0 +1,1 @@
+11:38:04.886:[v1.1] Les paramètres 'NumeroGsmRouteurSms;' ne figurent pas dans le fichier de configuration de l'application.

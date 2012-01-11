@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleApplicationTestSMS
+namespace ServiceSMS
 {
 	public class SMS : SMSBase
 	{
