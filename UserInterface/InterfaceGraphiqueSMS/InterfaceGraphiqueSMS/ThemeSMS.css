@@ -70,7 +70,8 @@ top : 40px;
     border-radius: 10px; 
 }
 
-#navbar_ex8 a:hover, #navbar_ex8 a#active8 {
+#navbar_ex8 a:hover, #navbar_ex8 a#active8 
+{
 padding: 2px 5px;
 background: #FAFAFA;
 border-right: 1px solid #333;
@@ -81,7 +82,8 @@ color: #000;
 border-radius: 10px; 
 }
 
-#navbar_ex8 a#active8 {
+#navbar_ex8 a#active8 
+{
 background: #F6F6F6;
 border-top: 1px solid #333;
 font-weight: bold;

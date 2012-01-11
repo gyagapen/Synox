@@ -18,7 +18,7 @@ namespace InterfaceGraphiqueSMS
         {
             //on charge tous les encodages
             Encodage[] listeEncodages = (from encs in dbContext.Encodage select encs).ToArray();
-
+            //Response.Write(listeEncodages.First().libelleEncodage);
             //on peuple le drop down liste pour les encodages
             DropDownEncodage.DataSource = listeEncodages;
             DropDownEncodage.DataTextField = "libelleEncodage";
@@ -30,7 +30,7 @@ namespace InterfaceGraphiqueSMS
         {
             //insertion d'un message
             Message msg = new Message();
-            msg.messagePDU = contenuSMS.Text;
+            msg.messageTexte = contenuSMS.Text;
             msg.noDestinataire = numDestinataire.Text;
             //on recupere l'encodage
             msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == int.Parse(DropDownEncodage.SelectedValue) select enc).First();
