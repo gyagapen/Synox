@@ -16,7 +16,14 @@ namespace InterfaceGraphiqueSMS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            //on charge tous les encodages
+            Encodage[] listeEncodages = (from encs in dbContext.Encodage select encs).ToArray();
+
+            //on peuple le drop down liste pour les encodages
+            DropDownEncodage.DataSource = listeEncodages;
+            DropDownEncodage.DataTextField = "libelleEncodage";
+            DropDownEncodage.DataValueField = "idEncodage";
+            DropDownEncodage.DataBind();
         }
 
         protected void EcrireSMS(object sender, EventArgs e)
@@ -25,10 +32,9 @@ namespace InterfaceGraphiqueSMS
             Message msg = new Message();
             msg.messagePDU = contenuSMS.Text;
             msg.noDestinataire = numDestinataire.Text;
+            //on recupere l'encodage
+            msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == int.Parse(DropDownEncodage.SelectedValue) select enc).First();
 
-            //selectionne ascii comme encodage
-            Encodage enc = (from en in dbContext.Encodage select en).First();
-            msg.Encodage = enc;
 
             //selectionne statut en attente
             Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
@@ -36,6 +42,8 @@ namespace InterfaceGraphiqueSMS
 
             dbContext.Message.InsertOnSubmit(msg);
             dbContext.SubmitChanges();
+
+            Response.Write("<script> $(\"#dialog\").dialog(); </script>"); 
 
         }
     }

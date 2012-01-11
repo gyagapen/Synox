@@ -10,12 +10,16 @@
 
         <h2 align="center">Envoyer des SMS</h2>
         <hr />
-        Num&eacute;ro de t&eacute;l&eacute;phone :
+        Num&eacute;ro du destinataire :
         <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br /><br />
+        Encodage :
+    <asp:DropDownList ID="DropDownEncodage" runat="server"></asp:DropDownList><br /><br />
         Message à envoyer : <br />
         
         <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" runat="server"></asp:TextBox><br />
         <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" />
     </form>
+
+    <div id="dialog" style="display: none">Message OK !!</div>
 
 </asp:Content>
