@@ -1,2 +1,95 @@
-﻿body {
+﻿body 
+{
+    width:1024px;
+    height:800px;
+}
+
+h1,h2
+{
+  letter-spacing:-1px;  font-size:1em;
+  font-family: 'Trebuchet MS';
+
+}
+
+.header
+{
+    background-color:#6BACD6;
+    position : relative;
+    width : 760px;
+    height : 85px;
+    margin-left : auto;
+    margin-right : auto; 
+    border-radius: 10px;  
+}
+
+.contenu
+{
+    width : 760px;
+    position : relative;
+    margin-left : auto;
+    margin-right : auto;   
+}
+
+#navbar_ex8 
+{    
+padding: 0;
+background: #FDF5E6;
+position : relative;
+height: 30px;
+top : 40px;
+}
+
+#navbar_ex8 ul 
+{
+    position : relative;
+    top : 4px;
+    margin: 0px;
+    padding: 0px 0px;
+    display: block;
+}
+
+#navbar_ex8 ul li 
+{
+    
+    list-style: none;
+    float: left;
+}
+
+#navbar_ex8 a 
+{
+
+    margin: 0px;
+    display: block;
+    /*border-top: 1px solid #333;*/
+    padding: 1px 6px;
+    text-decoration: none;
+    background: #FDF5E6;
+    font: normal 12px verdana, serif;
+    color: #000;
+    border-radius: 10px; 
+}
+
+#navbar_ex8 a:hover, #navbar_ex8 a#active8 {
+padding: 2px 5px;
+background: #FAFAFA;
+border-right: 1px solid #333;
+border-left: 1px solid #333;
+border-top: 1px solid #333;
+border-bottom: 1px solid #333;
+color: #000;
+border-radius: 10px; 
+}
+
+#navbar_ex8 a#active8 {
+background: #F6F6F6;
+border-top: 1px solid #333;
+font-weight: bold;
+border-radius: 10px; 
+}
+
+#navbar_ex8 li#current
+{
+border-right: 2px solid #828282;
+border-bottom: 2px solid #828282;
+border-radius: 10px; 
 }

@@ -7,12 +7,15 @@
    
 
     <form method=get>
-        Num&eacute;ro de t&eacute;l&eacute;phone :
-        <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br />
-        Message à envoyer : 
+
+        <h2 align="center">Envoyer des SMS</h2>
         <hr />
+        Num&eacute;ro de t&eacute;l&eacute;phone :
+        <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br /><br />
+        Message à envoyer : <br />
+        
         <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" runat="server"></asp:TextBox><br />
-        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server"/>
+        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" />
     </form>
 
 </asp:Content>

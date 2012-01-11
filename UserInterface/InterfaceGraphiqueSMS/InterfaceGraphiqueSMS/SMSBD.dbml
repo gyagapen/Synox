@@ -9,7 +9,7 @@
   </Table>
   <Table Name="dbo.Message" Member="Message">
     <Type Name="Message">
-      <Column Name="idMessage" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idMessage" AutoSync="Never" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="messageTexte" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="messagePDU" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="accuseReception" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
