@@ -18,8 +18,6 @@ namespace ServiceSMS
             InitializeComponent();
         }
 
-        
-
         protected override void OnShutdown()
         {
             base.OnShutdown();
