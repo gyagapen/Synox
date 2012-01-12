@@ -102,7 +102,7 @@ namespace ServiceSMS
         }
 
         //envoi d'un sms en MODE pdu, receipt = accuse de reception
-        public void sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage="16bits", int validityPeriod=0)
+        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage="16bits", int validityPeriod=0)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
 
@@ -115,13 +115,20 @@ namespace ServiceSMS
             //on envoie le sms
             Send("AT+CMGS=" + lenght);
 
-            Send(pduMSG + char.ConvertFromUtf32(26));
+            Send(pduMSG + char.ConvertFromUtf32(26), 1);
+
+            //recuperation et affichage de la reponse
+            string result = Recv();
+            Console.WriteLine(result);
+
+            //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
+            return getRefSentSMS(result);
 
         }
 
 
         //envoi d'une TRAME pdu, receipt = accuse de reception
-        public void sendTramePDU(string no, string trame, Boolean receipt = false)
+        public String sendTramePDU(string trame)
         {
 
             //mode pdu
@@ -133,8 +140,18 @@ namespace ServiceSMS
             //on envoie le sms
             Send("AT+CMGS=" + lenght);
 
-            Send(trame + char.ConvertFromUtf32(26));
+            Send(trame + char.ConvertFromUtf32(26), 1);
 
+            //recuperation et affichage de la reponse
+            string result = Recv();
+            Console.WriteLine(result);
+
+            //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
+            string reference =  getRefSentSMS(result);
+
+            Console.WriteLine("REPONSE " + reference + " FiN");
+
+            return reference;
         }
 
 
@@ -151,7 +168,7 @@ namespace ServiceSMS
         public void readAllSMS(string typeLecture, int reponseAutomatique = 0)
         {
             Send("AT+CPMS=\"SM\"");
-            //Send("AT+CPMS=\"SR\"");
+
             Send("AT+CMGL=" + typeLecture, reponseAutomatique);
 
         }
@@ -262,7 +279,7 @@ namespace ServiceSMS
             Send("AT+CMGF=1");
 
             Send("AT+CPMS=\"SR\"");
-            //Send("AT+CPMS=\"SR\"");
+
             Send("AT+CMGL=\"ALL\"", 1);
 
 
@@ -411,6 +428,26 @@ namespace ServiceSMS
                 Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
                 Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
             }
+        }
+
+        //recupere la reference d'une reponse issue de l'envoie d'un SMS
+        public string getRefSentSMS(string response)
+        {
+            string[] temp = response.Split('\n');
+            string result = null;
+                
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i].Contains("CMGS"))
+                {
+                    result = temp[i].Split(':').ElementAt(1).Trim();
+                }
+                else if (temp[i].Contains("ERROR")) //si erreur
+                {
+                    result = "ERROR";
+                }
+            }
+            return result;
         }
     }
 }

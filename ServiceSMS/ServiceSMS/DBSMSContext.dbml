@@ -46,6 +46,7 @@
       <Column Name="accuseReceptionRecu" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="dateReceptionAccuse" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="dureeValidite" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="referenceEnvoi" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Association Name="Message_MessageEnvoi" Member="Message" ThisKey="idMessage" OtherKey="idMessage" Type="Message" IsForeignKey="true" />
     </Type>
   </Table>

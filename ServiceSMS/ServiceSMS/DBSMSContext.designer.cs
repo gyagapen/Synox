@@ -891,6 +891,8 @@ namespace ServiceSMS
 		
 		private System.Nullable<int> _dureeValidite;
 		
+		private string _referenceEnvoi;
+		
 		private EntityRef<Message> _Message;
 		
     #region Définitions de méthodes d'extensibilité
@@ -909,6 +911,8 @@ namespace ServiceSMS
     partial void OndateReceptionAccuseChanged();
     partial void OndureeValiditeChanging(System.Nullable<int> value);
     partial void OndureeValiditeChanged();
+    partial void OnreferenceEnvoiChanging(string value);
+    partial void OnreferenceEnvoiChanged();
     #endregion
 		
 		public MessageEnvoi()
@@ -1037,6 +1041,26 @@ namespace ServiceSMS
 					this._dureeValidite = value;
 					this.SendPropertyChanged("dureeValidite");
 					this.OndureeValiditeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_referenceEnvoi", DbType="NChar(10)")]
+		public string referenceEnvoi
+		{
+			get
+			{
+				return this._referenceEnvoi;
+			}
+			set
+			{
+				if ((this._referenceEnvoi != value))
+				{
+					this.OnreferenceEnvoiChanging(value);
+					this.SendPropertyChanging();
+					this._referenceEnvoi = value;
+					this.SendPropertyChanged("referenceEnvoi");
+					this.OnreferenceEnvoiChanged();
 				}
 			}
 		}

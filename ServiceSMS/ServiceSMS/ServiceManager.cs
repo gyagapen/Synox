@@ -208,16 +208,34 @@ namespace ServiceSMS
             //on determine le message a envoyer
             String messageAEnvoyer = null;
 
+            //pour sauvegarder la reference du SMS envoye
+            String reference = null;
+
             //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
             if (sms.Message.messageTexte == null && sms.Message.messagePDU!=null)
             {
                 messageAEnvoyer = sms.Message.messagePDU;
-                modem.sendTramePDU(sms.Message.noDestinataire, messageAEnvoyer); 
+                //on recupere la reference du message envoye
+                reference = modem.sendTramePDU(messageAEnvoyer); 
+
+                
             }
             else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
             {
                 messageAEnvoyer = sms.Message.messageTexte;
-                modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value); 
+                //on recupere la reference du message envoye
+                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value); 
+            }
+
+            //verifie s'il y a une erreur
+            if (reference.Contains("ERROR"))
+            {
+                //on passe le statut du sms a erreur
+                sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+            }
+            else //on sauvegarde la reference en BD
+            {
+                sms.referenceEnvoi = reference;            
             }
             
             
