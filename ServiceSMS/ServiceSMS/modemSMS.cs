@@ -273,7 +273,15 @@ namespace ServiceSMS
         }
 
 
-        public void readDeliveryReport()
+        /**
+        * Retourne un tableau avec les informations de l'accuse reception
+         * pour le message i
+        * [i]0 - Reference
+        * [i]1 - Destinataire
+        * [i]2 - Date d'envoi SMS
+        * [i]3 - Date Reception
+        * */
+        public String[][] readDeliveryReport()
         {
             //passage en mode PDU
             Send("AT+CMGF=1");
@@ -282,6 +290,7 @@ namespace ServiceSMS
 
             Send("AT+CMGL=\"ALL\"", 1);
 
+            String[][] result = null;
 
             //messages en text brut
             string message = Recv();
@@ -292,8 +301,10 @@ namespace ServiceSMS
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
             {
-                decoderDeliveryReport(tabRep[i]);
+                result[i] = decoderDeliveryReport(tabRep[i]);
             }
+
+            return result;
         }
 
     /**
@@ -414,20 +425,37 @@ namespace ServiceSMS
             return tabRep.ToArray();
         }
 
-
-        public void decoderDeliveryReport(string message)
+        /**
+         * Retourne un tableau avec les informations de l'accuse reception
+         * 0 - Reference
+         * 1 - Destinataire
+         * 2 - Date d'envoi SMS
+         * 3 - Date Reception
+         * */
+        public String[] decoderDeliveryReport(string message)
         {
+            String[] result = null;
             //on enleve toutes les reponses non pertinentes
             if (message.StartsWith("+"))
             {
                 String[] tabAttributs = message.Split(',');
 
-                Console.Out.WriteLine("--------- Contenu Accuse reception------------");
+                
+                result[0] = tabAttributs[3];
+                result[1] = tabAttributs[4];
+                result[2] = tabAttributs[6] + " " + tabAttributs[7];
+                result[3] = tabAttributs[8] + " " + tabAttributs[9];
+
+                
+
+                /*Console.Out.WriteLine("--------- Contenu Accuse reception------------");
                 Console.Out.WriteLine("Reference"+tabAttributs[3]);
                 Console.Out.WriteLine("Destinataire"+tabAttributs[4]);
                 Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
-                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
+                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);*/
             }
+
+            return result;
         }
 
         //recupere la reference d'une reponse issue de l'envoie d'un SMS

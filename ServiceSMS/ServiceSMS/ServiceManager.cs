@@ -136,7 +136,7 @@ namespace ServiceSMS
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
                                                          where msg.Message.Statut.libelleStatut == "Entente"
                                                          select msg).ToArray();
-                                                         
+
 
                         //on cherche un MessageEnvoi correspondant au SMS envoye en BD
                         /*var result = (from smsE in dbContext.MessageEnvoi where smsE.idMessage == sms.idMessage select smsE);
@@ -172,7 +172,7 @@ namespace ServiceSMS
                             envoyerSMS(sms);
                         }
 
-                        
+
 
                         if (lesSMSAEnvoyer.Length > 0)
                             modem.disconnectToModem();
@@ -212,19 +212,19 @@ namespace ServiceSMS
             String reference = null;
 
             //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
-            if (sms.Message.messageTexte == null && sms.Message.messagePDU!=null)
+            if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)
             {
                 messageAEnvoyer = sms.Message.messagePDU;
                 //on recupere la reference du message envoye
-                reference = modem.sendTramePDU(messageAEnvoyer); 
+                reference = modem.sendTramePDU(messageAEnvoyer);
 
-                
+
             }
             else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
             {
                 messageAEnvoyer = sms.Message.messageTexte;
                 //on recupere la reference du message envoye
-                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value); 
+                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value);
             }
 
             //verifie s'il y a une erreur
@@ -235,10 +235,10 @@ namespace ServiceSMS
             }
             else //on sauvegarde la reference en BD
             {
-                sms.referenceEnvoi = reference;            
+                sms.referenceEnvoi = reference;
             }
-            
-            
+
+
 
             //on envoie le sms si le contenu n'est pas nul
             if (messageAEnvoyer != null)
@@ -262,6 +262,55 @@ namespace ServiceSMS
             //on valide les changements dans la BD
             dbContext.SubmitChanges();
 
+        }
+
+        public void getDeliveryReport()
+        {
+            //on selectionne les messages dont la reception de l'accuse reception est a verifier
+            MessageEnvoi[] lesSMSAVerifier = (from msg in dbContext.MessageEnvoi
+                                              where msg.Message.Statut.libelleStatut == "Envoye"
+                                              && msg.Message.accuseReception == 1
+                                              select msg).ToArray();
+
+            //on recupere les accuses du modem
+            /**
+       * Retourne un tableau avec les informations de l'accuse reception
+        * pour le message i
+       * [i]0 - Reference
+       * [i]1 - Destinataire
+       * [i]2 - Date d'envoi SMS
+       * [i]3 - Date Reception
+       * */
+            String[][] accuses = modem.readDeliveryReport();
+
+            //pour chaque message
+            foreach (MessageEnvoi sms in lesSMSAVerifier)
+            {
+                //si on a recu l'accuse
+                if (verifierAccusePresentDansModem(sms, accuses))
+                {
+                    //on change le statut
+                }
+            }
+
+        }
+
+        //retourne vrai si l'accuse du sms a ete recu par le modem
+        public Boolean verifierAccusePresentDansModem(MessageEnvoi sms, String[][] listeAccusesModem)
+        {
+            Boolean estPresent = false;
+            int compteur = 0;
+
+            while (estPresent == false)
+            {
+                if(sms.referenceEnvoi == listeAccusesModem[compteur][0]))
+                {
+                    estPresent = true;
+                }
+                compteur++;
+            }
+
+            return estPresent;
         }
 
         #endregion
