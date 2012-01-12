@@ -10,16 +10,60 @@
 
         <h2 align="center">Envoyer des SMS</h2>
         <hr />
-        Num&eacute;ro du destinataire :
-        <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br /><br />
-        Encodage :
-    <asp:DropDownList ID="DropDownEncodage" runat="server"></asp:DropDownList><br /><br />
+        Mode :
+        <asp:DropDownList ID="ListeMode" runat="server" AutoPostBack="True" 
+            onselectedindexchanged="ListeMode_SelectedIndexChanged">
+            <asp:ListItem>Texte</asp:ListItem>
+            <asp:ListItem>PDU</asp:ListItem>
+        </asp:DropDownList>
+        <br />
+        <br />
+        <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
+                Num&eacute;ro du destinataire :
+                <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br />
+                Encodage :
+                <asp:DropDownList ID="DropDownEncodage" runat="server"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
+                <asp:CheckBox ID="CheckBoxAccuse" runat="server" Text="Accusé de réception" /><br />
+                Date de validité
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="style2" Width="20px"></asp:TextBox>
+                jours
+                <asp:TextBox ID="TextBox2" runat="server" CssClass="style3" Width="20px"></asp:TextBox>
+                heures
+                <asp:TextBox ID="TextBox3" runat="server" CssClass="style4" Width="20px"></asp:TextBox>
+                minutes<br />
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="ListeMode" 
+                    EventName="SelectedIndexChanged">
+                </asp:AsyncPostBackTrigger>
+            </Triggers>
+        </asp:UpdatePanel>
+        <br />
+        
         Message à envoyer : <br />
+    
         
         <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" runat="server"></asp:TextBox><br />
-        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" />
+        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" 
+            CssClass="style1" />
     </form>
 
     <div id="dialog" style="display: none">Message OK !!</div>
 
 </asp:Content>
+<asp:Content ID="Content1" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .style1
+        {}
+        .style2
+        {}
+        .style3
+        {}
+        .style4
+        {}
+    </style>
+</asp:Content>
+

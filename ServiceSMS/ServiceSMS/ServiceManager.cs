@@ -46,7 +46,7 @@ namespace ServiceSMS
 
         //informations sur le modem
         private const String numeroModem = "+33604655154";
-        private const String noPortModem = "COM11";
+        private const String noPortModem = "COM5";
 
         //Reference vers la base de donnees
         private DBSMSContextDataContext dbContext = new DBSMSContextDataContext();
@@ -56,7 +56,6 @@ namespace ServiceSMS
         /// </summary>
         public ServiceManager()
         {
-
             // Taches de fons toutes les 2 secondes
             _timerService = new System.Timers.Timer();
             _timerService.Interval = 2000;

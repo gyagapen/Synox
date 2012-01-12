@@ -10,16 +10,7 @@
 namespace InterfaceGraphiqueSMS {
     
     
-    public partial class _Default {
-        
-        /// <summary>
-        /// Contrôle ListeMode.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ListeMode;
+    public partial class WebForm2 {
         
         /// <summary>
         /// Contrôle ScriptManager1.
@@ -40,66 +31,48 @@ namespace InterfaceGraphiqueSMS {
         protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
-        /// Contrôle numDestinataire.
+        /// Contrôle Label1.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox numDestinataire;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Contrôle DropDownEncodage.
+        /// Contrôle Button1.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownEncodage;
+        protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
-        /// Contrôle CheckBoxAccuse.
+        /// Contrôle Button2.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox CheckBoxAccuse;
+        protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
-        /// Contrôle TextBox1.
+        /// Contrôle UpdatePanel2.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
-        /// Contrôle TextBox2.
+        /// Contrôle Label2.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
-        
-        /// <summary>
-        /// Contrôle TextBox3.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
-        
-        /// <summary>
-        /// Contrôle contenuSMS.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox contenuSMS;
+        protected global::System.Web.UI.WebControls.Label Label2;
     }
 }
