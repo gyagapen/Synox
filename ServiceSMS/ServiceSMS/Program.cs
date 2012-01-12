@@ -42,7 +42,11 @@ namespace ServiceSMS
 
                         case "test":
 
-                            Console.WriteLine("test de jo");
+                            modemSMS modSMS = new modemSMS("COM11");
+                            modSMS.connectToModem();
+                            modSMS.sendTramePDU("0001000b913376650111F800f6002930000000000066010b000001001b04343731314e85b65950683b590831323334353637380000126701");
+                            modSMS.readDeliveryReport();
+                            modSMS.disconnectToModem();
                             break;
                     }
                     Console.WriteLine(string.Empty);

@@ -97,17 +97,14 @@ namespace ServiceSMS
 
             Send("AT+CMGS=\"" + no + "\"");
 
-            Console.WriteLine("Juste avant l'envoi texte : " + message + char.ConvertFromUtf32(26));
-
             Send(message + char.ConvertFromUtf32(26));
 
-            Console.WriteLine("Juste après l'envoi texte");
         }
 
-        //envoi d'un sms en mode pdu, receipt = accuse de reception
-        public void sendSMSPDU(string no, string message, Boolean receipt = false)
+        //envoi d'un sms en MODE pdu, receipt = accuse de reception
+        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage="16bits", int validityPeriod=0)
         {
-            string pduMSG = encodeMsgPDU(message, no, receipt);
+            string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
 
             //mode pdu
             Send("AT+CMGF=0");
@@ -118,9 +115,45 @@ namespace ServiceSMS
             //on envoie le sms
             Send("AT+CMGS=" + lenght);
 
-            Send(pduMSG + char.ConvertFromUtf32(26));
+            Send(pduMSG + char.ConvertFromUtf32(26), 1);
+
+            //recuperation et affichage de la reponse
+            string result = Recv();
+            Console.WriteLine(result);
+
+            //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
+            return getRefSentSMS(result);
 
         }
+
+
+        //envoi d'une TRAME pdu, receipt = accuse de reception
+        public String sendTramePDU(string trame)
+        {
+
+            //mode pdu
+            Send("AT+CMGF=0");
+
+            //longueur du message 
+            int lenght = (trame.Length - 2) / 2;
+
+            //on envoie le sms
+            Send("AT+CMGS=" + lenght);
+
+            Send(trame + char.ConvertFromUtf32(26), 1);
+
+            //recuperation et affichage de la reponse
+            string result = Recv();
+            Console.WriteLine(result);
+
+            //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
+            string reference =  getRefSentSMS(result);
+
+            Console.WriteLine("REPONSE " + reference + " FiN");
+
+            return reference;
+        }
+
 
 
         public void readAllSMSText()
@@ -135,7 +168,7 @@ namespace ServiceSMS
         public void readAllSMS(string typeLecture, int reponseAutomatique = 0)
         {
             Send("AT+CPMS=\"SM\"");
-            //Send("AT+CPMS=\"SR\"");
+
             Send("AT+CMGL=" + typeLecture, reponseAutomatique);
 
         }
@@ -240,15 +273,24 @@ namespace ServiceSMS
         }
 
 
-        public void readDeliveryReport()
+        /**
+        * Retourne un tableau avec les informations de l'accuse reception
+         * pour le message i
+        * [i]0 - Reference
+        * [i]1 - Destinataire
+        * [i]2 - Date d'envoi SMS
+        * [i]3 - Date Reception
+        * */
+        public String[][] readDeliveryReport()
         {
             //passage en mode PDU
             Send("AT+CMGF=1");
 
             Send("AT+CPMS=\"SR\"");
-            //Send("AT+CPMS=\"SR\"");
+
             Send("AT+CMGL=\"ALL\"", 1);
 
+            String[][] result = null;
 
             //messages en text brut
             string message = Recv();
@@ -259,13 +301,22 @@ namespace ServiceSMS
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
             {
-                decoderDeliveryReport(tabRep[i]);
+                result[i] = decoderDeliveryReport(tabRep[i]);
             }
+
+            return result;
         }
 
-        public string encodeMsgPDU(string message, string no, Boolean receipt)
+    /**
+     * Encode un message texte
+     * Receipt : demande accuse reception ou non
+     * typeEncodage : 7,8 ou 16 bits ?
+     * validityPeriod : periode de validite du message, par defaut 0 (aucune periode)
+     * */
+        public string encodeMsgPDU(string message, string no, Boolean receipt, string typeEncodage, int validityPeriod = 0)
         {
             SMS sms = new SMS();
+            String result = null;
 
             //Setting direction of sms
             sms.Direction = SMSDirection.Submited;
@@ -278,10 +329,31 @@ namespace ServiceSMS
             //accuse de recepetion
             sms.StatusReportIndication = receipt;
 
-            //periode de validite de deux jours
-            //sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
 
-            return sms.Compose(SMS.SMSEncoding.UCS2);
+
+            //periode de validite 
+            if (validityPeriod != 0)
+            {
+                sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+            }
+
+
+            //Encodage
+            switch (typeEncodage)
+            {
+                case "7bits":
+                    result = sms.Compose(SMS.SMSEncoding._7bit);
+                    break;
+                case "8bits":
+                    result = sms.Compose(SMS.SMSEncoding._8bit);
+                    break;
+                case "16bits":
+                    result = sms.Compose(SMS.SMSEncoding.UCS2);
+                    break;
+            }
+
+            return result;
+
         }
 
 
@@ -353,20 +425,57 @@ namespace ServiceSMS
             return tabRep.ToArray();
         }
 
-
-        public void decoderDeliveryReport(string message)
+        /**
+         * Retourne un tableau avec les informations de l'accuse reception
+         * 0 - Reference
+         * 1 - Destinataire
+         * 2 - Date d'envoi SMS
+         * 3 - Date Reception
+         * */
+        public String[] decoderDeliveryReport(string message)
         {
+            String[] result = null;
             //on enleve toutes les reponses non pertinentes
             if (message.StartsWith("+"))
             {
                 String[] tabAttributs = message.Split(',');
 
-                Console.Out.WriteLine("--------- Contenu Accuse reception------------");
+                
+                result[0] = tabAttributs[3];
+                result[1] = tabAttributs[4];
+                result[2] = tabAttributs[6] + " " + tabAttributs[7];
+                result[3] = tabAttributs[8] + " " + tabAttributs[9];
+
+                
+
+                /*Console.Out.WriteLine("--------- Contenu Accuse reception------------");
                 Console.Out.WriteLine("Reference"+tabAttributs[3]);
                 Console.Out.WriteLine("Destinataire"+tabAttributs[4]);
                 Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
-                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
+                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);*/
             }
+
+            return result;
+        }
+
+        //recupere la reference d'une reponse issue de l'envoie d'un SMS
+        public string getRefSentSMS(string response)
+        {
+            string[] temp = response.Split('\n');
+            string result = null;
+                
+            for (int i = 0; i < temp.Length; i++)
+            {
+                if (temp[i].Contains("CMGS"))
+                {
+                    result = temp[i].Split(':').ElementAt(1).Trim();
+                }
+                else if (temp[i].Contains("ERROR")) //si erreur
+                {
+                    result = "ERROR";
+                }
+            }
+            return result;
         }
     }
 }

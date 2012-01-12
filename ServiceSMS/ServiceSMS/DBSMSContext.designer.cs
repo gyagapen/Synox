@@ -36,19 +36,19 @@ namespace ServiceSMS
     partial void InsertMessage(Message instance);
     partial void UpdateMessage(Message instance);
     partial void DeleteMessage(Message instance);
-    partial void InsertMessageEnvoi(MessageEnvoi instance);
-    partial void UpdateMessageEnvoi(MessageEnvoi instance);
-    partial void DeleteMessageEnvoi(MessageEnvoi instance);
     partial void InsertMessageRecu(MessageRecu instance);
     partial void UpdateMessageRecu(MessageRecu instance);
     partial void DeleteMessageRecu(MessageRecu instance);
     partial void InsertStatut(Statut instance);
     partial void UpdateStatut(Statut instance);
     partial void DeleteStatut(Statut instance);
+    partial void InsertMessageEnvoi(MessageEnvoi instance);
+    partial void UpdateMessageEnvoi(MessageEnvoi instance);
+    partial void DeleteMessageEnvoi(MessageEnvoi instance);
     #endregion
 		
 		public DBSMSContextDataContext() : 
-				base(global::ServiceSMS.Properties.Settings.Default.SMS_DBConnectionString1, mappingSource)
+				base(global::ServiceSMS.Properties.Settings.Default.SMS_DBConnectionString2, mappingSource)
 		{
 			OnCreated();
 		}
@@ -93,14 +93,6 @@ namespace ServiceSMS
 			}
 		}
 		
-		public System.Data.Linq.Table<MessageEnvoi> MessageEnvoi
-		{
-			get
-			{
-				return this.GetTable<MessageEnvoi>();
-			}
-		}
-		
 		public System.Data.Linq.Table<MessageRecu> MessageRecu
 		{
 			get
@@ -114,6 +106,14 @@ namespace ServiceSMS
 			get
 			{
 				return this.GetTable<Statut>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MessageEnvoi> MessageEnvoi
+		{
+			get
+			{
+				return this.GetTable<MessageEnvoi>();
 			}
 		}
 	}
@@ -254,9 +254,9 @@ namespace ServiceSMS
 		
 		private int _idStatut;
 		
-		private EntityRef<MessageEnvoi> _MessageEnvoi;
-		
 		private EntityRef<MessageRecu> _MessageRecu;
+		
+		private EntityRef<MessageEnvoi> _MessageEnvoi;
 		
 		private EntityRef<Encodage> _Encodage;
 		
@@ -286,8 +286,8 @@ namespace ServiceSMS
 		
 		public Message()
 		{
-			this._MessageEnvoi = default(EntityRef<MessageEnvoi>);
 			this._MessageRecu = default(EntityRef<MessageRecu>);
+			this._MessageEnvoi = default(EntityRef<MessageEnvoi>);
 			this._Encodage = default(EntityRef<Encodage>);
 			this._Statut = default(EntityRef<Statut>);
 			OnCreated();
@@ -461,35 +461,6 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageEnvoi", Storage="_MessageEnvoi", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
-		public MessageEnvoi MessageEnvoi
-		{
-			get
-			{
-				return this._MessageEnvoi.Entity;
-			}
-			set
-			{
-				MessageEnvoi previousValue = this._MessageEnvoi.Entity;
-				if (((previousValue != value) 
-							|| (this._MessageEnvoi.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MessageEnvoi.Entity = null;
-						previousValue.Message = null;
-					}
-					this._MessageEnvoi.Entity = value;
-					if ((value != null))
-					{
-						value.Message = this;
-					}
-					this.SendPropertyChanged("MessageEnvoi");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageRecu", Storage="_MessageRecu", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
 		public MessageRecu MessageRecu
 		{
@@ -515,6 +486,35 @@ namespace ServiceSMS
 						value.Message = this;
 					}
 					this.SendPropertyChanged("MessageRecu");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageEnvoi", Storage="_MessageEnvoi", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
+		public MessageEnvoi MessageEnvoi
+		{
+			get
+			{
+				return this._MessageEnvoi.Entity;
+			}
+			set
+			{
+				MessageEnvoi previousValue = this._MessageEnvoi.Entity;
+				if (((previousValue != value) 
+							|| (this._MessageEnvoi.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MessageEnvoi.Entity = null;
+						previousValue.Message = null;
+					}
+					this._MessageEnvoi.Entity = value;
+					if ((value != null))
+					{
+						value.Message = this;
+					}
+					this.SendPropertyChanged("MessageEnvoi");
 				}
 			}
 		}
@@ -583,181 +583,6 @@ namespace ServiceSMS
 						this._idStatut = default(int);
 					}
 					this.SendPropertyChanged("Statut");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MessageEnvoi")]
-	public partial class MessageEnvoi : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idMessage;
-		
-		private System.Nullable<System.DateTime> _dureeValidite;
-		
-		private System.Nullable<System.DateTime> _dateDemande;
-		
-		private System.Nullable<System.DateTime> _dateEnvoi;
-		
-		private EntityRef<Message> _Message;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidMessageChanging(int value);
-    partial void OnidMessageChanged();
-    partial void OndureeValiditeChanging(System.Nullable<System.DateTime> value);
-    partial void OndureeValiditeChanged();
-    partial void OndateDemandeChanging(System.Nullable<System.DateTime> value);
-    partial void OndateDemandeChanged();
-    partial void OndateEnvoiChanging(System.Nullable<System.DateTime> value);
-    partial void OndateEnvoiChanged();
-    #endregion
-		
-		public MessageEnvoi()
-		{
-			this._Message = default(EntityRef<Message>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idMessage
-		{
-			get
-			{
-				return this._idMessage;
-			}
-			set
-			{
-				if ((this._idMessage != value))
-				{
-					if (this._Message.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidMessageChanging(value);
-					this.SendPropertyChanging();
-					this._idMessage = value;
-					this.SendPropertyChanged("idMessage");
-					this.OnidMessageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dureeValidite", DbType="Date")]
-		public System.Nullable<System.DateTime> dureeValidite
-		{
-			get
-			{
-				return this._dureeValidite;
-			}
-			set
-			{
-				if ((this._dureeValidite != value))
-				{
-					this.OndureeValiditeChanging(value);
-					this.SendPropertyChanging();
-					this._dureeValidite = value;
-					this.SendPropertyChanged("dureeValidite");
-					this.OndureeValiditeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="Date")]
-		public System.Nullable<System.DateTime> dateDemande
-		{
-			get
-			{
-				return this._dateDemande;
-			}
-			set
-			{
-				if ((this._dateDemande != value))
-				{
-					this.OndateDemandeChanging(value);
-					this.SendPropertyChanging();
-					this._dateDemande = value;
-					this.SendPropertyChanged("dateDemande");
-					this.OndateDemandeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateEnvoi", DbType="Date")]
-		public System.Nullable<System.DateTime> dateEnvoi
-		{
-			get
-			{
-				return this._dateEnvoi;
-			}
-			set
-			{
-				if ((this._dateEnvoi != value))
-				{
-					this.OndateEnvoiChanging(value);
-					this.SendPropertyChanging();
-					this._dateEnvoi = value;
-					this.SendPropertyChanged("dateEnvoi");
-					this.OndateEnvoiChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageEnvoi", Storage="_Message", ThisKey="idMessage", OtherKey="idMessage", IsForeignKey=true)]
-		public Message Message
-		{
-			get
-			{
-				return this._Message.Entity;
-			}
-			set
-			{
-				Message previousValue = this._Message.Entity;
-				if (((previousValue != value) 
-							|| (this._Message.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Message.Entity = null;
-						previousValue.MessageEnvoi = null;
-					}
-					this._Message.Entity = value;
-					if ((value != null))
-					{
-						value.MessageEnvoi = this;
-						this._idMessage = value.idMessage;
-					}
-					else
-					{
-						this._idMessage = default(int);
-					}
-					this.SendPropertyChanged("Message");
 				}
 			}
 		}
@@ -1045,6 +870,253 @@ namespace ServiceSMS
 		{
 			this.SendPropertyChanging();
 			entity.Statut = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MessageEnvoi")]
+	public partial class MessageEnvoi : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idMessage;
+		
+		private System.Nullable<System.DateTime> _dateDemande;
+		
+		private System.Nullable<System.DateTime> _dateEnvoi;
+		
+		private System.Nullable<int> _accuseReceptionRecu;
+		
+		private System.Nullable<System.DateTime> _dateReceptionAccuse;
+		
+		private System.Nullable<int> _dureeValidite;
+		
+		private string _referenceEnvoi;
+		
+		private EntityRef<Message> _Message;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidMessageChanging(int value);
+    partial void OnidMessageChanged();
+    partial void OndateDemandeChanging(System.Nullable<System.DateTime> value);
+    partial void OndateDemandeChanged();
+    partial void OndateEnvoiChanging(System.Nullable<System.DateTime> value);
+    partial void OndateEnvoiChanged();
+    partial void OnaccuseReceptionRecuChanging(System.Nullable<int> value);
+    partial void OnaccuseReceptionRecuChanged();
+    partial void OndateReceptionAccuseChanging(System.Nullable<System.DateTime> value);
+    partial void OndateReceptionAccuseChanged();
+    partial void OndureeValiditeChanging(System.Nullable<int> value);
+    partial void OndureeValiditeChanged();
+    partial void OnreferenceEnvoiChanging(string value);
+    partial void OnreferenceEnvoiChanged();
+    #endregion
+		
+		public MessageEnvoi()
+		{
+			this._Message = default(EntityRef<Message>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idMessage
+		{
+			get
+			{
+				return this._idMessage;
+			}
+			set
+			{
+				if ((this._idMessage != value))
+				{
+					if (this._Message.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidMessageChanging(value);
+					this.SendPropertyChanging();
+					this._idMessage = value;
+					this.SendPropertyChanged("idMessage");
+					this.OnidMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="Date")]
+		public System.Nullable<System.DateTime> dateDemande
+		{
+			get
+			{
+				return this._dateDemande;
+			}
+			set
+			{
+				if ((this._dateDemande != value))
+				{
+					this.OndateDemandeChanging(value);
+					this.SendPropertyChanging();
+					this._dateDemande = value;
+					this.SendPropertyChanged("dateDemande");
+					this.OndateDemandeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateEnvoi", DbType="Date")]
+		public System.Nullable<System.DateTime> dateEnvoi
+		{
+			get
+			{
+				return this._dateEnvoi;
+			}
+			set
+			{
+				if ((this._dateEnvoi != value))
+				{
+					this.OndateEnvoiChanging(value);
+					this.SendPropertyChanging();
+					this._dateEnvoi = value;
+					this.SendPropertyChanged("dateEnvoi");
+					this.OndateEnvoiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accuseReceptionRecu", DbType="Int")]
+		public System.Nullable<int> accuseReceptionRecu
+		{
+			get
+			{
+				return this._accuseReceptionRecu;
+			}
+			set
+			{
+				if ((this._accuseReceptionRecu != value))
+				{
+					this.OnaccuseReceptionRecuChanging(value);
+					this.SendPropertyChanging();
+					this._accuseReceptionRecu = value;
+					this.SendPropertyChanged("accuseReceptionRecu");
+					this.OnaccuseReceptionRecuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReceptionAccuse", DbType="Date")]
+		public System.Nullable<System.DateTime> dateReceptionAccuse
+		{
+			get
+			{
+				return this._dateReceptionAccuse;
+			}
+			set
+			{
+				if ((this._dateReceptionAccuse != value))
+				{
+					this.OndateReceptionAccuseChanging(value);
+					this.SendPropertyChanging();
+					this._dateReceptionAccuse = value;
+					this.SendPropertyChanged("dateReceptionAccuse");
+					this.OndateReceptionAccuseChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dureeValidite", DbType="Int")]
+		public System.Nullable<int> dureeValidite
+		{
+			get
+			{
+				return this._dureeValidite;
+			}
+			set
+			{
+				if ((this._dureeValidite != value))
+				{
+					this.OndureeValiditeChanging(value);
+					this.SendPropertyChanging();
+					this._dureeValidite = value;
+					this.SendPropertyChanged("dureeValidite");
+					this.OndureeValiditeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_referenceEnvoi", DbType="NChar(10)")]
+		public string referenceEnvoi
+		{
+			get
+			{
+				return this._referenceEnvoi;
+			}
+			set
+			{
+				if ((this._referenceEnvoi != value))
+				{
+					this.OnreferenceEnvoiChanging(value);
+					this.SendPropertyChanging();
+					this._referenceEnvoi = value;
+					this.SendPropertyChanged("referenceEnvoi");
+					this.OnreferenceEnvoiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageEnvoi", Storage="_Message", ThisKey="idMessage", OtherKey="idMessage", IsForeignKey=true)]
+		public Message Message
+		{
+			get
+			{
+				return this._Message.Entity;
+			}
+			set
+			{
+				Message previousValue = this._Message.Entity;
+				if (((previousValue != value) 
+							|| (this._Message.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Message.Entity = null;
+						previousValue.MessageEnvoi = null;
+					}
+					this._Message.Entity = value;
+					if ((value != null))
+					{
+						value.MessageEnvoi = this;
+						this._idMessage = value.idMessage;
+					}
+					else
+					{
+						this._idMessage = default(int);
+					}
+					this.SendPropertyChanged("Message");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 }

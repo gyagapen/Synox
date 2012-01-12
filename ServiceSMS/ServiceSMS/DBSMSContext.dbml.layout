@@ -14,24 +14,11 @@
         <elementListCompartment Id="67650ebd-3ddc-4d2e-a7b5-ae93ec95887d" absoluteBounds="3.265, 3.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.6875 : 2.69399251302083); (4.6875 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.6875 : 2.69399251302083); (4.6875 : 3.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBSMSContextDataContext/Encodage/Encodage_Message" />
       <nodes>
         <classShapeMoniker Id="dab0b65c-ef18-461a-af37-7d18ef1e9dbc" />
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="79516067-0bfc-4f1b-89f0-550d8cb6b729" absoluteBounds="6.25, 7, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/DBSMSContextDataContext/MessageEnvoi" />
-      <nestedChildShapes>
-        <elementListCompartment Id="4d9639c4-cfbf-4d38-90a2-005e6744c07c" absoluteBounds="6.265, 7.46, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(4.25 : 5.84780110677083); (4.25 : 7.78929768880208); (6.25 : 7.78929768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageEnvoi" />
-      <nodes>
-        <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
-        <classShapeMoniker Id="79516067-0bfc-4f1b-89f0-550d8cb6b729" />
       </nodes>
     </associationConnector>
     <classShape Id="fe8a4ac3-d9d0-4f0c-884e-d4ce7d312752" absoluteBounds="0.875, 6.625, 2, 1.3862939453125">
@@ -40,7 +27,7 @@
         <elementListCompartment Id="74256891-1187-4e65-b32e-e3d3460de1ec" absoluteBounds="0.89, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(3.7187475 : 5.84780110677083); (3.7187475 : 7.20714884440104); (2.875 : 7.20714884440104)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(3.7187475 : 5.84780110677083); (3.7187475 : 7.20714884440104); (2.875 : 7.20714884440104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageRecu" />
       <nodes>
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
@@ -53,11 +40,24 @@
         <elementListCompartment Id="9874ecc8-042d-4f49-9524-48b5192e228c" absoluteBounds="1.2650000000000001, 4.71, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.21875 : 4.25); (2.21875 : 3.8749995); (3.25 : 3.8749995)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.21875 : 4.25); (2.21875 : 3.8749995); (3.25 : 3.8749995)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/DBSMSContextDataContext/Statut/Statut_Message" />
       <nodes>
         <classShapeMoniker Id="b383ece3-9eb3-4386-917e-d43dde65fb37" />
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="bc5058e3-2a49-440d-9f03-15f6425353e1" absoluteBounds="6.375, 6.5, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/DBSMSContextDataContext/MessageEnvoi" />
+      <nestedChildShapes>
+        <elementListCompartment Id="27d8fa4f-21ed-4ad2-904a-86a6a1377613" absoluteBounds="6.39, 6.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(4.51562625 : 5.84780110677083); (4.51562625 : 7.9313242594401); (6.375 : 7.9313242594401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageEnvoi" />
+      <nodes>
+        <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
+        <classShapeMoniker Id="bc5058e3-2a49-440d-9f03-15f6425353e1" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
