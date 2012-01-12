@@ -127,44 +127,52 @@ namespace ServiceSMS
                     if (_dateDerniereEnvoi.Add(_dureeEntre2Envois) < DateTime.Now)
                     {
                         //on recupere tous les message en attente d'envoi dans la base de donnees
-                        Message[] lesSMSAEnvoyer = (from msg in dbContext.Message
+                        /*Message[] lesSMSAEnvoyer = (from msg in dbContext.Message
                                                     join status in dbContext.Statut
                                                     on msg.idStatut equals status.idStatut
                                                     where status.libelleStatut == "En attente"
-                                                    select msg).ToArray();
+                                                    select msg).ToArray();*/
 
-                        //on recupere le statut "ENVOYE"
-                        Statut statutEnvoye = (from stat in dbContext.Statut where stat.libelleStatut == "Envoye" select stat).First();
+                        MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
+                                                         where msg.Message.Statut.libelleStatut == "Entente"
+                                                         select msg).ToArray();
+                                                         
 
-                        if (lesSMSAEnvoyer.Length > 0)
-                            modem.connectToModem();
-                        //pour chaque message a envoyer
-                        foreach (Message sms in lesSMSAEnvoyer)
+                        //on cherche un MessageEnvoi correspondant au SMS envoye en BD
+                        /*var result = (from smsE in dbContext.MessageEnvoi where smsE.idMessage == sms.idMessage select smsE);
+
+
+
+                        MessageEnvoi smsEnvoi;
+
+                        //si deja present BD
+                        if (result.Count() > 0)
                         {
-                            //on envoie le sms
-                            modem.sendSMSPDU(sms.noDestinataire, sms.messagePDU, true);
-
-                            System.Console.WriteLine(sms.messagePDU);
-
-                            sms.noEmetteur = numeroModem;
-
-                            //on passe le sms en statut envoye
-                            sms.Statut = statutEnvoye;
-
-
-                            //on cree un SMSEnvoi pour sauvegarder les infos sur l'envoi des SMS
-                            MessageEnvoi smsEnvoi = new MessageEnvoi();
-                            smsEnvoi.dateEnvoi = new DateTime();
+                            smsEnvoi = result.First();
+                        }
+                        else //si aucune entree en BD
+                        {
+                            //on  instancie un nouveau MessageEnvoi
+                            smsEnvoi = new MessageEnvoi();
                             smsEnvoi.Message = sms;
 
                             //sauvegarde
                             dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
-                            
+                        }*/
 
+
+                        //connexion au modem
+                        if (lesSMSAEnvoyer.Length > 0)
+                            modem.connectToModem();
+
+                        //pour chaque message a envoyer
+                        foreach (MessageEnvoi sms in lesSMSAEnvoyer)
+                        {
+                            //on envoie le sms
+                            envoyerSMS(sms);
                         }
 
-                        //on valide les changements dans la BD
-                        dbContext.SubmitChanges();
+                        
 
                         if (lesSMSAEnvoyer.Length > 0)
                             modem.disconnectToModem();
@@ -177,10 +185,67 @@ namespace ServiceSMS
             }
             catch (Exception ex)
             {
-                _busy = false;
+                //_busy = false;
                 //LogHelper.Trace("timerService_Elapsed:" + ex.Message, LogHelper.EnumCategorie.Erreur); 
+                Console.WriteLine("Erreur : " + ex.Message);
             }
         }
+
+        //methode qui communique avec le modem pour une demande d'envoi de SMS
+        private void envoyerSMS(MessageEnvoi sms)
+        {
+            //on recupere le statut "ENVOYE"
+            Statut statutEnvoye = (from stat in dbContext.Statut where stat.libelleStatut == "Envoye" select stat).First();
+
+            //on recupere le booleen concernant la demande d'accuse reception
+            Boolean demandeAccuse = true; //par defaut a vrai
+
+            if (sms.Message.accuseReception == 0) //si specifier le contraire en BD, on change la valeur
+            {
+                demandeAccuse = false;
+            }
+
+            //on determine le message a envoyer
+            String messageAEnvoyer = null;
+
+            //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
+            if (sms.Message.messageTexte == null && sms.Message.messagePDU!=null)
+            {
+                messageAEnvoyer = sms.Message.messagePDU;
+                modem.sendTramePDU(sms.Message.noDestinataire, messageAEnvoyer); 
+            }
+            else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
+            {
+                messageAEnvoyer = sms.Message.messageTexte;
+                modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value); 
+            }
+            
+            
+
+            //on envoie le sms si le contenu n'est pas nul
+            if (messageAEnvoyer != null)
+            {
+                //on complete les informations sur l'envoi des SMS
+                sms.Message.noEmetteur = numeroModem;
+                sms.accuseReceptionRecu = 0; //pas encore recu
+
+                //on passe le sms en statut envoye
+                sms.Message.Statut = statutEnvoye;
+                sms.dateEnvoi = DateTime.Now; //date du jour
+
+            }
+            else // erreur
+            {
+                //on passe le statut du sms a erreur
+                sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+            }
+
+
+            //on valide les changements dans la BD
+            dbContext.SubmitChanges();
+
+        }
+
         #endregion
     }
 }

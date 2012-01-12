@@ -97,17 +97,14 @@ namespace ServiceSMS
 
             Send("AT+CMGS=\"" + no + "\"");
 
-            Console.WriteLine("Juste avant l'envoi texte : " + message + char.ConvertFromUtf32(26));
-
             Send(message + char.ConvertFromUtf32(26));
 
-            Console.WriteLine("Juste après l'envoi texte");
         }
 
-        //envoi d'un sms en mode pdu, receipt = accuse de reception
-        public void sendSMSPDU(string no, string message, Boolean receipt = false)
+        //envoi d'un sms en MODE pdu, receipt = accuse de reception
+        public void sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage="16bits", int validityPeriod=0)
         {
-            string pduMSG = encodeMsgPDU(message, no, receipt);
+            string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
 
             //mode pdu
             Send("AT+CMGF=0");
@@ -121,6 +118,25 @@ namespace ServiceSMS
             Send(pduMSG + char.ConvertFromUtf32(26));
 
         }
+
+
+        //envoi d'une TRAME pdu, receipt = accuse de reception
+        public void sendTramePDU(string no, string trame, Boolean receipt = false)
+        {
+
+            //mode pdu
+            Send("AT+CMGF=0");
+
+            //longueur du message 
+            int lenght = (trame.Length - 2) / 2;
+
+            //on envoie le sms
+            Send("AT+CMGS=" + lenght);
+
+            Send(trame + char.ConvertFromUtf32(26));
+
+        }
+
 
 
         public void readAllSMSText()
@@ -263,9 +279,16 @@ namespace ServiceSMS
             }
         }
 
-        public string encodeMsgPDU(string message, string no, Boolean receipt)
+    /**
+     * Encode un message texte
+     * Receipt : demande accuse reception ou non
+     * typeEncodage : 7,8 ou 16 bits ?
+     * validityPeriod : periode de validite du message, par defaut 0 (aucune periode)
+     * */
+        public string encodeMsgPDU(string message, string no, Boolean receipt, string typeEncodage, int validityPeriod = 0)
         {
             SMS sms = new SMS();
+            String result = null;
 
             //Setting direction of sms
             sms.Direction = SMSDirection.Submited;
@@ -278,10 +301,31 @@ namespace ServiceSMS
             //accuse de recepetion
             sms.StatusReportIndication = receipt;
 
-            //periode de validite de deux jours
-            //sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
 
-            return sms.Compose(SMS.SMSEncoding.UCS2);
+
+            //periode de validite 
+            if (validityPeriod != 0)
+            {
+                sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+            }
+
+
+            //Encodage
+            switch (typeEncodage)
+            {
+                case "7bits":
+                    result = sms.Compose(SMS.SMSEncoding._7bit);
+                    break;
+                case "8bits":
+                    result = sms.Compose(SMS.SMSEncoding._8bit);
+                    break;
+                case "16bits":
+                    result = sms.Compose(SMS.SMSEncoding.UCS2);
+                    break;
+            }
+
+            return result;
+
         }
 
 

@@ -43,5 +43,16 @@ namespace ServiceSMS.Properties {
                 return ((string)(this["SMS_DBConnectionString1"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PRIM-PC\\DB_SYNOX;Initial Catalog=SMS_DB;Persist Security Info=True;Us" +
+            "er ID=SYNOX;Password=synox")]
+        public string SMS_DBConnectionString2 {
+            get {
+                return ((string)(this["SMS_DBConnectionString2"]));
+            }
+        }
     }
 }
