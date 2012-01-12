@@ -64,17 +64,17 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>QZvhbEdCg0V2WfvYLySDwBxGZ3U=</dsig:DigestValue>
+        <dsig:DigestValue>Vd/cOqgXiTxG95Kh5MjD59ostS0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="ServiceSMS.exe.config" size="617">
+  <file name="ServiceSMS.exe.config" size="616">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>turOk8l4Vndg0YgDYeakhYchAdk=</dsig:DigestValue>
+      <dsig:DigestValue>QZplh7XVXT94nYkJb1mvjSOkWnM=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

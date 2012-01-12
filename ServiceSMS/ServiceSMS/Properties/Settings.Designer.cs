@@ -36,8 +36,8 @@ namespace ServiceSMS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=GUI-PC\\SQLEXPRESS;Initial Catalog=SMS_DB;user ID=SYNOX; password=syno" +
-            "x")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=PRIM-PC\\DB_SYNOX;Initial Catalog=SMS_DB;user ID=SYNOX; password=synox" +
+            "")]
         public string SMS_DBConnectionString1 {
             get {
                 return ((string)(this["SMS_DBConnectionString1"]));

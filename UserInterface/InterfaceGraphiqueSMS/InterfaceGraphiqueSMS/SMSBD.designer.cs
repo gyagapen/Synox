@@ -48,7 +48,7 @@ namespace InterfaceGraphiqueSMS
     #endregion
 		
 		public SMSBDDataContext() : 
-				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SMS_DBConnectionString"].ConnectionString, mappingSource)
+				base(global::System.Configuration.ConfigurationManager.ConnectionStrings["SMS_DBConnectionString1"].ConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
@@ -146,7 +146,7 @@ namespace InterfaceGraphiqueSMS
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idEncodage
 		{
 			get
@@ -293,7 +293,7 @@ namespace InterfaceGraphiqueSMS
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", DbType="Int NOT NULL", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idMessage
 		{
 			get
@@ -313,7 +313,7 @@ namespace InterfaceGraphiqueSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_messageTexte", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_messageTexte", DbType="NVarChar(MAX)")]
 		public string messageTexte
 		{
 			get
@@ -333,7 +333,7 @@ namespace InterfaceGraphiqueSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_messagePDU", DbType="NVarChar(MAX) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_messagePDU", DbType="NVarChar(MAX)")]
 		public string messagePDU
 		{
 			get
@@ -393,7 +393,7 @@ namespace InterfaceGraphiqueSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noEmetteur", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noEmetteur", DbType="NVarChar(50)")]
 		public string noEmetteur
 		{
 			get
@@ -622,6 +622,10 @@ namespace InterfaceGraphiqueSMS
 		
 		private System.Nullable<System.DateTime> _dateEnvoi;
 		
+		private int _accuseReceptionRecu;
+		
+		private System.DateTime _dateReceptionAccuse;
+		
 		private EntityRef<Message> _Message;
 		
     #region Définitions de méthodes d'extensibilité
@@ -636,6 +640,10 @@ namespace InterfaceGraphiqueSMS
     partial void OndateDemandeChanged();
     partial void OndateEnvoiChanging(System.Nullable<System.DateTime> value);
     partial void OndateEnvoiChanged();
+    partial void OnaccuseReceptionRecuChanging(int value);
+    partial void OnaccuseReceptionRecuChanged();
+    partial void OndateReceptionAccuseChanging(System.DateTime value);
+    partial void OndateReceptionAccuseChanged();
     #endregion
 		
 		public MessageEnvoi()
@@ -724,6 +732,46 @@ namespace InterfaceGraphiqueSMS
 					this._dateEnvoi = value;
 					this.SendPropertyChanged("dateEnvoi");
 					this.OndateEnvoiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accuseReceptionRecu", DbType="Int NOT NULL")]
+		public int accuseReceptionRecu
+		{
+			get
+			{
+				return this._accuseReceptionRecu;
+			}
+			set
+			{
+				if ((this._accuseReceptionRecu != value))
+				{
+					this.OnaccuseReceptionRecuChanging(value);
+					this.SendPropertyChanging();
+					this._accuseReceptionRecu = value;
+					this.SendPropertyChanged("accuseReceptionRecu");
+					this.OnaccuseReceptionRecuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReceptionAccuse", DbType="Date NOT NULL")]
+		public System.DateTime dateReceptionAccuse
+		{
+			get
+			{
+				return this._dateReceptionAccuse;
+			}
+			set
+			{
+				if ((this._dateReceptionAccuse != value))
+				{
+					this.OndateReceptionAccuseChanging(value);
+					this.SendPropertyChanging();
+					this._dateReceptionAccuse = value;
+					this.SendPropertyChanged("dateReceptionAccuse");
+					this.OndateReceptionAccuseChanged();
 				}
 			}
 		}
@@ -962,7 +1010,7 @@ namespace InterfaceGraphiqueSMS
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idStatut", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idStatut", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
 		public int idStatut
 		{
 			get
