@@ -1,29 +1,13 @@
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.config
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.ProjectInstaller.resources
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.write.1.tlog
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.manifest
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.application
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.pdb
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe.manifest
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.application
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.pdb
-C:\Users\Guillaume\Desktop\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.config
-C:\Users\Guillaume\Desktop\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe
-C:\Users\Guillaume\Desktop\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.pdb
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.config
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.pdb
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.ProjectInstaller.resources
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.read.1.tlog
-C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.write.1.tlog
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResolveAssemblyReference.cache
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.ProjectInstaller.resources
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.read.1.tlog
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ResGen.write.1.tlog
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe.manifest
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.application
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.pdb
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.exe.manifest
-F:\Internet\public_space\Polytech\Synox\GitHub\Synox\ServiceSMS\ServiceSMS\obj\x86\Debug\ServiceSMS.application

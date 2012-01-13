@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Collections;
 
 namespace InterfaceGraphiqueSMS
 {
@@ -45,6 +46,23 @@ namespace InterfaceGraphiqueSMS
 
             Response.Write("<script> $(\"#dialog\").dialog(); </script>"); 
 
+        }
+
+        protected void ListeMode_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            IEnumerator ctrls = UpdatePanel1.Controls.GetEnumerator();
+            while (ctrls.MoveNext())
+            {
+                if (ListeMode.SelectedValue == "PDU")
+                {
+                    ((Control)ctrls.Current).Visible = false;
+                }
+                else
+                {
+                    ((Control)ctrls.Current).Visible = true;
+                }
+            }
+            //TextBox1.Visible = false;
         }
     }
 }

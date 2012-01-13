@@ -19,12 +19,13 @@ namespace InterfaceGraphiqueSMS
             ListMessages.DataTextField = "messageTexte";
             ListMessages.DataValueField = "idMessage";
             ListMessages.DataBind();
-            tbMessage.Text = "troc";
         }
 
         protected void ListMessages_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tbMessage.Text = "truc";
+            //Message DetailsMessage = (from mess in dbContext.Message where mess.idMessage == ListMessages.SelectedIndex select mess).ToArray()[0];
+            tbMessage.Text = ListMessages.SelectedIndex.ToString();
+            //tbMessage.Text += "a";
         }
     }
 }
