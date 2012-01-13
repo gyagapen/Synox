@@ -118,6 +118,10 @@ namespace ServiceSMS
                     {
                         // to do : fqire le process de lecture
                         // ...
+
+                        //lecture des accuses reception
+                        Console.WriteLine("Lecture des accuses reception");
+                        getDeliveryReport();
                         _dateDerniereLecture = DateTime.Now;
                     }
 
@@ -280,6 +284,13 @@ namespace ServiceSMS
                                               && msg.Message.accuseReception == 1
                                               select msg).ToArray();
 
+
+            if (lesSMSAVerifier.Count() > 0)
+            {
+                //connexion modem
+                modem.connectToModem();
+            }
+
             //on recupere les accuses du modem
             /**
        * Retourne un tableau avec les informations de l'accuse reception
@@ -298,7 +309,14 @@ namespace ServiceSMS
                 if (verifierAccusePresentDansModem(sms, accuses))
                 {
                     //on change le statut
+                    sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Accuse" select stat).First();
+                    sms.accuseReceptionRecu = 1;
                 }
+            }
+
+            if (lesSMSAVerifier.Count() > 0)
+            {
+                modem.disconnectToModem();
             }
 
         }
@@ -309,13 +327,16 @@ namespace ServiceSMS
             Boolean estPresent = false;
             int compteur = 0;
 
-            while (estPresent == false)
+            while (estPresent == false && compteur<listeAccusesModem.Count())
             {
-                if(sms.referenceEnvoi == listeAccusesModem[compteur][0])
+                if (listeAccusesModem[compteur][0] != null)
                 {
-                    estPresent = true;
+                    if (sms.referenceEnvoi.Trim() == listeAccusesModem[compteur][0].Trim())
+                    {
+                        estPresent = true;
+                    }
+                    compteur++;
                 }
-                compteur++;
             }
 
             return estPresent;
