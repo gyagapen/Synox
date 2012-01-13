@@ -17,14 +17,17 @@ namespace InterfaceGraphiqueSMS
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //on charge tous les encodages
-            Encodage[] listeEncodages = (from encs in dbContext.Encodage select encs).ToArray();
-            //Response.Write(listeEncodages.First().libelleEncodage);
-            //on peuple le drop down liste pour les encodages
-            DropDownEncodage.DataSource = listeEncodages;
-            DropDownEncodage.DataTextField = "libelleEncodage";
-            DropDownEncodage.DataValueField = "idEncodage";
-            DropDownEncodage.DataBind();
+            if (!Page.IsPostBack)
+            {
+                //on charge tous les encodages
+                Encodage[] listeEncodages = (from encs in dbContext.Encodage select encs).ToArray();
+                //Response.Write(listeEncodages.First().libelleEncodage);
+                //on peuple le drop down liste pour les encodages
+                DropDownEncodage.DataSource = listeEncodages;
+                DropDownEncodage.DataTextField = "libelleEncodage";
+                DropDownEncodage.DataValueField = "idEncodage";
+                DropDownEncodage.DataBind();
+            }
         }
 
         protected void EcrireSMS(object sender, EventArgs e)
@@ -35,6 +38,7 @@ namespace InterfaceGraphiqueSMS
             msg.noDestinataire = numDestinataire.Text;
             //on recupere l'encodage
             msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == int.Parse(DropDownEncodage.SelectedValue) select enc).First();
+            
 
 
             //selectionne statut en attente

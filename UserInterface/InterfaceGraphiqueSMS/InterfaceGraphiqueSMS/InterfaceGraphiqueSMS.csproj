@@ -63,7 +63,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="LireSMS.aspx" />
+    <Content Include="SMSEnvoyes.aspx" />
     <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -87,12 +87,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SMSBD.dbml</DependentUpon>
     </Compile>
-    <Compile Include="LireSMS.aspx.cs">
-      <DependentUpon>LireSMS.aspx</DependentUpon>
+    <Compile Include="SMSEnvoyes.aspx.cs">
+      <DependentUpon>SMSEnvoyes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="LireSMS.aspx.designer.cs">
-      <DependentUpon>LireSMS.aspx</DependentUpon>
+    <Compile Include="SMSEnvoyes.aspx.designer.cs">
+      <DependentUpon>SMSEnvoyes.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebForm2.aspx.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>

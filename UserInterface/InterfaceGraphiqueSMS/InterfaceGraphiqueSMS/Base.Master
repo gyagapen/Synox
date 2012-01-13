@@ -17,7 +17,7 @@
         <div id="navbar_ex8">
             <ul>
                 <li id="current"><a id="active8" href="EcrireSMS.aspx">Ecrire SMS</a></li>
-                <li><a href="LireSMS.aspx">Lire SMS</a></li>
+                <li><a href="SMSEnvoyes.aspx">SMS envoyés</a></li>
                 <li><a href="#">V&eacute;rifier statut SMS</a></li>
             </ul>
         </div>
