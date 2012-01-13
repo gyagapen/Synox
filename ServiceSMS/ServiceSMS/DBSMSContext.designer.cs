@@ -1045,7 +1045,7 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_referenceEnvoi", DbType="NChar(10)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_referenceEnvoi", DbType="NChar(25)")]
 		public string referenceEnvoi
 		{
 			get

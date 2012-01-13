@@ -46,7 +46,7 @@ namespace ServiceSMS
 
         //informations sur le modem
         private const String numeroModem = "+33604655154";
-        private const String noPortModem = "COM5";
+        private const String noPortModem = "COM11";
 
         //Reference vers la base de donnees
         private DBSMSContextDataContext dbContext = new DBSMSContextDataContext();
@@ -133,7 +133,7 @@ namespace ServiceSMS
                                                     select msg).ToArray();*/
 
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
-                                                         where msg.Message.Statut.libelleStatut == "Entente"
+                                                         where msg.Message.Statut.libelleStatut == "En attente"
                                                          select msg).ToArray();
 
 
@@ -187,6 +187,7 @@ namespace ServiceSMS
                 //_busy = false;
                 //LogHelper.Trace("timerService_Elapsed:" + ex.Message, LogHelper.EnumCategorie.Erreur); 
                 Console.WriteLine("Erreur : " + ex.Message);
+                Console.WriteLine(ex.StackTrace);
             }
         }
 
@@ -222,8 +223,16 @@ namespace ServiceSMS
             else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
             {
                 messageAEnvoyer = sms.Message.messageTexte;
+
+                //on recupere la duree de validite
+                int dureeValiditite = sms.dureeValidite.Value;
+                if (dureeValiditite == null)
+                {
+                    dureeValiditite = 0;
+                }
+
                 //on recupere la reference du message envoye
-                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, sms.dureeValidite.Value);
+                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
             }
 
             //verifie s'il y a une erreur

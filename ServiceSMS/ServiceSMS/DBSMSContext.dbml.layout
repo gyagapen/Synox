@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.875" name="DBSMSContext">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.375" name="DBSMSContext">
   <DataContextMoniker Name="/DBSMSContextDataContext" />
   <nestedChildShapes>
     <classShape Id="dab0b65c-ef18-461a-af37-7d18ef1e9dbc" absoluteBounds="4.125, 1.5, 2, 1.1939925130208333">
@@ -47,17 +47,17 @@
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
       </nodes>
     </associationConnector>
-    <classShape Id="bc5058e3-2a49-440d-9f03-15f6425353e1" absoluteBounds="6.375, 6.5, 2, 2.1554996744791666">
+    <classShape Id="c1cb1e8b-25f9-4b3c-a6df-634be99885ee" absoluteBounds="6, 7, 2, 2.1554996744791666">
       <DataClassMoniker Name="/DBSMSContextDataContext/MessageEnvoi" />
       <nestedChildShapes>
-        <elementListCompartment Id="27d8fa4f-21ed-4ad2-904a-86a6a1377613" absoluteBounds="6.39, 6.96, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2d92db2a-8879-4bc0-b348-82b8858b8b58" absoluteBounds="6.015, 7.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.51562625 : 5.84780110677083); (4.51562625 : 7.9313242594401); (6.375 : 7.9313242594401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.51562625 : 5.84780110677083); (4.51562625 : 8.1813242594401); (6 : 8.1813242594401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageEnvoi" />
       <nodes>
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
-        <classShapeMoniker Id="bc5058e3-2a49-440d-9f03-15f6425353e1" />
+        <classShapeMoniker Id="c1cb1e8b-25f9-4b3c-a6df-634be99885ee" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

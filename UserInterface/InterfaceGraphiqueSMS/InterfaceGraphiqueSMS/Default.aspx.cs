@@ -41,7 +41,28 @@ namespace InterfaceGraphiqueSMS
             Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
             msg.Statut = stat;
 
+
+            //demande accuse reception
+            if (CheckBoxAccuse.Checked) // on a demande un accuse
+            {
+                msg.accuseReception = 1;
+            }
+            else
+            {
+                msg.accuseReception = 0;
+            }
+
             dbContext.Message.InsertOnSubmit(msg);
+
+            //on cree un message envoi
+            MessageEnvoi smsEnvoi = new MessageEnvoi();
+            smsEnvoi.Message = msg;
+            smsEnvoi.dateDemande = DateTime.Now;
+
+            dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
+
+
+
             dbContext.SubmitChanges();
 
             Response.Write("<script> $(\"#dialog\").dialog(); </script>"); 
