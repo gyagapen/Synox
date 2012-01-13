@@ -41,6 +41,9 @@ namespace InterfaceGraphiqueSMS
             Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
             msg.Statut = stat;
 
+            
+            
+
 
             //demande accuse reception
             if (CheckBoxAccuse.Checked) // on a demande un accuse
@@ -59,6 +62,9 @@ namespace InterfaceGraphiqueSMS
             smsEnvoi.Message = msg;
             smsEnvoi.dateDemande = DateTime.Now;
 
+            //duree de validite
+            smsEnvoi.dureeValidite = 0;
+            
             dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
 
 
