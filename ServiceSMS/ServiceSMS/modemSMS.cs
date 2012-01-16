@@ -70,6 +70,8 @@ namespace ServiceSMS
                 Console.Read();
             }
 
+            Send("AT+CNMI=2,2,3,2,1"); //permet la reception des accuses reception
+
             Console.Out.WriteLine("Modem Connecte");
 
         }
@@ -290,13 +292,15 @@ namespace ServiceSMS
 
             Send("AT+CMGL=\"ALL\"", 1);
 
-            String[][] result = null;
+            
 
             //messages en text brut
             string message = Recv();
 
             //on recupere les reponses a decoder
             string[] tabRep = message.Split('\n');
+
+            String[][] result = new String[tabRep.Length][];
 
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
@@ -327,8 +331,7 @@ namespace ServiceSMS
             sms.Message = message;
 
             //accuse de recepetion
-            sms.StatusReportIndication = receipt;
-
+            sms.StatusReportIndication = true;
 
 
             //periode de validite 
@@ -434,7 +437,7 @@ namespace ServiceSMS
          * */
         public String[] decoderDeliveryReport(string message)
         {
-            String[] result = null;
+            String[] result = new String[4];
             //on enleve toutes les reponses non pertinentes
             if (message.StartsWith("+"))
             {
@@ -448,11 +451,11 @@ namespace ServiceSMS
 
                 
 
-                /*Console.Out.WriteLine("--------- Contenu Accuse reception------------");
+                Console.Out.WriteLine("--------- Contenu Accuse reception------------");
                 Console.Out.WriteLine("Reference"+tabAttributs[3]);
                 Console.Out.WriteLine("Destinataire"+tabAttributs[4]);
                 Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
-                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);*/
+                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
             }
 
             return result;
