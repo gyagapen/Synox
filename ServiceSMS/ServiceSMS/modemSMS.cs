@@ -70,7 +70,9 @@ namespace ServiceSMS
                 Console.Read();
             }
 
-            Send("AT+CNMI=2,2,3,2,1"); //permet la reception des accuses reception
+            //permet la reception des accuses reception
+            Send("AT+CSMP=49,167,0,0");
+            Send("AT+CNMI=2,2,3,2,1"); 
 
             Console.Out.WriteLine("Modem Connecte");
 
@@ -282,6 +284,7 @@ namespace ServiceSMS
         * [i]1 - Destinataire
         * [i]2 - Date d'envoi SMS
         * [i]3 - Date Reception
+        * [i]4 - Heure de reception 
         * */
         public String[][] readDeliveryReport()
         {
@@ -434,10 +437,11 @@ namespace ServiceSMS
          * 1 - Destinataire
          * 2 - Date d'envoi SMS
          * 3 - Date Reception
+         * 4 - Heure de reception
          * */
         public String[] decoderDeliveryReport(string message)
         {
-            String[] result = new String[4];
+            String[] result = new String[5];
             //on enleve toutes les reponses non pertinentes
             if (message.StartsWith("+"))
             {
@@ -447,15 +451,16 @@ namespace ServiceSMS
                 result[0] = tabAttributs[3];
                 result[1] = tabAttributs[4];
                 result[2] = tabAttributs[6] + " " + tabAttributs[7];
-                result[3] = tabAttributs[8] + " " + tabAttributs[9];
+                result[3] = tabAttributs[8].Replace("\"","");
+                result[4] = tabAttributs[9].Replace("\"","").Remove(8);
 
                 
 
-                Console.Out.WriteLine("--------- Contenu Accuse reception------------");
+                /*Console.Out.WriteLine("--------- Contenu Accuse reception------------");
                 Console.Out.WriteLine("Reference"+tabAttributs[3]);
                 Console.Out.WriteLine("Destinataire"+tabAttributs[4]);
                 Console.Out.WriteLine("Date envoi SMS" + tabAttributs[6] +" @ "+ tabAttributs[7]);
-                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);
+                Console.Out.WriteLine("Date Reception Accuse" + tabAttributs[8]+" @ " + tabAttributs[9]);*/
             }
 
             return result;

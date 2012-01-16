@@ -44,7 +44,7 @@ namespace ConsoleApplicationTestSMS
             //modSMS.sendSMSPDU(numeroG, "Alors, ca fait quoi d'etre flashe ?", true);
 
             //modSMS.Send("AT+CSMP=49,167,0,0");
-            modSMS.Send("AT+CNMI=2,2,3,2,1");
+            //modSMS.Send("AT+CNMI=2,2,3,2,1");
 
             //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
             //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);

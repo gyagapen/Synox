@@ -299,6 +299,7 @@ namespace ServiceSMS
        * [i]1 - Destinataire
        * [i]2 - Date d'envoi SMS
        * [i]3 - Date Reception
+       * [i]4 - Heure de reception
        * */
             String[][] accuses = modem.readDeliveryReport();
 
@@ -313,6 +314,9 @@ namespace ServiceSMS
                     sms.accuseReceptionRecu = 1;
                 }
             }
+
+            //on submit les changement
+            dbContext.SubmitChanges();
 
             if (lesSMSAVerifier.Count() > 0)
             {
@@ -331,12 +335,27 @@ namespace ServiceSMS
             {
                 if (listeAccusesModem[compteur][0] != null)
                 {
+
+                    //Console.WriteLine("REF " + listeAccusesModem[compteur][0] + "= "+sms.referenceEnvoi);
+ 
                     if (sms.referenceEnvoi.Trim() == listeAccusesModem[compteur][0].Trim())
                     {
                         estPresent = true;
+
+                        //on sauvegarde la date de l'accuse reception
+                        Console.WriteLine("Date origine : " + listeAccusesModem[compteur][3] + " " + listeAccusesModem[compteur][4]);
+
+                        DateTime dateReception = DateTime.ParseExact(listeAccusesModem[compteur][3] + " " + listeAccusesModem[compteur][4], "yy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+
+                        Console.WriteLine("DATTE " + dateReception);
+                        sms.dateReceptionAccuse = dateReception;
+
+                        //sms.dateReceptionAccuse = DateTime.ParseExact(listeAccusesModem[compteur][3], "YY-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
                     }
-                    compteur++;
+                    
                 }
+                compteur++;
+                
             }
 
             return estPresent;

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.375" name="DBSMSContext">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.625" name="DBSMSContext">
   <DataContextMoniker Name="/DBSMSContextDataContext" />
   <nestedChildShapes>
     <classShape Id="dab0b65c-ef18-461a-af37-7d18ef1e9dbc" absoluteBounds="4.125, 1.5, 2, 1.1939925130208333">
@@ -21,19 +21,6 @@
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
       </nodes>
     </associationConnector>
-    <classShape Id="fe8a4ac3-d9d0-4f0c-884e-d4ce7d312752" absoluteBounds="0.875, 6.625, 2, 1.3862939453125">
-      <DataClassMoniker Name="/DBSMSContextDataContext/MessageRecu" />
-      <nestedChildShapes>
-        <elementListCompartment Id="74256891-1187-4e65-b32e-e3d3460de1ec" absoluteBounds="0.89, 7.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(3.7187475 : 5.84780110677083); (3.7187475 : 7.20714884440104); (2.875 : 7.20714884440104)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageRecu" />
-      <nodes>
-        <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
-        <classShapeMoniker Id="fe8a4ac3-d9d0-4f0c-884e-d4ce7d312752" />
-      </nodes>
-    </associationConnector>
     <classShape Id="b383ece3-9eb3-4386-917e-d43dde65fb37" absoluteBounds="1.25, 4.25, 2, 1.1939925130208333">
       <DataClassMoniker Name="/DBSMSContextDataContext/Statut" />
       <nestedChildShapes>
@@ -47,17 +34,30 @@
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
       </nodes>
     </associationConnector>
-    <classShape Id="c1cb1e8b-25f9-4b3c-a6df-634be99885ee" absoluteBounds="6, 7, 2, 2.1554996744791666">
+    <classShape Id="35b20050-23e4-45b4-800c-58fdad13c482" absoluteBounds="6.75, 7.25, 2, 2.1554996744791666">
       <DataClassMoniker Name="/DBSMSContextDataContext/MessageEnvoi" />
       <nestedChildShapes>
-        <elementListCompartment Id="2d92db2a-8879-4bc0-b348-82b8858b8b58" absoluteBounds="6.015, 7.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="93431a16-1dd5-4333-b5fe-e928838b8cf9" absoluteBounds="6.765, 7.71, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(4.51562625 : 5.84780110677083); (4.51562625 : 8.1813242594401); (6 : 8.1813242594401)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(4.40625 : 5.84780110677083); (4.40625 : 8.98964680989583); (6.75 : 8.98964680989583)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageEnvoi" />
       <nodes>
         <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
-        <classShapeMoniker Id="c1cb1e8b-25f9-4b3c-a6df-634be99885ee" />
+        <classShapeMoniker Id="35b20050-23e4-45b4-800c-58fdad13c482" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="5c76c571-cae4-4e76-9584-9d862470ac41" absoluteBounds="1.5, 7.125, 2, 1.3862939453125">
+      <DataClassMoniker Name="/DBSMSContextDataContext/MessageRecu" />
+      <nestedChildShapes>
+        <elementListCompartment Id="b2553853-31e5-45fd-92a4-e0f4565349f3" absoluteBounds="1.5150000000000001, 7.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.921873 : 5.84780110677083); (3.921873 : 7.81814697265625); (3.5 : 7.81814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/DBSMSContextDataContext/Message/Message_MessageRecu" />
+      <nodes>
+        <classShapeMoniker Id="63b58e1b-2856-4236-b337-2f0f01ce05d3" />
+        <classShapeMoniker Id="5c76c571-cae4-4e76-9584-9d862470ac41" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
