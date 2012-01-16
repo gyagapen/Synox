@@ -36,15 +36,15 @@ namespace ServiceSMS
     partial void InsertMessage(Message instance);
     partial void UpdateMessage(Message instance);
     partial void DeleteMessage(Message instance);
-    partial void InsertMessageRecu(MessageRecu instance);
-    partial void UpdateMessageRecu(MessageRecu instance);
-    partial void DeleteMessageRecu(MessageRecu instance);
     partial void InsertStatut(Statut instance);
     partial void UpdateStatut(Statut instance);
     partial void DeleteStatut(Statut instance);
     partial void InsertMessageEnvoi(MessageEnvoi instance);
     partial void UpdateMessageEnvoi(MessageEnvoi instance);
     partial void DeleteMessageEnvoi(MessageEnvoi instance);
+    partial void InsertMessageRecu(MessageRecu instance);
+    partial void UpdateMessageRecu(MessageRecu instance);
+    partial void DeleteMessageRecu(MessageRecu instance);
     #endregion
 		
 		public DBSMSContextDataContext() : 
@@ -93,14 +93,6 @@ namespace ServiceSMS
 			}
 		}
 		
-		public System.Data.Linq.Table<MessageRecu> MessageRecu
-		{
-			get
-			{
-				return this.GetTable<MessageRecu>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Statut> Statut
 		{
 			get
@@ -114,6 +106,14 @@ namespace ServiceSMS
 			get
 			{
 				return this.GetTable<MessageEnvoi>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MessageRecu> MessageRecu
+		{
+			get
+			{
+				return this.GetTable<MessageRecu>();
 			}
 		}
 	}
@@ -254,9 +254,9 @@ namespace ServiceSMS
 		
 		private int _idStatut;
 		
-		private EntityRef<MessageRecu> _MessageRecu;
-		
 		private EntityRef<MessageEnvoi> _MessageEnvoi;
+		
+		private EntityRef<MessageRecu> _MessageRecu;
 		
 		private EntityRef<Encodage> _Encodage;
 		
@@ -286,8 +286,8 @@ namespace ServiceSMS
 		
 		public Message()
 		{
-			this._MessageRecu = default(EntityRef<MessageRecu>);
 			this._MessageEnvoi = default(EntityRef<MessageEnvoi>);
+			this._MessageRecu = default(EntityRef<MessageRecu>);
 			this._Encodage = default(EntityRef<Encodage>);
 			this._Statut = default(EntityRef<Statut>);
 			OnCreated();
@@ -461,35 +461,6 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageRecu", Storage="_MessageRecu", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
-		public MessageRecu MessageRecu
-		{
-			get
-			{
-				return this._MessageRecu.Entity;
-			}
-			set
-			{
-				MessageRecu previousValue = this._MessageRecu.Entity;
-				if (((previousValue != value) 
-							|| (this._MessageRecu.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._MessageRecu.Entity = null;
-						previousValue.Message = null;
-					}
-					this._MessageRecu.Entity = value;
-					if ((value != null))
-					{
-						value.Message = this;
-					}
-					this.SendPropertyChanged("MessageRecu");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageEnvoi", Storage="_MessageEnvoi", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
 		public MessageEnvoi MessageEnvoi
 		{
@@ -515,6 +486,35 @@ namespace ServiceSMS
 						value.Message = this;
 					}
 					this.SendPropertyChanged("MessageEnvoi");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageRecu", Storage="_MessageRecu", ThisKey="idMessage", OtherKey="idMessage", IsUnique=true, IsForeignKey=false)]
+		public MessageRecu MessageRecu
+		{
+			get
+			{
+				return this._MessageRecu.Entity;
+			}
+			set
+			{
+				MessageRecu previousValue = this._MessageRecu.Entity;
+				if (((previousValue != value) 
+							|| (this._MessageRecu.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._MessageRecu.Entity = null;
+						previousValue.Message = null;
+					}
+					this._MessageRecu.Entity = value;
+					if ((value != null))
+					{
+						value.Message = this;
+					}
+					this.SendPropertyChanged("MessageRecu");
 				}
 			}
 		}
@@ -583,157 +583,6 @@ namespace ServiceSMS
 						this._idStatut = default(int);
 					}
 					this.SendPropertyChanged("Statut");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MessageRecu")]
-	public partial class MessageRecu : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idMessage;
-		
-		private System.DateTime _dateReception;
-		
-		private System.Nullable<System.DateTime> _dateLecture;
-		
-		private EntityRef<Message> _Message;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidMessageChanging(int value);
-    partial void OnidMessageChanged();
-    partial void OndateReceptionChanging(System.DateTime value);
-    partial void OndateReceptionChanged();
-    partial void OndateLectureChanging(System.Nullable<System.DateTime> value);
-    partial void OndateLectureChanged();
-    #endregion
-		
-		public MessageRecu()
-		{
-			this._Message = default(EntityRef<Message>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int idMessage
-		{
-			get
-			{
-				return this._idMessage;
-			}
-			set
-			{
-				if ((this._idMessage != value))
-				{
-					if (this._Message.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnidMessageChanging(value);
-					this.SendPropertyChanging();
-					this._idMessage = value;
-					this.SendPropertyChanged("idMessage");
-					this.OnidMessageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReception", DbType="Date NOT NULL")]
-		public System.DateTime dateReception
-		{
-			get
-			{
-				return this._dateReception;
-			}
-			set
-			{
-				if ((this._dateReception != value))
-				{
-					this.OndateReceptionChanging(value);
-					this.SendPropertyChanging();
-					this._dateReception = value;
-					this.SendPropertyChanged("dateReception");
-					this.OndateReceptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateLecture", DbType="Date")]
-		public System.Nullable<System.DateTime> dateLecture
-		{
-			get
-			{
-				return this._dateLecture;
-			}
-			set
-			{
-				if ((this._dateLecture != value))
-				{
-					this.OndateLectureChanging(value);
-					this.SendPropertyChanging();
-					this._dateLecture = value;
-					this.SendPropertyChanged("dateLecture");
-					this.OndateLectureChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageRecu", Storage="_Message", ThisKey="idMessage", OtherKey="idMessage", IsForeignKey=true)]
-		public Message Message
-		{
-			get
-			{
-				return this._Message.Entity;
-			}
-			set
-			{
-				Message previousValue = this._Message.Entity;
-				if (((previousValue != value) 
-							|| (this._Message.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._Message.Entity = null;
-						previousValue.MessageRecu = null;
-					}
-					this._Message.Entity = value;
-					if ((value != null))
-					{
-						value.MessageRecu = this;
-						this._idMessage = value.idMessage;
-					}
-					else
-					{
-						this._idMessage = default(int);
-					}
-					this.SendPropertyChanged("Message");
 				}
 			}
 		}
@@ -945,7 +794,7 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateDemande", DbType="DateTime")]
 		public System.Nullable<System.DateTime> dateDemande
 		{
 			get
@@ -965,7 +814,7 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateEnvoi", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateEnvoi", DbType="DateTime")]
 		public System.Nullable<System.DateTime> dateEnvoi
 		{
 			get
@@ -1005,7 +854,7 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReceptionAccuse", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReceptionAccuse", DbType="DateTime")]
 		public System.Nullable<System.DateTime> dateReceptionAccuse
 		{
 			get
@@ -1088,6 +937,157 @@ namespace ServiceSMS
 					if ((value != null))
 					{
 						value.MessageEnvoi = this;
+						this._idMessage = value.idMessage;
+					}
+					else
+					{
+						this._idMessage = default(int);
+					}
+					this.SendPropertyChanged("Message");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MessageRecu")]
+	public partial class MessageRecu : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idMessage;
+		
+		private System.DateTime _dateReception;
+		
+		private System.Nullable<System.DateTime> _dateLecture;
+		
+		private EntityRef<Message> _Message;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidMessageChanging(int value);
+    partial void OnidMessageChanged();
+    partial void OndateReceptionChanging(System.DateTime value);
+    partial void OndateReceptionChanged();
+    partial void OndateLectureChanging(System.Nullable<System.DateTime> value);
+    partial void OndateLectureChanged();
+    #endregion
+		
+		public MessageRecu()
+		{
+			this._Message = default(EntityRef<Message>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idMessage", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		public int idMessage
+		{
+			get
+			{
+				return this._idMessage;
+			}
+			set
+			{
+				if ((this._idMessage != value))
+				{
+					if (this._Message.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnidMessageChanging(value);
+					this.SendPropertyChanging();
+					this._idMessage = value;
+					this.SendPropertyChanged("idMessage");
+					this.OnidMessageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateReception", DbType="DateTime NOT NULL")]
+		public System.DateTime dateReception
+		{
+			get
+			{
+				return this._dateReception;
+			}
+			set
+			{
+				if ((this._dateReception != value))
+				{
+					this.OndateReceptionChanging(value);
+					this.SendPropertyChanging();
+					this._dateReception = value;
+					this.SendPropertyChanged("dateReception");
+					this.OndateReceptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dateLecture", DbType="DateTime")]
+		public System.Nullable<System.DateTime> dateLecture
+		{
+			get
+			{
+				return this._dateLecture;
+			}
+			set
+			{
+				if ((this._dateLecture != value))
+				{
+					this.OndateLectureChanging(value);
+					this.SendPropertyChanging();
+					this._dateLecture = value;
+					this.SendPropertyChanged("dateLecture");
+					this.OndateLectureChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Message_MessageRecu", Storage="_Message", ThisKey="idMessage", OtherKey="idMessage", IsForeignKey=true)]
+		public Message Message
+		{
+			get
+			{
+				return this._Message.Entity;
+			}
+			set
+			{
+				Message previousValue = this._Message.Entity;
+				if (((previousValue != value) 
+							|| (this._Message.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Message.Entity = null;
+						previousValue.MessageRecu = null;
+					}
+					this._Message.Entity = value;
+					if ((value != null))
+					{
+						value.MessageRecu = this;
 						this._idMessage = value.idMessage;
 					}
 					else
