@@ -56,6 +56,21 @@ namespace ServiceSMS
                             modSMSRead.readPDUMessage();
                             modSMSRead.disconnectToModem();
                             break;
+
+
+                        case "test vp":
+                            modemSMS modSMSVP = new modemSMS("COM11");
+
+                            TimeSpan tim = new TimeSpan(1,0,0,0);
+
+                            int intValue = modSMSVP.calculValidityPeriod(tim);
+                            Console.WriteLine("INT VALUE : " + intValue);
+
+                            TimeSpan tim2 = modSMSVP.decoderValidityPeriod(intValue);
+
+                            Console.WriteLine("Redecodage : " + tim2.Days + ", " + tim2.Hours + ", " + tim2.Minutes);
+
+                            break;
                     }
                     Console.WriteLine(string.Empty);
                 }

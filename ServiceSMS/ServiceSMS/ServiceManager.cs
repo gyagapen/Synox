@@ -210,7 +210,7 @@ namespace ServiceSMS
 
                 sms.Message.messageTexte = smsPDU.Message;
                 sms.Message.noDestinataire = smsPDU.PhoneNumber;
-                //sms.dureeValidite = smsPDU.ValidityPeriod
+                sms.dureeValidite = modem.calculValidityPeriod(smsPDU.ValidityPeriod);
 
                 //status report
                 if(smsPDU.StatusReportIndication)
@@ -225,7 +225,7 @@ namespace ServiceSMS
 
                 //on recupere la duree de validite
 
-                int dureeValiditite = 0; 
+                int dureeValiditite = -1; 
                 
                 if (sms.dureeValidite.HasValue)
                     dureeValiditite= sms.dureeValidite.Value;

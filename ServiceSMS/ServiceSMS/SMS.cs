@@ -101,29 +101,30 @@ namespace ServiceSMS
 			}
 			set
 			{
-				if (value.Days > 441)
+				/*if (value.Days > 441)
 					throw new ArgumentOutOfRangeException("TimeSpan.Days", value.Days, "Value must be not greater 441 days.");
 
 				if (value.Days > 30) //Up to 441 days
 					_validityPeriod = (byte) (192 + (int) (value.Days / 7));
-				else if (value.Days > 1) //Up to 30 days
-					_validityPeriod = (byte) (166 + value.Days);
-				else if (value.Hours > 12) //Up to 24 hours
-					_validityPeriod = (byte) (143 + (value.Hours - 12) * 2 + value.Minutes / 30);
-				else if (value.Hours > 1 || value.Minutes > 1) //Up to 12 hours
-					_validityPeriod = (byte) (value.Hours * 12 + value.Minutes / 5 - 1);
-				else {
-					_validityPeriodFormat = ValidityPeriodFormat.FieldNotPresent;
-				
+                else if (value.Days > 1) //Up to 30 days
+                    _validityPeriod = (byte)(166 + value.Days);
+                else if (value.Hours > 12) //Up to 24 hours
+                    _validityPeriod = (byte)(143 + (value.Hours - 12) * 2 + value.Minutes / 30);
+                else if (value.Hours > 1 || value.Minutes > 1) //Up to 12 hours
+                    _validityPeriod = (byte)(value.Hours * 12 + value.Minutes / 5 - 1);
+                else
+                {
+                    _validityPeriodFormat = ValidityPeriodFormat.FieldNotPresent;
 
-					return;
-				}
+
+                    return;
+                }*/
 
 				_validityPeriodFormat = ValidityPeriodFormat.Relative;
 
-                    //int TP_VP_value = calculValidityPeriod(value);
+                    int TP_VP_value = calculValidityPeriod(value);
 
-                    //_validityPeriod = (byte)(TP_VP_value);
+                    _validityPeriod = (byte)(TP_VP_value);
 			}
 
 
@@ -138,7 +139,7 @@ namespace ServiceSMS
             {
                 result = (int)(value.Days / 7) + 192;
             }
-            else if (value.Days >= 2)
+            else if (value.Days >= 1)
             {
                 result = (int)(value.Days + 166);
             }

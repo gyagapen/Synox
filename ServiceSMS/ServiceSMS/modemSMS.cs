@@ -106,7 +106,7 @@ namespace ServiceSMS
         }
 
         //envoi d'un sms en MODE pdu, receipt = accuse de reception
-        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage = "16bits", int validityPeriod = 0)
+        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage = "16bits", int validityPeriod = -1)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
 
@@ -320,7 +320,7 @@ namespace ServiceSMS
          * typeEncodage : 7,8 ou 16 bits ?
          * validityPeriod : periode de validite du message, par defaut 0 (aucune periode)
          * */
-        public string encodeMsgPDU(string message, string no, Boolean receipt, string typeEncodage, int validityPeriod = 0)
+        public string encodeMsgPDU(string message, string no, Boolean receipt, string typeEncodage, int validityPeriod = -1)
         {
             SMS sms = new SMS();
             String result = null;
@@ -338,9 +338,9 @@ namespace ServiceSMS
 
 
             //periode de validite 
-            if (validityPeriod != 0)
+            if (validityPeriod != -1)
             {
-                sms.ValidityPeriod = new TimeSpan(0, 0, 5, 0, 0);
+                sms.ValidityPeriod = decoderValidityPeriod(validityPeriod);
             }
 
 
@@ -496,40 +496,37 @@ namespace ServiceSMS
         //permet de retrouver un timespan depuis une valeur en int de validity period
         public TimeSpan decoderValidityPeriod(int intValue)
         {
-            TimeSpan resultat = new TimeSpan();
+            
+            int minutes=0;
+            int heures=0;
+            int jours = 0;
+
+            if (intValue < 144)
+            {
+                //minutes
+                int temp = (intValue + 1) * 5;
+                heures = (int)(temp / 60);
+                minutes = (int)(temp - 60 * heures);
+            }
+            else if (intValue < 168)
+            {
+                 int temp = (int)(intValue - 143) * 30;
+                 heures = 12 + (int)(temp / 60);
+                 minutes = temp - (int)((heures-12)*60);
+            }
+            else if (intValue < 197)
+            {
+                jours = (int)(intValue - 166);
+            }
+            else if (intValue < 256)
+            {
+                jours = (int)(intValue - 192) * 7;
+            }
+
+            //construction du time span
+            TimeSpan resultat = new TimeSpan(jours, heures, minutes,0);
 
             return resultat;
-        }
-
-
-
-
-
-        public int calculValidityPeriod(TimeSpan value)
-        {
-            int result;
-
-            //si plus de 4 semaines
-            if (value.Days >= 35)
-            {
-                result = (int)(value.Days / 7) + 192;
-            }
-            else if (value.Days >= 2)
-            {
-                result = (int)(value.Days + 166);
-            }
-            else if (value.Hours >= 12)
-            {
-                result = (int)((value.Hours - 12) * 2 + 143 + (int)(value.Minutes / 30));
-            }
-            else
-            {
-                result = (int)(value.Minutes / 5 - 1 + value.Hours * 12);
-            }
-
-            Console.Out.WriteLine("Valeur TP VP : " + result);
-
-            return result;
         }
 
     }
