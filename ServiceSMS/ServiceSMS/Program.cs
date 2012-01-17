@@ -44,7 +44,8 @@ namespace ServiceSMS
 
                             modemSMS modSMS = new modemSMS("COM11");
                             modSMS.connectToModem();
-                            modSMS.sendTramePDU("0001000b913376650111F800f6002930000000000066010b000001001b04343731314e85b65950683b590831323334353637380000126701");
+                            //modSMS.sendTramePDU("0001000b913376650111F800f6002930000000000066010b000001001b04343731314e85b65950683b590831323334353637380000126701");
+                            modSMS.sendTramePDU("0021000A816057161081000015F4F29C0E0A8FC7F57919242F8FCB707AFAED06");
                             modSMS.readDeliveryReport();
                             modSMS.disconnectToModem();
                             break;

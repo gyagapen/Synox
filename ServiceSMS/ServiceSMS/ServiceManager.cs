@@ -116,12 +116,18 @@ namespace ServiceSMS
                     // tqche de lecture des sms recus
                     if (_dateDerniereLecture.Add(_dureeEntre2Lectures) < DateTime.Now)
                     {
-                        // to do : fqire le process de lecture
-                        // ...
+                        //  le process de lecture
+
 
                         //lecture des accuses reception
                         Console.WriteLine("Lecture des accuses reception");
                         getDeliveryReport();
+
+                        //on supprime tous les messages lus du modem
+                        modem.connectToModem();
+                        modem.deleteAllReadSMS();
+                        modem.disconnectToModem();
+
                         _dateDerniereLecture = DateTime.Now;
                     }
 
@@ -204,6 +210,13 @@ namespace ServiceSMS
 
                 sms.Message.messageTexte = smsPDU.Message;
                 sms.Message.noDestinataire = smsPDU.PhoneNumber;
+                //sms.dureeValidite = smsPDU.ValidityPeriod
+
+                //status report
+                if(smsPDU.StatusReportIndication)
+                    sms.Message.accuseReception = 1;
+                else
+                    sms.Message.accuseReception = 0;
 
             }
             else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
@@ -211,11 +224,12 @@ namespace ServiceSMS
                 messageAEnvoyer = sms.Message.messageTexte;
 
                 //on recupere la duree de validite
-                int dureeValiditite = sms.dureeValidite.Value;
-                if (dureeValiditite == null)
-                {
-                    dureeValiditite = 0;
-                }
+
+                int dureeValiditite = 0; 
+                
+                if (sms.dureeValidite.HasValue)
+                    dureeValiditite= sms.dureeValidite.Value;
+
 
                 //on recupere la reference du message envoye
                 reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
@@ -224,8 +238,6 @@ namespace ServiceSMS
             //verifie s'il y a une erreur
             if (reference.Contains("ERROR"))
             {
-                Console.WriteLine("ERREUR");
-
                 //on passe le statut du sms a erreur
                 sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
             }
@@ -329,7 +341,6 @@ namespace ServiceSMS
 
                         DateTime dateReception = DateTime.ParseExact(listeAccusesModem[compteur][3] + " " + listeAccusesModem[compteur][4], "yy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
-                        Console.WriteLine("DATTE " + dateReception);
                         sms.dateReceptionAccuse = dateReception;
 
                         

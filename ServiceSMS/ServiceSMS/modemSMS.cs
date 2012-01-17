@@ -72,7 +72,7 @@ namespace ServiceSMS
 
             //permet la reception des accuses reception
             Send("AT+CSMP=49,167,0,0");
-            Send("AT+CNMI=2,2,3,2,1"); 
+            Send("AT+CNMI=2,2,3,2,1");
 
             Console.Out.WriteLine("Modem Connecte");
 
@@ -106,7 +106,7 @@ namespace ServiceSMS
         }
 
         //envoi d'un sms en MODE pdu, receipt = accuse de reception
-        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage="16bits", int validityPeriod=0)
+        public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage = "16bits", int validityPeriod = 0)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
 
@@ -151,7 +151,7 @@ namespace ServiceSMS
             Console.WriteLine(result);
 
             //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
-            string reference =  getRefSentSMS(result);
+            string reference = getRefSentSMS(result);
 
             Console.WriteLine("REPONSE " + reference + " FiN");
 
@@ -295,7 +295,7 @@ namespace ServiceSMS
 
             Send("AT+CMGL=\"ALL\"", 1);
 
-            
+
 
             //messages en text brut
             string message = Recv();
@@ -314,12 +314,12 @@ namespace ServiceSMS
             return result;
         }
 
-    /**
-     * Encode un message texte
-     * Receipt : demande accuse reception ou non
-     * typeEncodage : 7,8 ou 16 bits ?
-     * validityPeriod : periode de validite du message, par defaut 0 (aucune periode)
-     * */
+        /**
+         * Encode un message texte
+         * Receipt : demande accuse reception ou non
+         * typeEncodage : 7,8 ou 16 bits ?
+         * validityPeriod : periode de validite du message, par defaut 0 (aucune periode)
+         * */
         public string encodeMsgPDU(string message, string no, Boolean receipt, string typeEncodage, int validityPeriod = 0)
         {
             SMS sms = new SMS();
@@ -367,12 +367,12 @@ namespace ServiceSMS
         public SMS decodeSMSPDU(string message)
         {
 
-                //on recupere le sms
-                SMS sms = new SMS();
-                SMS.Fetch(sms, ref message);
-                afficherContenuMessagePDU(sms);
+            //on recupere le sms
+            SMS sms = new SMS();
+            SMS.Fetch(sms, ref message);
+            //afficherContenuMessagePDU(sms);
 
-                return sms;
+            return sms;
         }
 
 
@@ -396,6 +396,16 @@ namespace ServiceSMS
         {
             Console.Out.WriteLine("Deleting all messages");
             Send("AT+CMGD=0,4");
+        }
+
+
+        //
+        //supprime tous les messages lus de la sim
+        //
+        public void deleteAllReadSMS()
+        {
+            Console.Out.WriteLine("Deleting all READ messages");
+            Send("AT+CMGD=1,2");
         }
 
 
@@ -434,14 +444,14 @@ namespace ServiceSMS
             {
                 String[] tabAttributs = message.Split(',');
 
-                
+
                 result[0] = tabAttributs[3];
                 result[1] = tabAttributs[4];
                 result[2] = tabAttributs[6] + " " + tabAttributs[7];
-                result[3] = tabAttributs[8].Replace("\"","");
-                result[4] = tabAttributs[9].Replace("\"","").Remove(8);
+                result[3] = tabAttributs[8].Replace("\"", "");
+                result[4] = tabAttributs[9].Replace("\"", "").Remove(8);
 
-                
+
 
                 /*Console.Out.WriteLine("--------- Contenu Accuse reception------------");
                 Console.Out.WriteLine("Reference"+tabAttributs[3]);
@@ -458,7 +468,7 @@ namespace ServiceSMS
         {
             string[] temp = response.Split('\n');
             string result = null;
-                
+
             for (int i = 0; i < temp.Length; i++)
             {
                 if (temp[i].Contains("CMGS"))
@@ -472,5 +482,55 @@ namespace ServiceSMS
             }
             return result;
         }
+
+
+        //calcul la periode de validite
+        public int calculValidityPeriod(TimeSpan unePeriode)
+        {
+
+            SMS sms = new SMS();
+            return sms.calculValidityPeriod(unePeriode);
+        }
+
+
+        //permet de retrouver un timespan depuis une valeur en int de validity period
+        public TimeSpan decoderValidityPeriod(int intValue)
+        {
+            TimeSpan resultat = new TimeSpan();
+
+            return resultat;
+        }
+
+
+
+
+
+        public int calculValidityPeriod(TimeSpan value)
+        {
+            int result;
+
+            //si plus de 4 semaines
+            if (value.Days >= 35)
+            {
+                result = (int)(value.Days / 7) + 192;
+            }
+            else if (value.Days >= 2)
+            {
+                result = (int)(value.Days + 166);
+            }
+            else if (value.Hours >= 12)
+            {
+                result = (int)((value.Hours - 12) * 2 + 143 + (int)(value.Minutes / 30));
+            }
+            else
+            {
+                result = (int)(value.Minutes / 5 - 1 + value.Hours * 12);
+            }
+
+            Console.Out.WriteLine("Valeur TP VP : " + result);
+
+            return result;
+        }
+
     }
 }
