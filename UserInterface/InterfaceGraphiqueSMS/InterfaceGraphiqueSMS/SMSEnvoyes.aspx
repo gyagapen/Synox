@@ -33,11 +33,11 @@
             <br />
             Message : 
             <asp:TextBox ID="tbMessage" runat="server" CssClass="style2" 
-                Height="89px" ReadOnly="True" Width="330px"></asp:TextBox>
+                Height="89px" ReadOnly="True" Width="330px" TextMode="MultiLine"></asp:TextBox>
             <br />
             PDU :
             <asp:TextBox ID="tbPDU" runat="server" CssClass="style2" Height="89px" 
-                ReadOnly="True" Width="330px"></asp:TextBox>
+                ReadOnly="True" Width="330px" TextMode="MultiLine"></asp:TextBox>
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="ListMessages" EventName="SelectedIndexChanged" />
