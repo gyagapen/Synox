@@ -152,7 +152,7 @@ namespace ServiceSMS
                 result = (int)(value.Minutes / 5 - 1 + value.Hours * 12);
             }
 
-            Console.Out.WriteLine("Valeur TP VP : " + result);
+            //Console.Out.WriteLine("Valeur TP VP : " + result);
 
             return result;
         }

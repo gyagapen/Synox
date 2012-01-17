@@ -123,6 +123,9 @@ namespace ServiceSMS
                         Console.WriteLine("Lecture des accuses reception");
                         getDeliveryReport();
 
+                        //lecture des messages
+                        readMessagesOnSim();
+
                         //on supprime tous les messages lus du modem
                         modem.connectToModem();
                         modem.deleteAllReadSMS();
@@ -139,7 +142,7 @@ namespace ServiceSMS
 
 
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
-                                                         where msg.Message.Statut.libelleStatut == "En attente"
+                                                         where msg.Statut.libelleStatut == "En attente"
                                                          select msg).ToArray();
 
 
@@ -239,7 +242,7 @@ namespace ServiceSMS
             if (reference.Contains("ERROR"))
             {
                 //on passe le statut du sms a erreur
-                sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+                sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
             }
             else //on sauvegarde la reference en BD
             {
@@ -256,14 +259,14 @@ namespace ServiceSMS
                 sms.accuseReceptionRecu = 0; //pas encore recu
 
                 //on passe le sms en statut envoye
-                sms.Message.Statut = statutEnvoye;
+                sms.Statut = statutEnvoye;
                 sms.dateEnvoi = DateTime.Now; //date du jour
 
             }
             else // erreur
             {
                 //on passe le statut du sms a erreur
-                sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+                sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
             }
 
 
@@ -272,22 +275,71 @@ namespace ServiceSMS
 
         }
 
+        //lit les messages presents sur la sim
+        public void readMessagesOnSim()
+        {
+            //connexion au modem
+            modem.connectToModem();
+            
+            //on recupere les messages sur la sim
+            SMS[] lesMessagesSurSIM = modem.readPDUMessage();
+
+            //pour chaque message
+            foreach (SMS sms in lesMessagesSurSIM)
+            {
+                //on fait le mapping avec un nouvel objet de la BD
+                
+                //initialisation
+                MessageRecu msg = new MessageRecu();
+                msg.Message = new Message();
+
+                //remplissage
+                msg.dateReception = sms.ServiceCenterTimeStamp;
+                msg.Message.messageTexte = sms.Message;
+                msg.Message.noEmetteur = sms.PhoneNumber;
+                msg.Message.noDestinataire = numeroModem;
+                msg.Message.accuseReception = 0; //faux par defaut
+
+                Console.WriteLine("lecture message : " + sms.Message);
+
+                if (sms.StatusReportIndication)
+                    msg.Message.accuseReception =1;
+              
+                //encodage
+                msg.Message.Encodage = (from enc in dbContext.Encodage where enc.libelleEncodage == "PDU" select enc).First();
+
+
+                //enregistre du message
+                dbContext.Message.InsertOnSubmit(msg.Message);
+                dbContext.MessageRecu.InsertOnSubmit(msg);
+            }
+
+            //sauvegarde des changements
+            dbContext.SubmitChanges();
+
+            //deconnexion
+            modem.disconnectToModem();
+            
+        }
+
+
         public void getDeliveryReport()
         {
             //on selectionne les messages dont la reception de l'accuse reception est a verifier
             MessageEnvoi[] lesSMSAVerifier = (from msg in dbContext.MessageEnvoi
-                                              where msg.Message.Statut.libelleStatut == "Envoye"
+                                              where msg.Statut.libelleStatut == "Envoye"
                                               && msg.Message.accuseReception == 1
                                               select msg).ToArray();
 
+
+            String[][] accuses = null;
 
             if (lesSMSAVerifier.Count() > 0)
             {
                 //connexion modem
                 modem.connectToModem();
-            }
 
-            //on recupere les accuses du modem
+                 //on recupere les accuses du modem
             /**
        * Retourne un tableau avec les informations de l'accuse reception
         * pour le message i
@@ -297,7 +349,10 @@ namespace ServiceSMS
        * [i]3 - Date Reception
        * [i]4 - Heure de reception
        * */
-            String[][] accuses = modem.readDeliveryReport();
+             accuses = modem.readDeliveryReport();
+            }
+
+           
 
             //pour chaque message
             foreach (MessageEnvoi sms in lesSMSAVerifier)
@@ -306,7 +361,7 @@ namespace ServiceSMS
                 if (verifierAccusePresentDansModem(sms, accuses))
                 {
                     //on change le statut
-                    sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Accuse" select stat).First();
+                    sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Accuse" select stat).First();
                     sms.accuseReceptionRecu = 1;
                 }
             }

@@ -153,7 +153,6 @@ namespace ServiceSMS
             //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
             string reference = getRefSentSMS(result);
 
-            Console.WriteLine("REPONSE " + reference + " FiN");
 
             return reference;
         }
@@ -253,8 +252,8 @@ namespace ServiceSMS
 
         }
 
-
-        public void readPDUMessage()
+        //retourne les SMS recus
+        public SMS[] readPDUMessage()
         {
             //passage en mode PDU
             Send("AT+CMGF=0");
@@ -269,11 +268,15 @@ namespace ServiceSMS
             //on recupere les reponses a decoder
             string[] tabRep = decouperChaineLecturePDU(message);
 
+            SMS[] tabSMSRecus = new SMS[tabRep.Length];
+
             //on decode chaque reponse
             for (int i = 0; i < tabRep.Length; i++)
             {
-                decodeSMSPDU(tabRep[i]);
+                tabSMSRecus[i] = decodeSMSPDU(tabRep[i]);
             }
+
+            return tabSMSRecus;
         }
 
 

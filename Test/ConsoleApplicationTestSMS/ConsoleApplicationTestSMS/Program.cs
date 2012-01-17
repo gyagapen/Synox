@@ -59,10 +59,10 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("AT+CMGL=\"ALL\""); 
             //modSMS.Send("AT+CMGL=4");
 
-            modSMS.readDeliveryReport();
+            //modSMS.readDeliveryReport();
 
-            //modSMS.readPDUMessage();
-            //modSMS.readAllSMSText();
+            modSMS.readPDUMessage();
+            modSMS.readAllSMSText();
 
 
             //modSMS.sendSMSText(numeroM, "test mode texte");
