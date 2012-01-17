@@ -67,31 +67,31 @@ namespace InterfaceGraphiqueSMS {
         protected global::System.Web.UI.WebControls.CheckBox CheckBoxAccuse;
         
         /// <summary>
-        /// Contrôle TextBox1.
+        /// Contrôle tbJours.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox tbJours;
         
         /// <summary>
-        /// Contrôle TextBox2.
+        /// Contrôle tbHeures.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox tbHeures;
         
         /// <summary>
-        /// Contrôle TextBox3.
+        /// Contrôle tbMinutes.
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox3;
+        protected global::System.Web.UI.WebControls.TextBox tbMinutes;
         
         /// <summary>
         /// Contrôle contenuSMS.

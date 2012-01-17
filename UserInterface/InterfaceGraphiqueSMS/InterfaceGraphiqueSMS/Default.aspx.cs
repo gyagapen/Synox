@@ -32,32 +32,40 @@ namespace InterfaceGraphiqueSMS
 
         protected void EcrireSMS(object sender, EventArgs e)
         {
-            //insertion d'un message
             Message msg = new Message();
-            msg.messageTexte = contenuSMS.Text;
-            msg.noDestinataire = numDestinataire.Text;
-            //on recupere l'encodage
-            msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == int.Parse(DropDownEncodage.SelectedValue) select enc).First();
-            
 
+            if (ListeMode.SelectedValue == "Texte")
+            {
+                // Il s'agit d'un message texte
+
+                //insertion d'un message
+                msg.messageTexte = contenuSMS.Text;
+                msg.noDestinataire = numDestinataire.Text;
+                //on recupere l'encodage
+                msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == int.Parse(DropDownEncodage.SelectedValue) select enc).First();
+
+                //demande accuse reception
+                if (CheckBoxAccuse.Checked) // on a demande un accuse
+                {
+                    msg.accuseReception = 1;
+                }
+                else
+                {
+                    msg.accuseReception = 0;
+                }
+            }
+            else
+            {
+                // Message PDU
+                msg.messagePDU = contenuSMS.Text;
+
+                // Encodage PDU, pas propre !!!
+                msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == 4 select enc).First(); 
+            }
 
             //selectionne statut en attente
             Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
             msg.Statut = stat;
-
-            
-            
-
-
-            //demande accuse reception
-            if (CheckBoxAccuse.Checked) // on a demande un accuse
-            {
-                msg.accuseReception = 1;
-            }
-            else
-            {
-                msg.accuseReception = 0;
-            }
 
             dbContext.Message.InsertOnSubmit(msg);
 
@@ -66,12 +74,22 @@ namespace InterfaceGraphiqueSMS
             smsEnvoi.Message = msg;
             smsEnvoi.dateDemande = DateTime.Now;
 
-            //duree de validite
-            smsEnvoi.dureeValidite = 0;
-            
+            if (ListeMode.SelectedValue == "Texte")
+            {
+                //duree de validite
+                TimeSpan duree = new TimeSpan(int.Parse(tbJours.Text), int.Parse(tbHeures.Text), int.Parse(tbMinutes.Text), 0, 0);
+
+                if (duree.Days > 30) //Up to 441 days
+                    smsEnvoi.dureeValidite = (byte)(192 + (int)(duree.Days / 7));
+                else if (duree.Days > 1) //Up to 30 days
+                    smsEnvoi.dureeValidite = (byte)(166 + duree.Days);
+                else if (duree.Hours > 12) //Up to 24 hours
+                    smsEnvoi.dureeValidite = (byte)(143 + (duree.Hours - 12) * 2 + duree.Minutes / 30);
+                else if (duree.Hours > 1 || duree.Minutes > 1) //Up to 12 hours
+                    smsEnvoi.dureeValidite = (byte)(duree.Hours * 12 + duree.Minutes / 5 - 1);
+            }
+
             dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
-
-
 
             dbContext.SubmitChanges();
 

@@ -28,11 +28,11 @@
                 <asp:DropDownList ID="DropDownEncodage" runat="server"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
                 <asp:CheckBox ID="CheckBoxAccuse" runat="server" Text="Accusé de réception" /><br />
                 Date de validité
-                <asp:TextBox ID="TextBox1" runat="server" CssClass="style2" Width="20px"></asp:TextBox>
+                <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="20px"></asp:TextBox>
                 jours
-                <asp:TextBox ID="TextBox2" runat="server" CssClass="style3" Width="20px"></asp:TextBox>
+                <asp:TextBox ID="tbHeures" runat="server" CssClass="style3" Width="20px"></asp:TextBox>
                 heures
-                <asp:TextBox ID="TextBox3" runat="server" CssClass="style4" Width="20px"></asp:TextBox>
+                <asp:TextBox ID="tbMinutes" runat="server" CssClass="style4" Width="20px"></asp:TextBox>
                 minutes<br />
             </ContentTemplate>
             <Triggers>
