@@ -32,6 +32,16 @@ namespace InterfaceGraphiqueSMS
 
         protected void EcrireSMS(object sender, EventArgs e)
         {
+            if (tbHeures.Text == null)
+            {
+                tbHeures.Text = "0";
+            }
+
+            if (tbMinutes.Text == null)
+            {
+                tbMinutes.Text = "0";
+            }      
+
             Message msg = new Message();
 
             if (ListeMode.SelectedValue == "Texte")
@@ -81,7 +91,7 @@ namespace InterfaceGraphiqueSMS
 
                 if (duree.Days > 30) //Up to 441 days
                     smsEnvoi.dureeValidite = (byte)(192 + (int)(duree.Days / 7));
-                else if (duree.Days > 1) //Up to 30 days
+                else if (duree.Days >= 1) //Up to 30 days
                     smsEnvoi.dureeValidite = (byte)(166 + duree.Days);
                 else if (duree.Hours > 12) //Up to 24 hours
                     smsEnvoi.dureeValidite = (byte)(143 + (duree.Hours - 12) * 2 + duree.Minutes / 30);
@@ -112,6 +122,78 @@ namespace InterfaceGraphiqueSMS
                 }
             }
             //TextBox1.Visible = false;
+        }
+
+        protected void tbJours_TextChanged(object sender, EventArgs e)
+        {
+            int conv;
+            if (int.TryParse(tbJours.Text, out conv))
+            {
+                if (conv > 441)
+                {
+                    tbJours.Text = "441";
+                }
+            }
+            else
+            {
+                tbJours.Text = null;
+            }
+        }
+
+        protected void DropDownEncodage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (DropDownEncodage.SelectedValue)
+            {
+                case "1":
+                    // encodage 7 bits
+                    contenuSMS.MaxLength = 160;
+                    break;
+                case "2":
+                    // ecodage 8 bits
+                    contenuSMS.MaxLength = 140;
+                    break;
+                case "3":
+                    // encodage 16 bits
+                    contenuSMS.MaxLength = 70;
+                    break;
+                case "4":
+                    // Mode PDU, on ne fixe pas de limite
+                    //contenuSMS.MaxLength = 0;
+                    break;
+            }
+            contenuSMS.MaxLength = 5;
+        }
+
+        protected void tbHeures_TextChanged(object sender, EventArgs e)
+        {
+            int conv;
+            if (int.TryParse(tbHeures.Text, out conv))
+            {
+                if (conv > 24)
+                {
+                    tbHeures.Text = "24";
+                }
+            }
+            else
+            {
+                tbHeures.Text = null;
+            }
+        }
+
+        protected void tbMinutes_TextChanged(object sender, EventArgs e)
+        {
+            int conv;
+            if (int.TryParse(tbMinutes.Text, out conv))
+            {
+                if (conv > 60)
+                {
+                    tbMinutes.Text = "60";
+                }
+            }
+            else
+            {
+                tbMinutes.Text = null;
+            }
         }
     }
 }

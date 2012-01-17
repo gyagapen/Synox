@@ -25,14 +25,18 @@
                 Num&eacute;ro du destinataire :
                 <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br />
                 Encodage :
-                <asp:DropDownList ID="DropDownEncodage" runat="server"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
+                <asp:DropDownList ID="DropDownEncodage" runat="server" AutoPostBack="True" 
+                    onselectedindexchanged="DropDownEncodage_SelectedIndexChanged"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
                 <asp:CheckBox ID="CheckBoxAccuse" runat="server" Text="Accusé de réception" /><br />
-                Date de validité
-                <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="20px"></asp:TextBox>
+                Date de validité :
+                <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="24px" 
+                    AutoPostBack="True" MaxLength="3" ontextchanged="tbJours_TextChanged"></asp:TextBox>
                 jours
-                <asp:TextBox ID="tbHeures" runat="server" CssClass="style3" Width="20px"></asp:TextBox>
+                <asp:TextBox ID="tbHeures" runat="server" CssClass="style3" Width="24px" 
+                    AutoPostBack="True" MaxLength="2" ontextchanged="tbHeures_TextChanged"></asp:TextBox>
                 heures
-                <asp:TextBox ID="tbMinutes" runat="server" CssClass="style4" Width="20px"></asp:TextBox>
+                <asp:TextBox ID="tbMinutes" runat="server" CssClass="style4" Width="24px" 
+                    AutoPostBack="True" MaxLength="2" ontextchanged="tbMinutes_TextChanged"></asp:TextBox>
                 minutes<br />
             </ContentTemplate>
             <Triggers>
@@ -46,7 +50,8 @@
         Message à envoyer : <br />
     
         
-        <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" runat="server"></asp:TextBox><br />
+        <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" 
+            runat="server" AutoPostBack="True" MaxLength="5"></asp:TextBox><br />
         <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" 
             CssClass="style1" />
     </form>
