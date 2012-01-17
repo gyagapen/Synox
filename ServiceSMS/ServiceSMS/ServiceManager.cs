@@ -130,38 +130,13 @@ namespace ServiceSMS
                     if (_dateDerniereEnvoi.Add(_dureeEntre2Envois) < DateTime.Now)
                     {
                         //on recupere tous les message en attente d'envoi dans la base de donnees
-                        /*Message[] lesSMSAEnvoyer = (from msg in dbContext.Message
-                                                    join status in dbContext.Statut
-                                                    on msg.idStatut equals status.idStatut
-                                                    where status.libelleStatut == "En attente"
-                                                    select msg).ToArray();*/
+
 
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
                                                          where msg.Message.Statut.libelleStatut == "En attente"
                                                          select msg).ToArray();
 
 
-                        //on cherche un MessageEnvoi correspondant au SMS envoye en BD
-                        /*var result = (from smsE in dbContext.MessageEnvoi where smsE.idMessage == sms.idMessage select smsE);
-
-
-
-                        MessageEnvoi smsEnvoi;
-
-                        //si deja present BD
-                        if (result.Count() > 0)
-                        {
-                            smsEnvoi = result.First();
-                        }
-                        else //si aucune entree en BD
-                        {
-                            //on  instancie un nouveau MessageEnvoi
-                            smsEnvoi = new MessageEnvoi();
-                            smsEnvoi.Message = sms;
-
-                            //sauvegarde
-                            dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
-                        }*/
 
 
                         //connexion au modem
@@ -171,8 +146,10 @@ namespace ServiceSMS
                         //pour chaque message a envoyer
                         foreach (MessageEnvoi sms in lesSMSAEnvoyer)
                         {
-                            //on envoie le sms
-                            envoyerSMS(sms);
+          
+                                //on envoie le sms
+                                envoyerSMS(sms);
+
                         }
 
 
@@ -195,7 +172,7 @@ namespace ServiceSMS
             }
         }
 
-        //methode qui communique avec le modem pour une demande d'envoi de SMS
+        //methode qui communique avec le modem pour une demande d'envoi de SMS avec un message texte
         private void envoyerSMS(MessageEnvoi sms)
         {
             //on recupere le statut "ENVOYE"
@@ -216,12 +193,17 @@ namespace ServiceSMS
             String reference = null;
 
             //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
-            if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)
+            if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)  //TRAME PDU
             {
                 messageAEnvoyer = sms.Message.messagePDU;
                 //on recupere la reference du message envoye
                 reference = modem.sendTramePDU(messageAEnvoyer);
 
+                //decodage de la trame PDU
+                SMS smsPDU = modem.decodeSMSPDU(messageAEnvoyer);
+
+                sms.Message.messageTexte = smsPDU.Message;
+                sms.Message.noDestinataire = smsPDU.PhoneNumber;
 
             }
             else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
@@ -242,6 +224,8 @@ namespace ServiceSMS
             //verifie s'il y a une erreur
             if (reference.Contains("ERROR"))
             {
+                Console.WriteLine("ERREUR");
+
                 //on passe le statut du sms a erreur
                 sms.Message.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
             }
@@ -252,8 +236,8 @@ namespace ServiceSMS
 
 
 
-            //on envoie le sms si le contenu n'est pas nul
-            if (messageAEnvoyer != null)
+            //on sauvegarde le sms comme envoye s'il y a une reference d'envoi
+            if (reference != null)
             {
                 //on complete les informations sur l'envoi des SMS
                 sms.Message.noEmetteur = numeroModem;
@@ -333,10 +317,8 @@ namespace ServiceSMS
 
             while (estPresent == false && compteur<listeAccusesModem.Count())
             {
-                if (listeAccusesModem[compteur][0] != null)
+                if ((listeAccusesModem[compteur][0] != null) && (sms.referenceEnvoi != null))
                 {
-
-                    //Console.WriteLine("REF " + listeAccusesModem[compteur][0] + "= "+sms.referenceEnvoi);
  
                     if (sms.referenceEnvoi.Trim() == listeAccusesModem[compteur][0].Trim())
                     {
@@ -350,7 +332,7 @@ namespace ServiceSMS
                         Console.WriteLine("DATTE " + dateReception);
                         sms.dateReceptionAccuse = dateReception;
 
-                        //sms.dateReceptionAccuse = DateTime.ParseExact(listeAccusesModem[compteur][3], "YY-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+                        
                     }
                     
                 }
