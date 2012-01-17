@@ -30,10 +30,13 @@ namespace InterfaceGraphiqueSMS
             tbMessage.Text = detailsMessage.messageTexte;
             tbDestinataire.Text = detailsMessage.noDestinataire;
             tbEmetteur.Text = detailsMessage.noEmetteur;
-            Statut statutMsg = (from st in dbContext.Statut where st.idStatut == detailsMessage.idStatut select st).First();
+
+            Statut statutMsg = (from st in dbContext.Statut where st.idStatut == detailsMessage.MessageEnvoi.idStatut select st).First();
             tbStatut.Text = statutMsg.libelleStatut;
+
             Encodage encodageMsg = (from enc in dbContext.Encodage where enc.idEncodage == detailsMessage.idEncodage select enc).First();
             tbEncodage.Text = encodageMsg.libelleEncodage;
+
             tbPDU.Text = detailsMessage.messagePDU;
             tbDateEnvoi.Text = detailsMessage.MessageEnvoi.dateEnvoi.ToString();
             tbDateDemande.Text = detailsMessage.MessageEnvoi.dateDemande.ToString();

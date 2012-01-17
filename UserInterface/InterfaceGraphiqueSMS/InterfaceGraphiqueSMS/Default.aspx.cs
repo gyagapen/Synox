@@ -73,16 +73,15 @@ namespace InterfaceGraphiqueSMS
                 msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == 4 select enc).First(); 
             }
 
-            //selectionne statut en attente
-            Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
-            msg.Statut = stat;
-
             dbContext.Message.InsertOnSubmit(msg);
 
             //on cree un message envoi
             MessageEnvoi smsEnvoi = new MessageEnvoi();
             smsEnvoi.Message = msg;
             smsEnvoi.dateDemande = DateTime.Now;
+            //selectionne statut en attente
+            Statut stat = (from st in dbContext.Statut where st.libelleStatut == "En attente" select st).First();
+            smsEnvoi.Statut = stat;
 
             if (ListeMode.SelectedValue == "Texte")
             {

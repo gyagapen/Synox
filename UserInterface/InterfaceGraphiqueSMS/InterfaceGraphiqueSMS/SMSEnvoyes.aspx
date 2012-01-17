@@ -6,6 +6,7 @@
         .style2
         {}
     </style>
+    
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
     <h1>SMS envoyés</h1>
