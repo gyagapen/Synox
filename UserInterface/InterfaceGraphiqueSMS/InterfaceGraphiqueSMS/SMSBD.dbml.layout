@@ -1,63 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12.625, 10.375" name="SMSBD">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="SMSBD">
   <DataContextMoniker Name="/SMSBDDataContext" />
   <nestedChildShapes>
-    <classShape Id="a3d5a4cb-38fd-4433-99d0-9b0a8ce67faa" absoluteBounds="6.625, 4.875, 2, 1.1939925130208333">
+    <classShape Id="ae52b12e-8472-4fc9-b607-015e63163c30" absoluteBounds="0.5, 4.5, 2, 1.1939925130208335">
       <DataClassMoniker Name="/SMSBDDataContext/Encodage" />
       <nestedChildShapes>
-        <elementListCompartment Id="f85d78b8-4e52-4a6f-a5a0-44ae8c28906c" absoluteBounds="6.64, 5.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="3ab026bd-3f33-47ce-a553-3f62acdd7f9d" absoluteBounds="0.515, 4.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="04be192e-95f5-4d59-a706-539da6da6f6f" absoluteBounds="7.5, 7.375, 2, 2.3478011067708335">
-      <DataClassMoniker Name="/SMSBDDataContext/Message" />
-      <nestedChildShapes>
-        <elementListCompartment Id="480eef1a-3c29-45a0-8634-bc64318c9a72" absoluteBounds="7.515, 7.835, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <associationConnector edgePoints="[(8.0625 : 6.06899251302083); (8.0625 : 7.375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/SMSBDDataContext/Encodage/Encodage_Message" />
-      <nodes>
-        <classShapeMoniker Id="a3d5a4cb-38fd-4433-99d0-9b0a8ce67faa" />
-        <classShapeMoniker Id="04be192e-95f5-4d59-a706-539da6da6f6f" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="75537382-61a7-4ad2-a541-658a2e62a5af" absoluteBounds="10.25, 8.875, 2, 1.1939925130208333">
+    <classShape Id="4959dba0-b4b4-4f2b-a800-28f805d7c9b6" absoluteBounds="4.5, 1.5, 2, 1.1939925130208335">
       <DataClassMoniker Name="/SMSBDDataContext/Statut" />
       <nestedChildShapes>
-        <elementListCompartment Id="d4aeb5f9-aee9-41a9-848c-634e03eafed0" absoluteBounds="10.265, 9.335, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="e0bd478d-e66f-4b3c-b5b2-9d825ee579b0" absoluteBounds="4.5150000000000006, 1.96, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(10.25 : 9.29890055338542); (9.5 : 9.29890055338542)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/SMSBDDataContext/Statut/Statut_Message" />
-      <nodes>
-        <classShapeMoniker Id="75537382-61a7-4ad2-a541-658a2e62a5af" />
-        <classShapeMoniker Id="04be192e-95f5-4d59-a706-539da6da6f6f" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="44d041dc-23b1-4a2a-8460-538d1921d347" absoluteBounds="10.375, 6.75, 2, 2.1554996744791666">
+    <classShape Id="89721d32-fa58-4508-9355-5af87ec5af2a" absoluteBounds="3.25, 4, 2, 2.155499674479167">
+      <DataClassMoniker Name="/SMSBDDataContext/Message" />
+      <nestedChildShapes>
+        <elementListCompartment Id="17a87d10-41d4-49a4-8092-6dcb5beeea63" absoluteBounds="3.265, 4.46, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="fde04f4d-0b7f-458d-b8c6-0f4d9f33203c" absoluteBounds="1.125, 0.5, 2, 2.3478011067708335">
       <DataClassMoniker Name="/SMSBDDataContext/MessageEnvoi" />
       <nestedChildShapes>
-        <elementListCompartment Id="a2fadaaa-4b2d-47df-9f30-dabb6b58f645" absoluteBounds="10.39, 7.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="d8e5d371-ad0c-4c70-8126-1224858c5719" absoluteBounds="1.1399999999999997, 0.96, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(9.5 : 8.09375); (10.375 : 8.09375)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/SMSBDDataContext/Message/Message_MessageEnvoi" />
-      <nodes>
-        <classShapeMoniker Id="04be192e-95f5-4d59-a706-539da6da6f6f" />
-        <classShapeMoniker Id="44d041dc-23b1-4a2a-8460-538d1921d347" />
-      </nodes>
-    </associationConnector>
-    <classShape Id="c550cbb1-7c72-47a1-80b5-eda64bea333f" absoluteBounds="5.375, 7.625, 2, 1.3862939453125">
+    <classShape Id="cf04eced-4ffb-44f6-8291-522c3eef5691" absoluteBounds="6, 4.375, 2, 1.3862939453125005">
       <DataClassMoniker Name="/SMSBDDataContext/MessageRecu" />
       <nestedChildShapes>
-        <elementListCompartment Id="07c5a9e2-ef1e-4508-9098-98d36f2470c3" absoluteBounds="5.39, 8.085, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="2b9b7bac-e0da-4186-8a55-ed2973d74867" absoluteBounds="6.015, 4.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.5 : 8.31814697265625); (7.375 : 8.31814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.5 : 5.09699625651042); (3.25 : 5.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SMSBDDataContext/Encodage/Encodage_Message" />
+      <nodes>
+        <classShapeMoniker Id="ae52b12e-8472-4fc9-b607-015e63163c30" />
+        <classShapeMoniker Id="89721d32-fa58-4508-9355-5af87ec5af2a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(3.25 : 4.21875); (2.84375 : 4.21875); (2.84375 : 2.84780110677083)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SMSBDDataContext/Message/Message_MessageEnvoi" />
+      <nodes>
+        <classShapeMoniker Id="89721d32-fa58-4508-9355-5af87ec5af2a" />
+        <classShapeMoniker Id="fde04f4d-0b7f-458d-b8c6-0f4d9f33203c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(4.5 : 2.09699625651042); (3.125 : 2.09699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/SMSBDDataContext/Statut/Statut_MessageEnvoi" />
+      <nodes>
+        <classShapeMoniker Id="4959dba0-b4b4-4f2b-a800-28f805d7c9b6" />
+        <classShapeMoniker Id="fde04f4d-0b7f-458d-b8c6-0f4d9f33203c" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(5.25 : 5.06814697265625); (6 : 5.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/SMSBDDataContext/Message/Message_MessageRecu" />
       <nodes>
-        <classShapeMoniker Id="04be192e-95f5-4d59-a706-539da6da6f6f" />
-        <classShapeMoniker Id="c550cbb1-7c72-47a1-80b5-eda64bea333f" />
+        <classShapeMoniker Id="89721d32-fa58-4508-9355-5af87ec5af2a" />
+        <classShapeMoniker Id="cf04eced-4ffb-44f6-8291-522c3eef5691" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>

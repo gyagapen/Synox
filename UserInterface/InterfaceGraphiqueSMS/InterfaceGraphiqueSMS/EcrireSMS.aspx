@@ -4,6 +4,18 @@
 <asp:Content ContentPlaceHolderID=Main  runat=server>
 
     <!-- Formulaire d envoi -->
+    <script type="text/javascript">
+        function Count(text, long) 
+        {
+            var maxlength = new Number(long); // Change number to your max length.
+
+            if (document.getElementById("contenuSMS").value.length > maxlength) 
+            {
+                text.value = text.value.substring(0, maxlength);
+                alert("Maximum " + long + " caracteres");
+            }
+        }
+    </script>
    
 
     <form method=get>
@@ -51,7 +63,7 @@
     
         
         <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" 
-            runat="server" AutoPostBack="True" MaxLength="5"></asp:TextBox><br />
+            runat="server" AutoPostBack="True" onKeyUp="javascript:Count(this,160);" onChange="javascript:Count(this,160);"></asp:TextBox><br />
         <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" 
             CssClass="style1" />
     </form>
