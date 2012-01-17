@@ -30,21 +30,21 @@ namespace ServiceSMS
 		
     #region Définitions de méthodes d'extensibilité
     partial void OnCreated();
-    partial void InsertEncodage(Encodage instance);
-    partial void UpdateEncodage(Encodage instance);
-    partial void DeleteEncodage(Encodage instance);
     partial void InsertMessage(Message instance);
     partial void UpdateMessage(Message instance);
     partial void DeleteMessage(Message instance);
-    partial void InsertStatut(Statut instance);
-    partial void UpdateStatut(Statut instance);
-    partial void DeleteStatut(Statut instance);
+    partial void InsertEncodage(Encodage instance);
+    partial void UpdateEncodage(Encodage instance);
+    partial void DeleteEncodage(Encodage instance);
     partial void InsertMessageEnvoi(MessageEnvoi instance);
     partial void UpdateMessageEnvoi(MessageEnvoi instance);
     partial void DeleteMessageEnvoi(MessageEnvoi instance);
     partial void InsertMessageRecu(MessageRecu instance);
     partial void UpdateMessageRecu(MessageRecu instance);
     partial void DeleteMessageRecu(MessageRecu instance);
+    partial void InsertStatut(Statut instance);
+    partial void UpdateStatut(Statut instance);
+    partial void DeleteStatut(Statut instance);
     #endregion
 		
 		public DBSMSContextDataContext() : 
@@ -77,14 +77,6 @@ namespace ServiceSMS
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Encodage> Encodage
-		{
-			get
-			{
-				return this.GetTable<Encodage>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Message> Message
 		{
 			get
@@ -93,11 +85,11 @@ namespace ServiceSMS
 			}
 		}
 		
-		public System.Data.Linq.Table<Statut> Statut
+		public System.Data.Linq.Table<Encodage> Encodage
 		{
 			get
 			{
-				return this.GetTable<Statut>();
+				return this.GetTable<Encodage>();
 			}
 		}
 		
@@ -116,119 +108,13 @@ namespace ServiceSMS
 				return this.GetTable<MessageRecu>();
 			}
 		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Encodage")]
-	public partial class Encodage : INotifyPropertyChanging, INotifyPropertyChanged
-	{
 		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _idEncodage;
-		
-		private string _libelleEncodage;
-		
-		private EntitySet<Message> _Message;
-		
-    #region Définitions de méthodes d'extensibilité
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidEncodageChanging(int value);
-    partial void OnidEncodageChanged();
-    partial void OnlibelleEncodageChanging(string value);
-    partial void OnlibelleEncodageChanged();
-    #endregion
-		
-		public Encodage()
-		{
-			this._Message = new EntitySet<Message>(new Action<Message>(this.attach_Message), new Action<Message>(this.detach_Message));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idEncodage
+		public System.Data.Linq.Table<Statut> Statut
 		{
 			get
 			{
-				return this._idEncodage;
+				return this.GetTable<Statut>();
 			}
-			set
-			{
-				if ((this._idEncodage != value))
-				{
-					this.OnidEncodageChanging(value);
-					this.SendPropertyChanging();
-					this._idEncodage = value;
-					this.SendPropertyChanged("idEncodage");
-					this.OnidEncodageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleEncodage", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string libelleEncodage
-		{
-			get
-			{
-				return this._libelleEncodage;
-			}
-			set
-			{
-				if ((this._libelleEncodage != value))
-				{
-					this.OnlibelleEncodageChanging(value);
-					this.SendPropertyChanging();
-					this._libelleEncodage = value;
-					this.SendPropertyChanged("libelleEncodage");
-					this.OnlibelleEncodageChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Message", ThisKey="idEncodage", OtherKey="idEncodage")]
-		public EntitySet<Message> Message
-		{
-			get
-			{
-				return this._Message;
-			}
-			set
-			{
-				this._Message.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_Message(Message entity)
-		{
-			this.SendPropertyChanging();
-			entity.Encodage = this;
-		}
-		
-		private void detach_Message(Message entity)
-		{
-			this.SendPropertyChanging();
-			entity.Encodage = null;
 		}
 	}
 	
@@ -244,13 +130,13 @@ namespace ServiceSMS
 		
 		private string _messagePDU;
 		
-		private int _accuseReception;
+		private System.Nullable<int> _accuseReception;
 		
 		private string _noDestinataire;
 		
 		private string _noEmetteur;
 		
-		private int _idEncodage;
+		private System.Nullable<int> _idEncodage;
 		
 		private int _idStatut;
 		
@@ -272,13 +158,13 @@ namespace ServiceSMS
     partial void OnmessageTexteChanged();
     partial void OnmessagePDUChanging(string value);
     partial void OnmessagePDUChanged();
-    partial void OnaccuseReceptionChanging(int value);
+    partial void OnaccuseReceptionChanging(System.Nullable<int> value);
     partial void OnaccuseReceptionChanged();
     partial void OnnoDestinataireChanging(string value);
     partial void OnnoDestinataireChanged();
     partial void OnnoEmetteurChanging(string value);
     partial void OnnoEmetteurChanged();
-    partial void OnidEncodageChanging(int value);
+    partial void OnidEncodageChanging(System.Nullable<int> value);
     partial void OnidEncodageChanged();
     partial void OnidStatutChanging(int value);
     partial void OnidStatutChanged();
@@ -353,8 +239,8 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accuseReception", DbType="Int NOT NULL")]
-		public int accuseReception
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accuseReception", DbType="Int")]
+		public System.Nullable<int> accuseReception
 		{
 			get
 			{
@@ -373,7 +259,7 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noDestinataire", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_noDestinataire", DbType="NVarChar(50)")]
 		public string noDestinataire
 		{
 			get
@@ -413,8 +299,8 @@ namespace ServiceSMS
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", DbType="Int NOT NULL")]
-		public int idEncodage
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", DbType="Int")]
+		public System.Nullable<int> idEncodage
 		{
 			get
 			{
@@ -546,7 +432,7 @@ namespace ServiceSMS
 					}
 					else
 					{
-						this._idEncodage = default(int);
+						this._idEncodage = default(Nullable<int>);
 					}
 					this.SendPropertyChanged("Encodage");
 				}
@@ -608,15 +494,15 @@ namespace ServiceSMS
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Statut")]
-	public partial class Statut : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Encodage")]
+	public partial class Encodage : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _idStatut;
+		private int _idEncodage;
 		
-		private string _libelleStatut;
+		private string _libelleEncodage;
 		
 		private EntitySet<Message> _Message;
 		
@@ -624,59 +510,59 @@ namespace ServiceSMS
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnidStatutChanging(int value);
-    partial void OnidStatutChanged();
-    partial void OnlibelleStatutChanging(string value);
-    partial void OnlibelleStatutChanged();
+    partial void OnidEncodageChanging(int value);
+    partial void OnidEncodageChanged();
+    partial void OnlibelleEncodageChanging(string value);
+    partial void OnlibelleEncodageChanged();
     #endregion
 		
-		public Statut()
+		public Encodage()
 		{
 			this._Message = new EntitySet<Message>(new Action<Message>(this.attach_Message), new Action<Message>(this.detach_Message));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idStatut", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int idStatut
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idEncodage", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idEncodage
 		{
 			get
 			{
-				return this._idStatut;
+				return this._idEncodage;
 			}
 			set
 			{
-				if ((this._idStatut != value))
+				if ((this._idEncodage != value))
 				{
-					this.OnidStatutChanging(value);
+					this.OnidEncodageChanging(value);
 					this.SendPropertyChanging();
-					this._idStatut = value;
-					this.SendPropertyChanged("idStatut");
-					this.OnidStatutChanged();
+					this._idEncodage = value;
+					this.SendPropertyChanged("idEncodage");
+					this.OnidEncodageChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleStatut", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string libelleStatut
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleEncodage", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string libelleEncodage
 		{
 			get
 			{
-				return this._libelleStatut;
+				return this._libelleEncodage;
 			}
 			set
 			{
-				if ((this._libelleStatut != value))
+				if ((this._libelleEncodage != value))
 				{
-					this.OnlibelleStatutChanging(value);
+					this.OnlibelleEncodageChanging(value);
 					this.SendPropertyChanging();
-					this._libelleStatut = value;
-					this.SendPropertyChanged("libelleStatut");
-					this.OnlibelleStatutChanged();
+					this._libelleEncodage = value;
+					this.SendPropertyChanged("libelleEncodage");
+					this.OnlibelleEncodageChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Statut_Message", Storage="_Message", ThisKey="idStatut", OtherKey="idStatut")]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Encodage_Message", Storage="_Message", ThisKey="idEncodage", OtherKey="idEncodage")]
 		public EntitySet<Message> Message
 		{
 			get
@@ -712,13 +598,13 @@ namespace ServiceSMS
 		private void attach_Message(Message entity)
 		{
 			this.SendPropertyChanging();
-			entity.Statut = this;
+			entity.Encodage = this;
 		}
 		
 		private void detach_Message(Message entity)
 		{
 			this.SendPropertyChanging();
-			entity.Statut = null;
+			entity.Encodage = null;
 		}
 	}
 	
@@ -1117,6 +1003,120 @@ namespace ServiceSMS
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Statut")]
+	public partial class Statut : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _idStatut;
+		
+		private string _libelleStatut;
+		
+		private EntitySet<Message> _Message;
+		
+    #region Définitions de méthodes d'extensibilité
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidStatutChanging(int value);
+    partial void OnidStatutChanged();
+    partial void OnlibelleStatutChanging(string value);
+    partial void OnlibelleStatutChanged();
+    #endregion
+		
+		public Statut()
+		{
+			this._Message = new EntitySet<Message>(new Action<Message>(this.attach_Message), new Action<Message>(this.detach_Message));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_idStatut", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int idStatut
+		{
+			get
+			{
+				return this._idStatut;
+			}
+			set
+			{
+				if ((this._idStatut != value))
+				{
+					this.OnidStatutChanging(value);
+					this.SendPropertyChanging();
+					this._idStatut = value;
+					this.SendPropertyChanged("idStatut");
+					this.OnidStatutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_libelleStatut", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string libelleStatut
+		{
+			get
+			{
+				return this._libelleStatut;
+			}
+			set
+			{
+				if ((this._libelleStatut != value))
+				{
+					this.OnlibelleStatutChanging(value);
+					this.SendPropertyChanging();
+					this._libelleStatut = value;
+					this.SendPropertyChanged("libelleStatut");
+					this.OnlibelleStatutChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Statut_Message", Storage="_Message", ThisKey="idStatut", OtherKey="idStatut")]
+		public EntitySet<Message> Message
+		{
+			get
+			{
+				return this._Message;
+			}
+			set
+			{
+				this._Message.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Message(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.Statut = this;
+		}
+		
+		private void detach_Message(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.Statut = null;
 		}
 	}
 }

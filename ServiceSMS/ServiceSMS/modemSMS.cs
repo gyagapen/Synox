@@ -364,29 +364,15 @@ namespace ServiceSMS
 
 
 
-        public void decodeSMSPDU(string message)
+        public SMS decodeSMSPDU(string message)
         {
-            //on determine le type du sms recu
-            SMSType smsType = SMSBase.GetSMSType(message);
 
-
-
-            //si c'est un sms classique
-            if (smsType == SMSType.SMS)
-            {
                 //on recupere le sms
                 SMS sms = new SMS();
                 SMS.Fetch(sms, ref message);
                 afficherContenuMessagePDU(sms);
 
-            }
-            else // c'est un accuse de reception
-            {
-                //on recupere l'accuse
-                SMSStatusReport smsStatus = new SMSStatusReport();
-                SMSStatusReport.Fetch(smsStatus, ref message);
-                Console.Out.WriteLine("Accuse de reception " + smsStatus.MessageReference);
-            }
+                return sms;
         }
 
 
@@ -396,6 +382,7 @@ namespace ServiceSMS
             Console.Out.WriteLine("--------- Contenu message PDU ------------");
             Console.Out.WriteLine("Expediteur : " + unSMS.PhoneNumber);
             Console.Out.WriteLine("Message : " + unSMS.Message);
+            Console.Out.WriteLine("Date : " + unSMS.ServiceCenterTimeStamp);
             Console.Out.WriteLine("Accuse reception : " + unSMS.StatusReportIndication);
             Console.Out.WriteLine("Type de message : " + unSMS.Type);
 

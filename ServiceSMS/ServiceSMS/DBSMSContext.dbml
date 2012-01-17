@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SMS_DB" Class="DBSMSContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="AppSettings" ConnectionString="Data Source=PRIM-PC\DB_SYNOX;Initial Catalog=SMS_DB;Persist Security Info=True;User ID=SYNOX" SettingsObjectName="ServiceSMS.Properties.Settings" SettingsPropertyName="SMS_DBConnectionString2" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Encodage" Member="Encodage">
-    <Type Name="Encodage">
-      <Column Name="idEncodage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="libelleEncodage" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Encodage_Message" Member="Message" ThisKey="idEncodage" OtherKey="idEncodage" Type="Message" />
-    </Type>
-  </Table>
   <Table Name="dbo.Message" Member="Message">
     <Type Name="Message">
       <Column Name="idMessage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="messageTexte" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="messagePDU" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="accuseReception" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="noDestinataire" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="accuseReception" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="noDestinataire" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="noEmetteur" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="idEncodage" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="idEncodage" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="idStatut" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Association Name="Message_MessageEnvoi" Member="MessageEnvoi" ThisKey="idMessage" OtherKey="idMessage" Type="MessageEnvoi" Cardinality="One" />
       <Association Name="Message_MessageRecu" Member="MessageRecu" ThisKey="idMessage" OtherKey="idMessage" Type="MessageRecu" Cardinality="One" />
@@ -23,11 +16,11 @@
       <Association Name="Statut_Message" Member="Statut" ThisKey="idStatut" OtherKey="idStatut" Type="Statut" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.Statut" Member="Statut">
-    <Type Name="Statut">
-      <Column Name="idStatut" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="libelleStatut" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Association Name="Statut_Message" Member="Message" ThisKey="idStatut" OtherKey="idStatut" Type="Message" />
+  <Table Name="dbo.Encodage" Member="Encodage">
+    <Type Name="Encodage">
+      <Column Name="idEncodage" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="libelleEncodage" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Encodage_Message" Member="Message" ThisKey="idEncodage" OtherKey="idEncodage" Type="Message" />
     </Type>
   </Table>
   <Table Name="dbo.MessageEnvoi" Member="MessageEnvoi">
@@ -48,6 +41,13 @@
       <Column Name="dateReception" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
       <Column Name="dateLecture" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Association Name="Message_MessageRecu" Member="Message" ThisKey="idMessage" OtherKey="idMessage" Type="Message" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Statut" Member="Statut">
+    <Type Name="Statut">
+      <Column Name="idStatut" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="libelleStatut" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Statut_Message" Member="Message" ThisKey="idStatut" OtherKey="idStatut" Type="Message" />
     </Type>
   </Table>
 </Database>

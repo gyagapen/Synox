@@ -48,6 +48,13 @@ namespace ServiceSMS
                             modSMS.readDeliveryReport();
                             modSMS.disconnectToModem();
                             break;
+
+                        case "read":
+                            modemSMS modSMSRead = new modemSMS("COM11");
+                            modSMSRead.connectToModem();
+                            modSMSRead.readPDUMessage();
+                            modSMSRead.disconnectToModem();
+                            break;
                     }
                     Console.WriteLine(string.Empty);
                 }
