@@ -32,16 +32,6 @@ namespace InterfaceGraphiqueSMS
 
         protected void EcrireSMS(object sender, EventArgs e)
         {
-            if (tbHeures.Text == null)
-            {
-                tbHeures.Text = "0";
-            }
-
-            if (tbMinutes.Text == null)
-            {
-                tbMinutes.Text = "0";
-            }      
-
             Message msg = new Message();
 
             if (ListeMode.SelectedValue == "Texte")
@@ -85,8 +75,29 @@ namespace InterfaceGraphiqueSMS
 
             if (ListeMode.SelectedValue == "Texte")
             {
+                int nbJours, nbHeures, nbMinutes;
+
+                if (tbJours.Text == null || tbJours.Text=="")
+                    nbJours = 0;
+                else
+                    nbJours = int.Parse(tbJours.Text);
+
+                if (tbHeures.Text == null || tbHeures.Text=="")
+                    nbHeures = 0;
+                else
+                    nbHeures = int.Parse(tbHeures.Text);
+
+                if (tbMinutes.Text == null || tbMinutes.Text == "")
+                    nbMinutes = 5;
+                else
+                {
+                    nbMinutes = int.Parse(tbMinutes.Text);
+                    if (nbMinutes < 5)
+                        nbMinutes = 5;
+                }
+
                 //duree de validite
-                TimeSpan duree = new TimeSpan(int.Parse(tbJours.Text), int.Parse(tbHeures.Text), int.Parse(tbMinutes.Text), 0, 0);
+                TimeSpan duree = new TimeSpan(nbJours, nbHeures, nbMinutes, 0, 0);
 
                 if (duree.Days > 30) //Up to 441 days
                     smsEnvoi.dureeValidite = (byte)(192 + (int)(duree.Days / 7));
@@ -94,8 +105,10 @@ namespace InterfaceGraphiqueSMS
                     smsEnvoi.dureeValidite = (byte)(166 + duree.Days);
                 else if (duree.Hours > 12) //Up to 24 hours
                     smsEnvoi.dureeValidite = (byte)(143 + (duree.Hours - 12) * 2 + duree.Minutes / 30);
-                else if (duree.Hours > 1 || duree.Minutes > 1) //Up to 12 hours
+                else if (duree.Hours >= 1 || duree.Minutes > 1) //Up to 12 hours
                     smsEnvoi.dureeValidite = (byte)(duree.Hours * 12 + duree.Minutes / 5 - 1);
+                else
+                    smsEnvoi.dureeValidite = 0;
             }
 
             dbContext.MessageEnvoi.InsertOnSubmit(smsEnvoi);
