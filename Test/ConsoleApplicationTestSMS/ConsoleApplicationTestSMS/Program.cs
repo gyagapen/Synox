@@ -23,10 +23,10 @@ namespace ConsoleApplicationTestSMS
             modemSMS modSMS = new modemSMS(portCom);
             modSMS.connectToModem();
 
-            //modSMS.Send("ATE0");
+            //modSMS.Send("ATE1");
 
             // Paramètre le modem pour les accusés de réception
-           // modSMS.Send("AT+CSMP=49,0,0,0 ");
+            //modSMS.Send("AT+CSMP=49,0,0,0 ");
 
             //on supprime tous les messages
             //modSMS.deleteAllSMS();
@@ -45,7 +45,8 @@ namespace ConsoleApplicationTestSMS
             //modSMS.sendSMSPDU(numeroG, "Alors, ca fait quoi d'etre flashe ?", true);
 
             //modSMS.Send("AT+CSMP=49,167,0,0");
-            //modSMS.Send("AT+CNMI=2,2,3,2,1");
+            //modSMS.Send("AT+CNMI=2,1,3,2,1");
+            modSMS.Send("AT+CNMI=2,1,1,2,1");
 
             //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
             //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
@@ -59,10 +60,12 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("AT+CMGL=\"ALL\""); 
             //modSMS.Send("AT+CMGL=4");
 
-            //modSMS.readDeliveryReport();
+            modSMS.readDeliveryReport();
+
+            //modSMS.Send("AT+CPMS?");
 
             modSMS.readPDUMessage();
-            modSMS.readAllSMSText();
+            //modSMS.readAllSMSText();
 
 
             //modSMS.sendSMSText(numeroM, "test mode texte");

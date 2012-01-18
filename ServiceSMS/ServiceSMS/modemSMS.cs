@@ -70,9 +70,8 @@ namespace ServiceSMS
                 Console.Read();
             }
 
-            //permet la reception des accuses reception
-            Send("AT+CSMP=49,167,0,0");
-            Send("AT+CNMI=2,2,3,2,1");
+            //IMPORTANT : permet la reception des accuses reception et la lecture des messages
+            Send("AT+CNMI=2,1,1,2,1");
 
             Console.Out.WriteLine("Modem Connecte");
 
@@ -408,6 +407,13 @@ namespace ServiceSMS
         public void deleteAllReadSMS()
         {
             Console.Out.WriteLine("Deleting all READ messages");
+
+            //Status report memory
+            Send("AT+CPMS=\"SR\"");
+            Send("AT+CMGD=1,2");
+
+            //sim memory
+            Send("AT+CPMS=\"SM\"");
             Send("AT+CMGD=1,2");
         }
 
