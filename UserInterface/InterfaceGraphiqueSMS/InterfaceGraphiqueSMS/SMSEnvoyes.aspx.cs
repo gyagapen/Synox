@@ -21,6 +21,10 @@ namespace InterfaceGraphiqueSMS
                 ListMessages.DataTextField = "messageTexte";
                 ListMessages.DataValueField = "idMessage";
                 ListMessages.DataBind();
+
+                populateTableSMSEnvoyes();
+
+                
             }
         }
 
@@ -40,6 +44,53 @@ namespace InterfaceGraphiqueSMS
             tbPDU.Text = detailsMessage.messagePDU;
             tbDateEnvoi.Text = detailsMessage.MessageEnvoi.dateEnvoi.ToString();
             tbDateDemande.Text = detailsMessage.MessageEnvoi.dateDemande.ToString();
+        }
+
+
+        private void populateTableSMSEnvoyes()
+        {
+            Message[] listeMessages;
+            listeMessages = (from mess in dbContext.MessageEnvoi select mess.Message).ToArray();
+
+            foreach (Message sms in listeMessages)
+            {
+                TableRow ligne = new TableRow();
+                
+                //reference envoi
+                TableCell cRef = new TableCell();
+                cRef.Text = sms.MessageEnvoi.referenceEnvoi;
+                ligne.Cells.Add(cRef);
+
+                //no destinataire
+                TableCell cDest = new TableCell();
+                cRef.Text = sms.noDestinataire;
+                ligne.Cells.Add(cDest);
+
+                //Message
+                //si message PDU seulement
+                if (sms.messageTexte == null)
+                {
+                    TableCell cMsg = new TableCell();
+                    cMsg.Text = "Trame PDU";
+                    ligne.Cells.Add(cMsg);
+                }
+                else
+                {
+                    TableCell cMsg = new TableCell();
+                    cMsg.Text = sms.messageTexte;
+                    ligne.Cells.Add(cMsg);
+                }
+
+
+                //Etat
+                TableCell cStatut = new TableCell();
+                cStatut.Text = sms.MessageEnvoi.Statut.libelleStatut;
+                ligne.Cells.Add(cStatut);
+
+                //on ajoute la ligne au tableau
+                TableSMSEnvoyes.Rows.Add(ligne);
+            }
+
         }
     }
 }

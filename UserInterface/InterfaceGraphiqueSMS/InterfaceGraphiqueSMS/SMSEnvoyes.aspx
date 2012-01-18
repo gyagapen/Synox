@@ -14,6 +14,8 @@
         CssClass="style1" Width="404px" AutoPostBack="True" 
         onselectedindexchanged="ListMessages_SelectedIndexChanged" 
     Height="129px"></asp:ListBox>
+    <asp:Table ID="TableSMSEnvoyes" runat="server">
+    </asp:Table>
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     
