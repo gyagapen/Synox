@@ -13,6 +13,7 @@ namespace InterfaceGraphiqueSMS
     public partial class WebForm1 : System.Web.UI.Page
     {
         SMSBDDataContext dbContext = new SMSBDDataContext();
+        int idSMSDemande = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -57,16 +58,13 @@ namespace InterfaceGraphiqueSMS
         //fournit des details sur le SMS
         public void populateSMSField(int idMessage)
         {
-            //populateSMSField2(idMessage);
-
-            //Message detailsMessage = (from mess in dbContext.Message where mess.idMessage == idMessage select mess).ToArray()[0];
-            //tbMessage.Text = "tesst";
-            Response.Write("<script> alert('ok');<script>");
-            //tbDestinataire.Text = detailsMessage.noDestinataire;
-            //tbEmetteur.Text = detailsMessage.noEmetteur;
-            //return "OK";
+            idSMSDemande = idMessage;
         }
 
+        protected void buttonCache_clicked(object sender, EventArgs e)
+        {
+            populateSMSField2(int.Parse(buttonCache.Text));
+        }
 
         public void populateSMSField2(int idMessage)
         {
