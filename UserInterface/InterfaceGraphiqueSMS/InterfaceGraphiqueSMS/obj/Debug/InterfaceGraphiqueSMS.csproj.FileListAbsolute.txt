@@ -8,3 +8,4 @@ C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\Us
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\ResolveAssemblyReference.cache
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.dll
 C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.pdb
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\AjaxPro.2.dll

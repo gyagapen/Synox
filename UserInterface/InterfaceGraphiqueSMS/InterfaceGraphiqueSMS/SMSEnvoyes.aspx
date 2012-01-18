@@ -1,5 +1,35 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Base.Master" AutoEventWireup="true" CodeBehind="SMSEnvoyes.aspx.cs" Inherits="InterfaceGraphiqueSMS.WebForm1" %>
+
+
+
+
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    
+    
+    <script>
+
+
+        function populateSMSField_callback(res) {
+            alert(res.value);
+        }
+
+        
+        function selectTableSMS(idSMS) {
+
+
+            //WebForm1.populateSMSField(populateSMSField_callback);
+
+            InterfaceGraphiqueSMS.WebForm1.populateSMSField(idSMS);
+            alert(idSMS);
+        }
+
+
+
+      
+    </script>
+    
+    
     <style type="text/css">
         .style1
         {}
@@ -16,7 +46,7 @@
     Height="129px"></asp:ListBox>
     <asp:Table ID="TableSMSEnvoyes" runat="server">
     </asp:Table>
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
     
     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
