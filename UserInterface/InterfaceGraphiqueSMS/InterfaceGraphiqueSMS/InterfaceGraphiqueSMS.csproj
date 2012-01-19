@@ -57,6 +57,7 @@
     <Content Include="css\SMSEnvoyes.css" />
     <Content Include="EcrireSMS.aspx" />
     <Content Include="img\basic\x.png" />
+    <Content Include="LireSMS.aspx" />
     <Content Include="Scripts\basic.js" />
     <Content Include="Scripts\iscroll.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -84,6 +85,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>EcrireSMS.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LireSMS.aspx.cs">
+      <DependentUpon>LireSMS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LireSMS.aspx.designer.cs">
+      <DependentUpon>LireSMS.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base.Master.cs">
