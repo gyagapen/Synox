@@ -22,7 +22,7 @@ namespace InterfaceGraphiqueSMS
 
             if (!Page.IsPostBack)
             {
-
+                //UpdatePanel1.Visible = false;
                 populateTableSMSEnvoyes();
 
 
@@ -41,6 +41,7 @@ namespace InterfaceGraphiqueSMS
         protected void buttonCache_clicked(object sender, EventArgs e)
         {
             populateSMSField(int.Parse(Session["noSMS"].ToString()));
+            //UpdatePanel1.Visible = true;
         }
 
         public void populateSMSField(int idMessage)

@@ -52,12 +52,18 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\basic.css" />
+    <Content Include="css\basic_ie.css" />
     <Content Include="css\SMSEnvoyes.css" />
     <Content Include="EcrireSMS.aspx" />
+    <Content Include="img\basic\x.png" />
+    <Content Include="Scripts\basic.js" />
     <Content Include="Scripts\iscroll.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\JQuery-1.7.1.js" />
+    <Content Include="Scripts\jquery.simplemodal.js" />
     <Content Include="ThemeSMS.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
