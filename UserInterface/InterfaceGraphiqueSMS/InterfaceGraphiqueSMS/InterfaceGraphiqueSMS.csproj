@@ -52,7 +52,9 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\SMSEnvoyes.css" />
     <Content Include="EcrireSMS.aspx" />
+    <Content Include="Scripts\iscroll.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />

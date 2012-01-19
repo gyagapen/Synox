@@ -150,7 +150,7 @@ namespace InterfaceGraphiqueSMS
                 ligne.Cells.Add(cStatut);
 
                 //on ajoute un evenement javascript pour recuperer le click du tableau
-                ligne.Attributes.Add("onClick", "selectTableSMS(" + sms.idMessage + ")");
+                ligne.Attributes.Add("ondblclick", "selectTableSMS(" + sms.idMessage + ")");
 
 
                 //on ajoute la ligne au tableau

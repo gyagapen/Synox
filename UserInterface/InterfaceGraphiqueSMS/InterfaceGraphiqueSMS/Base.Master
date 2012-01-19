@@ -7,7 +7,9 @@
     <link href="ThemeSMS.css" rel="Stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
     <script type="text/javascript" src="Scripts/jquery-1.4.1.js"></script>
+    
 </head>
 <body>
     <form id="form1" runat="server">
