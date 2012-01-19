@@ -54,35 +54,49 @@
     <form method=get>
 
         <h2 align="center">Envoyer des SMS</h2>
-        <hr />
+        
+        <fieldset><legend>Choix du mode SMS</legend>
         Mode :
         <asp:DropDownList ID="ListeMode" runat="server" AutoPostBack="True" 
             onselectedindexchanged="ListeMode_SelectedIndexChanged">
             <asp:ListItem>Texte</asp:ListItem>
             <asp:ListItem>PDU</asp:ListItem>
         </asp:DropDownList>
-        <br />
-        <br />
+        </fieldset>
+
+        <fieldset><legend>Ecriture du SMS</legend>
         <asp:ScriptManager ID="ScriptManager1" runat="server">
         </asp:ScriptManager>
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
-                Num&eacute;ro du destinataire :
-                <asp:TextBox runat=server ID="numDestinataire"></asp:TextBox><br />
-                Encodage :
-                <asp:DropDownList ID="DropDownEncodage" runat="server" AutoPostBack="True" 
-                    onselectedindexchanged="DropDownEncodage_SelectedIndexChanged" onChange="verifLongueurMessage()"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
-                <asp:CheckBox ID="CheckBoxAccuse" runat="server" Text="Accusé de réception" /><br />
-                Date de validité :
-                <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="24px" 
-                    AutoPostBack="True" MaxLength="3" ontextchanged="tbJours_TextChanged"></asp:TextBox>
-                jours
-                <asp:TextBox ID="tbHeures" runat="server" CssClass="style3" Width="24px" 
-                    AutoPostBack="True" MaxLength="2" ontextchanged="tbHeures_TextChanged"></asp:TextBox>
-                heures
-                <asp:TextBox ID="tbMinutes" runat="server" CssClass="style4" Width="24px" 
-                    AutoPostBack="True" MaxLength="2" ontextchanged="tbMinutes_TextChanged"></asp:TextBox>
-                minutes<br />
+                <table>
+                    <tr>
+                        <td>Num&eacute;ro du destinataire :</td>
+                        <td><asp:TextBox runat=server ID="numDestinataire"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Encodage :</td>
+                        <td>
+                            <asp:DropDownList ID="DropDownEncodage" runat="server" AutoPostBack="True" onselectedindexchanged="DropDownEncodage_SelectedIndexChanged" onChange="verifLongueurMessage()"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
+                            <asp:CheckBox ID="CheckBoxAccuse" runat="server" 
+                                Text="Demander un accusé de réception" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date de validité :</td>
+                        <td>
+                            <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="24px" 
+                            AutoPostBack="True" MaxLength="3" ontextchanged="tbJours_TextChanged"></asp:TextBox>
+                            jours
+                            <asp:TextBox ID="tbHeures" runat="server" CssClass="style3" Width="24px" 
+                            AutoPostBack="True" MaxLength="2" ontextchanged="tbHeures_TextChanged"></asp:TextBox>
+                            heures
+                            <asp:TextBox ID="tbMinutes" runat="server" CssClass="style4" Width="24px" 
+                            AutoPostBack="True" MaxLength="2" ontextchanged="tbMinutes_TextChanged"></asp:TextBox>
+                            minutes
+                        </td>
+                    </tr>
+                </table>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="ListeMode" 
@@ -95,15 +109,12 @@
         Message à envoyer : <br />
     
         
-        <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px" Text="text"
-            runat="server" AutoPostBack="True" onKeyUp="verifLongueurMessage();" onChange="verifLongueurMessage();"></asp:TextBox>
-        <br />
-        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" 
-            CssClass="style1" />
+        <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px"
+            runat="server" AutoPostBack="True" onKeyUp="verifLongueurMessage();" 
+                onChange="verifLongueurMessage();"></asp:TextBox>
+        </fieldset>
+        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" CssClass="style1" />
     </form>
-
-    <asp:Button ID="Button1" runat="server" CausesValidation="False"
-        Text="Button" />
 
     <div id="dialog" style="display: none">Message OK !!</div>
 
