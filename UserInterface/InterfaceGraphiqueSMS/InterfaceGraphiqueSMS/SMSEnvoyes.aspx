@@ -5,25 +5,19 @@
     <script type="text/javascript">
 
 
-        function populateSMSField_callback(res) {
-            alert(res.value);
+        function ReceiveServerData(value, context) {
+            alert(value);
         }
 
 
         function selectTableSMS(idSMS) {
 
 
-            //WebForm1.populateSMSField(populateSMSField_callback);
+            InterfaceGraphiqueSMS.WebForm1.saveIdSMS(idSMS);
 
-            InterfaceGraphiqueSMS.WebForm1.populateSMSField(idSMS);
+            $("#<%= buttonCache.ClientID %>").click();
 
-            //alert($("ct100_Main_buttonCache").text());
-            document.getElementById("<%= buttonCache.ClientID %>").innerHTML = idSMS;
-            document.getElementById("<%= buttonCache.ClientID %>").click();
-            //$("<%= buttonCache.ClientID %>").click();
-            alert(idSMS);
         }
-
 
 
       
@@ -40,8 +34,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
     <h1>
         SMS envoyés</h1>
-    <asp:ListBox ID="ListMessages" runat="server" CssClass="style1" Width="404px" AutoPostBack="True"
-        OnSelectedIndexChanged="ListMessages_SelectedIndexChanged" Height="129px"></asp:ListBox>
     <asp:Table ID="TableSMSEnvoyes" runat="server">
     </asp:Table>
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
@@ -70,17 +62,11 @@
             PDU :
             <asp:TextBox ID="tbPDU" runat="server" CssClass="style2" Height="89px" ReadOnly="True"
                 Width="330px" TextMode="MultiLine"></asp:TextBox>
-
-
+            <div style="display: none">
+                <asp:Button ID="buttonCache" ClientIDMode="Predictable" ClientID="test" runat="server"
+                    Text="Button" OnClick="buttonCache_clicked" />
+            </div>
         </ContentTemplate>
-        <Triggers>
-            <asp:AsyncPostBackTrigger ControlID="ListMessages" EventName="SelectedIndexChanged" />
-        </Triggers>
-
     </asp:UpdatePanel>
-                            <div style="display: block">
-            <asp:Button   ID="buttonCache" ClientIDMode="Predictable" ClientID="test" runat="server"
-                Text="Button" OnClick="buttonCache_clicked" />
-        </div>
     <br />
 </asp:Content>
