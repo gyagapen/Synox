@@ -15,13 +15,13 @@
     <form id="form1" runat="server">
     <!- Zone : En tete ->
     <div class="header">
-        <!--h1>Gestion des SMS</h1-->
+        <h1>Gestion des SMS</h1>
         <!- Zone : Menu ->
         <div id="navbar_ex8">
             <ul>
-                <li id="current"><a href="EcrireSMS.aspx">Ecrire SMS</a></li>
-                <li><a href="SMSEnvoyes.aspx">SMS envoyés</a></li>
-                <li><a href="#">V&eacute;rifier statut SMS</a></li>
+                <li><a href="EcrireSMS.aspx">Ecrire SMS</a></li>
+                <li><a href="SMSEnvoyes.aspx">Boite d'envoi</a></li>
+                <li><a href="#">Boite de r&eacute;ception</a></li>
             </ul>
         </div>
     </div>

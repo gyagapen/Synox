@@ -1,13 +1,74 @@
 ﻿body 
 {
-    width:1024px;
-    height:800px;
-    background-color : #E8E8E8 ;
+    width : 1000px;
+    background-color : #FEFFEA; /* E8E8E8 */
+    margin : auto;
 }
+
+.header
+{
+    
+    background-color:#6BACD6;
+    border : 1px solid grey;
+    border-radius : 1em;
+    text-align : center;
+}
+
+#navbar_ex8 ul 
+{
+    padding: 0px 0px;
+    display: block;
+    height : 18px;
+    text-align : center;
+    margin-bottom : 20px;
+}
+
+#navbar_ex8 ul li 
+{
+    list-style: none;
+    float : left;
+    margin-right : 5px;
+    margin-left : 5px;
+}
+
+#navbar_ex8 a 
+{
+
+    margin: 0px;
+    display: block;
+    padding: 1px 6px;
+    text-decoration: none;
+    background: #D7E4F2;
+    color : Black;
+    border-radius: 1em; 
+    padding : 5px;
+}
+
+#navbar_ex8 a:hover, #navbar_ex8 a#active8 
+{
+    padding : 4px;
+    background-color : #FBFBFB;
+    border : 1px solid grey;
+}
+
+#navbar_ex8 li#current
+{
+    border-right: 2px solid #828282;
+    border-bottom: 2px solid #828282;
+    border-radius: 1em; 
+}
+
+fieldset
+{
+    border-radius : 1em;
+}
+
+/*
 
 h1,h2
 {
-  letter-spacing:-1px;  font-size:1em;
+  letter-spacing:-1px;  
+  font-size:2em;
   font-family: 'Trebuchet MS';
 
 }
@@ -40,47 +101,11 @@ height: 30px;
 top : 40px;
 }
 
-#navbar_ex8 ul 
-{
-    position : relative;
-    top : 4px;
-    margin: 0px;
-    padding: 0px 0px;
-    display: block;
-}
 
-#navbar_ex8 ul li 
-{
-    
-    list-style: none;
-    float: left;
-}
 
-#navbar_ex8 a 
-{
 
-    margin: 0px;
-    display: block;
-    /*border-top: 1px solid #333;*/
-    padding: 1px 6px;
-    text-decoration: none;
-    background: #FDF5E6;
-    font: normal 12px verdana, serif;
-    color: #000;
-    border-radius: 10px; 
-}
 
-#navbar_ex8 a:hover, #navbar_ex8 a#active8 
-{
-padding: 2px 5px;
-background: #FAFAFA;
-border-right: 1px solid #333;
-border-left: 1px solid #333;
-border-top: 1px solid #333;
-border-bottom: 1px solid #333;
-color: #000;
-border-radius: 10px; 
-}
+
 
 #navbar_ex8 a#active8 
 {
@@ -90,9 +115,4 @@ font-weight: bold;
 border-radius: 10px; 
 }
 
-#navbar_ex8 li#current
-{
-border-right: 2px solid #828282;
-border-bottom: 2px solid #828282;
-border-radius: 10px; 
-}
+*/
