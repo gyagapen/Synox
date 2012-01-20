@@ -54,22 +54,27 @@
     <!-- FIN JAVASCRIPT -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
     <h1>
         SMS Recus</h1>
     <!-- Tableau des SMS envoyes -->
     <div id="divTable">
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+            <ContentTemplate>
  <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto">
                     <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
                     </asp:Table>
                     </asp:Panel>
+                    </ContentTemplate>
+        </asp:UpdatePanel>
     </div>
 
 
     
     
     <!-- Fin tableau -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
-    </asp:ScriptManager>
+    
     <div id="divPanel1" style="display: none">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>

@@ -38,6 +38,7 @@ namespace InterfaceGraphiqueSMS
         {
             //on va sauvegarde la date de premiere lecture si non renseigné
             populateSMSField(int.Parse(Session["noSMS"].ToString()), true);
+            UpdatePanel2.Update();
 
         }
 
