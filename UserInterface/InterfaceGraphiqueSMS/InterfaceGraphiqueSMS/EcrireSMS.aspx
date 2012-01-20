@@ -115,7 +115,7 @@
             runat="server" onKeyUp="verifLongueurMessage();" 
                 onChange="verifLongueurMessage();"></asp:TextBox>
         </fieldset>
-        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" CssClass="style1" />
+        <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" CssClass="niceButton" />
     </form>
 
     <div id="dialog" style="display: none">Message OK !!</div>

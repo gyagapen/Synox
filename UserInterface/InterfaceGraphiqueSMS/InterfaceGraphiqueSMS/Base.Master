@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Gestion de l'envoi et la r&eacute;ception des SMS</title>
+
     <link href="ThemeSMS.css" rel="Stylesheet" type="text/css" />
     <link type='text/css' href='css/basic.css' rel='stylesheet' media='screen' />
     <!-- IE6 "fix" for the close png image -->
@@ -12,12 +13,25 @@
 <![endif]-->
     <script type="text/javascript" src="Scripts/JQuery-1.7.1.js"></script>
     <script type='text/javascript' src='Scripts/jquery.simplemodal.js'></script>
-    <script type='text/javascript' src='Scripts/basic.js'></script>
+    <script type='text/javascript' src='Scripts/basic.js'></script> 
+
+
+     <!-- JQUERY -->
+        <link type="text/css" href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="Scripts/jquery-ui-1.8.17.custom.min.js"></script>
+    <!-- JQUERY -->
+
+    <script type="text/javascript">
+        $(function () {
+            $(".niceButton").button();
+        });
+    </script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
+    <form id="jqtransform" runat="server">
     <!- Zone : En tete ->
     <div class="header">
         <h1>
@@ -27,7 +41,7 @@
             <ul>
                 <li><a href="EcrireSMS.aspx">Ecrire SMS</a></li>
                 <li><a href="SMSEnvoyes.aspx">Boite d'envoi</a></li>
-                <li><a href="#">Boite de r&eacute;ception</a></li>
+                <li><a href="LireSMS.aspx">Boite de r&eacute;ception</a></li>
             </ul>
         </div>
     </div>
