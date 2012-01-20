@@ -71,7 +71,8 @@ namespace ServiceSMS
             }
 
             //IMPORTANT : permet la reception des accuses reception et la lecture des messages
-            Send("AT+CNMI=2,1,1,2,1");
+            Send("AT+CNMI=2,1,1,2,1"); 
+            //Send("AT+CNMI=1,1,1,0,0"); // Réception message
 
             Console.Out.WriteLine("Modem Connecte");
 
