@@ -20,11 +20,11 @@
         function loaded() {
 
 
-            // Please note that the following is the only line needed by iScroll to work. Everything else here is to make this demo fancier.
-            if (is_chrome != -1) {
-                //myScroll = new iScroll("<%= TableSMSEnvoyes.ClientID %>", { desktopCompatibility: true });
-                myScroll = new iScroll("divTable", { desktopCompatibility: true });
-            }
+        // Please note that the following is the only line needed by iScroll to work. Everything else here is to make this demo fancier.
+        if (is_chrome != -1) {
+        myScroll = new iScroll("<%= TableSMSEnvoyes.ClientID %>", { desktopCompatibility: true });
+        //myScroll = new iScroll("divTable", { desktopCompatibility: true });
+        }
         }
 
         // Prevent the whole screen to scroll when dragging elements outside of the scroller (ie:header/footer).
@@ -40,15 +40,15 @@
 
         function selectTableSMS(idSMS) {
 
+            //ouverture de la popup
             InterfaceGraphiqueSMS.WebForm1.saveIdSMS(idSMS);
 
             $("#<%= buttonCache.ClientID %>").click();
-
-            //ouverture de la popup
-            $('#tabInfo').modal({ minHeight: 450 });
-
+            $("#<%= UpdatePanel1.ClientID %>").modal({ minHeight: 450 });
+         
 
         }
+
 
 
     </script>
@@ -58,18 +58,23 @@
     <h1>
         SMS envoyés</h1>
     <!-- Tableau des SMS envoyes -->
-    <asp:Panel ID="Panel1" runat="server"  Height="400px" ScrollBars="Auto">
-        <div id="divTable">
-            <asp:Table ID="TableSMSEnvoyes"  runat="server" CssClass="tableauSMS">
-            </asp:Table>
-        </div>
-    </asp:Panel>
+    <div id="divTable">
+ <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto">
+                    <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
+                    </asp:Table>
+                    </asp:Panel>
+    </div>
+
+
+    
+    
     <!-- Fin tableau -->
     <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
-    <div id="div_panel" style="display: none">
+    <div id="divPanel1" style="display: none">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
+                <form>
                 <table align="center" id="tabInfo">
                     <tr>
                         <td>
@@ -140,6 +145,7 @@
                         </td>
                     </tr>
                 </table>
+                </form>
                 <div style="display: none">
                     <asp:Button ID="buttonCache" ClientIDMode="Predictable" runat="server" Text="Button"
                         OnClick="buttonCache_clicked" />
@@ -148,4 +154,8 @@
         </asp:UpdatePanel>
     </div>
     <br />
+
+
+
+
 </asp:Content>
