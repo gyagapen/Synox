@@ -59,16 +59,22 @@
     <h1>
         SMS Recus</h1>
     <!-- Tableau des SMS envoyes -->
-    <div id="divTable">
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+       <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
+    <div id="divTable">
+   
+
  <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto">
+  
                     <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
                     </asp:Table>
+                 
                     </asp:Panel>
-                    </ContentTemplate>
-        </asp:UpdatePanel>
+                    
+                 
     </div>
+       </ContentTemplate>
+        </asp:UpdatePanel>   
 
 
     
@@ -148,6 +154,8 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+        <asp:Timer ID="TimerRefresh" runat="server" OnTick="rafraichirPage">
+        </asp:Timer>
     </div>
     <br />
 

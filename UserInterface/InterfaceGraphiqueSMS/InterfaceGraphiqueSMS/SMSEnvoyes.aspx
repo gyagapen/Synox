@@ -7,6 +7,7 @@
     <!-- IScroll -->
     <script type="text/javascript" src="Scripts/iscroll.js"></script>
     <!-- JAVASCRIPT -->
+    
     <script type="text/javascript">
 
 
@@ -52,25 +53,77 @@
 
 
     </script>
+ 
     <!-- FIN JAVASCRIPT -->
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main" runat="server">
+
+<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
+    </asp:ScriptManager>
+
     <h1>
         SMS envoyés</h1>
     <!-- Tableau des SMS envoyes -->
     <div id="divTable">
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
+    <ContentTemplate>
  <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto">
+ <asp:Timer ID="TimerRefresh" runat="server">
+     
+     
+        </asp:Timer>
                     <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
                     </asp:Table>
                     </asp:Panel>
+
+
+                    <uc:Spinner>
+
+    <script type="text/javascript">
+
+        alert("OK");
+
+        //savoir si c'est le navigateur est chrome ou pas
+        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome')
+
+
+        /**************ISCROLL*****************/
+        var myScroll;
+        var a = 0;
+        function loaded() {
+
+
+            // Please note that the following is the only line needed by iScroll to work. Everything else here is to make this demo fancier.
+            if (is_chrome != -1) {
+                myScroll = new iScroll("<%= TableSMSEnvoyes.ClientID %>", { desktopCompatibility: true });
+                //myScroll = new iScroll("divTable", { desktopCompatibility: true });
+            }
+        }
+
+        // Prevent the whole screen to scroll when dragging elements outside of the scroller (ie:header/footer).
+        // If you want to use iScroll in a portion of the screen and still be able to use the native scrolling, do *not* preventDefault on touchmove.
+        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+
+        // Load iScroll when DOM content is ready.
+        document.addEventListener('DOMContentLoaded', loaded, false);
+
+        /**************FIN ISCROLL*****************/
+
+        
+
+    </script>
+
+</uc:Spinner>
+
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
     </div>
 
 
     
     
     <!-- Fin tableau -->
-    <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
-    </asp:ScriptManager>
+    
     <div id="divPanel1" style="display: none">
         <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
             <ContentTemplate>
@@ -152,6 +205,7 @@
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+        
     </div>
     <br />
 

@@ -17,12 +17,13 @@ namespace InterfaceGraphiqueSMS
             //initialisation AJAX
             AjaxPro.Utility.RegisterTypeForAjax(typeof(InterfaceGraphiqueSMS.WebForm1));
 
-
+            //rafraichissement de la page chaque 30 secondes
+            TimerRefresh.Interval = 30000;
+            TimerRefresh.Enabled = true;
+            
             if (!Page.IsPostBack)
             {
                 populateTableSMSRecus();
-
-
             }
         }
 
@@ -38,8 +39,15 @@ namespace InterfaceGraphiqueSMS
         {
             //on va sauvegarde la date de premiere lecture si non renseigné
             populateSMSField(int.Parse(Session["noSMS"].ToString()), true);
-            UpdatePanel2.Update();
+            
 
+        }
+
+
+        protected void rafraichirPage(object sender, EventArgs e)
+        {
+            populateTableSMSRecus();
+            UpdatePanel2.Update();
         }
 
         //lorsque renseignerDateLecture est a vrai, on associe une date de premiere lecture au sms
@@ -67,6 +75,8 @@ namespace InterfaceGraphiqueSMS
                 //on va sauvegarde la date de premiere lecture si non renseigné
                 detailsMessage.MessageRecu.dateLecture = DateTime.Now;
                 dbContext.SubmitChanges();
+                populateTableSMSRecus();
+                UpdatePanel2.Update();
             }
         }
 
