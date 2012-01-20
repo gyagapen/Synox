@@ -112,7 +112,7 @@
     
         
         <asp:TextBox TextMode=MultiLine ID="contenuSMS" Height="128px" Width="455px"
-            runat="server" AutoPostBack="True" onKeyUp="verifLongueurMessage();" 
+            runat="server" onKeyUp="verifLongueurMessage();" 
                 onChange="verifLongueurMessage();"></asp:TextBox>
         </fieldset>
         <asp:Button Text="Valider" onclick="EcrireSMS" runat="server" CssClass="niceButton" />

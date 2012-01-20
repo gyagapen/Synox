@@ -9,7 +9,7 @@ namespace ConsoleApplicationTestSMS
     class Program
     {
 
-        const string portCom = "COM11";
+        const string portCom = "COM5";
         const string numeroG = "0625123338";
         const string numeroY = "0675610118";
         const string numeroM = "0604655154";
@@ -46,9 +46,15 @@ namespace ConsoleApplicationTestSMS
 
             //modSMS.Send("AT+CSMP=49,167,0,0");
             //modSMS.Send("AT+CNMI=2,1,3,2,1");
+<<<<<<< HEAD
+            //modSMS.Send("AT+CNMI=2,1,1,2,1");
+            modSMS.Send("AT+CNMI?");
+            //modSMS.sendSMSPDU(numeroG, "Test accusé réception PDU", true);
+=======
             modSMS.Send("AT+CNMI=1,1,0,0,0");
 
             //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
+>>>>>>> 55074b141638b2144c0b34e6e341715b2ef0f76d
             //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
 
             //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");
@@ -64,7 +70,7 @@ namespace ConsoleApplicationTestSMS
 
             //modSMS.Send("AT+CPMS?");
 
-            modSMS.readPDUMessage();
+            //modSMS.readPDUMessage();
             //modSMS.readAllSMSText();
 
 
