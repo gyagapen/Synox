@@ -1,17 +1,19 @@
 ﻿body 
 {
     width : 1000px;
-    background-color : #FEFFEA; /* E8E8E8 */
+    background-color : #FEFFEA ; /* E8E8E8 */
     margin : auto;
 }
 
 .header
 {
     
-    background-color:#6BACD6;
+    background:url(css/images/banniere.png);
     border : 1px solid grey;
     border-radius : 1em;
     text-align : center;
+    color : #FEFFEA;
+    font-family:Trebuchet MS;
 }
 
 #navbar_ex8 ul 
@@ -21,14 +23,16 @@
     height : 18px;
     text-align : center;
     margin-bottom : 20px;
+     margin-left : 300px;
+     
 }
 
 #navbar_ex8 ul li 
 {
     list-style: none;
-    float : left;
-    margin-right : 5px;
-    margin-left : 5px;
+   float : left;
+    margin-right : 10px;
+    margin-left : 10px;
 }
 
 #navbar_ex8 a 
@@ -38,7 +42,8 @@
     display: block;
     padding: 1px 6px;
     text-decoration: none;
-    background: #D7E4F2;
+    /*background: #D7E4F2;*/
+    background : #AED0EA;
     color : Black;
     border-radius: 1em; 
     padding : 5px;
@@ -47,7 +52,7 @@
 #navbar_ex8 a:hover, #navbar_ex8 a#active8 
 {
     padding : 4px;
-    background-color : #FBFBFB;
+    background-color : #DEEDF7;
     border : 1px solid grey;
 }
 

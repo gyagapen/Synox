@@ -39,11 +39,15 @@
             Gestion des SMS</h1>
         <!- Zone : Menu ->
         <div id="navbar_ex8">
+        
             <ul>
+            <center>
                 <li><a href="EcrireSMS.aspx">Ecrire SMS</a></li>
                 <li><a href="SMSEnvoyes.aspx">Boite d'envoi</a></li>
                 <li><a href="LireSMS.aspx">Boite de r&eacute;ception</a></li>
+                </center>
             </ul>
+            
         </div>
     </div>
     <!- Zone : Contenu ->
