@@ -165,13 +165,19 @@ namespace InterfaceGraphiqueSMS
                 if (sms.messageTexte == null)
                 {
                     TableCell cMsg = new TableCell();
-                    cMsg.Text = "Trame PDU";
+                    cMsg.Text = "Trame PDU (Cliquer pour plus de details)";
                     ligne.Cells.Add(cMsg);
                 }
                 else
                 {
                     TableCell cMsg = new TableCell();
-                    cMsg.Text = sms.messageTexte;
+
+                    //longueur du msg a afficher dans le tableau
+                    if (sms.messageTexte.Length > 30)
+                        cMsg.Text = sms.messageTexte.Substring(0, 29) + "...";
+                    else
+                        cMsg.Text = sms.messageTexte;
+
                     ligne.Cells.Add(cMsg);
                 }
 

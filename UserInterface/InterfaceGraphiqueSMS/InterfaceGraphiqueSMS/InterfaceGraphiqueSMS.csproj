@@ -54,8 +54,11 @@
   <ItemGroup>
     <Content Include="css\basic.css" />
     <Content Include="css\basic_ie.css" />
+    <Content Include="css\images\banniere.png" />
+    <Content Include="css\images\repondre.jpg" />
     <Content Include="css\images\searchbg.png" />
     <Content Include="css\images\searchbtn.png" />
+    <Content Include="css\images\supprimer.gif" />
     <Content Include="css\images\ui-bg_diagonals-small_25_c5ddfc_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_20_e69700_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_22_1484e6_40x40.png" />
@@ -158,7 +161,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>1911</DevelopmentServerPort>
+          <DevelopmentServerPort>25248</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
