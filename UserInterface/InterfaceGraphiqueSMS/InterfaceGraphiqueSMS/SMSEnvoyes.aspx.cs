@@ -173,8 +173,8 @@ namespace InterfaceGraphiqueSMS
                     TableCell cMsg = new TableCell();
 
                     //longueur du msg a afficher dans le tableau
-                    if (sms.messageTexte.Length > 50)
-                        cMsg.Text = sms.messageTexte.Substring(0, 49) + "...";
+                    if (sms.messageTexte.Length > 30)
+                        cMsg.Text = sms.messageTexte.Substring(0, 29) + "...";
                     else
                         cMsg.Text = sms.messageTexte;
 
