@@ -93,7 +93,11 @@ namespace ServiceSMS
         }
 
 
-        //envoi d'un sms en mode texte
+        /// <summary>
+        /// envoi d'un sms en mode texte
+        /// </summary>
+        /// <param name="no"></param>
+        /// <param name="message"></param>
         public void sendSMSText(string no, string message)
         {
             //mode text
@@ -105,7 +109,15 @@ namespace ServiceSMS
 
         }
 
-        //envoi d'un sms en MODE pdu, receipt = accuse de reception
+        /// <summary>
+        /// envoi d'un sms en MODE pdu, receipt = accuse de reception
+        /// </summary>
+        /// <param name="no"></param>
+        /// <param name="message"></param>
+        /// <param name="receipt"></param>
+        /// <param name="typeEncodage"></param>
+        /// <param name="validityPeriod"></param>
+        /// <returns></returns>
         public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage = "16bits", int validityPeriod = -1)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
@@ -122,7 +134,21 @@ namespace ServiceSMS
             Send(pduMSG + char.ConvertFromUtf32(26), 1);
 
             //recuperation et affichage de la reponse
-            string result = Recv();
+            //Boolean rcvok = false;
+            string result = null;
+            /*while(!rcvok)
+            {
+                try
+                {*/
+                    result = Recv();
+                    //rcvok = true;
+                /*}
+                catch (ApplicationException e)
+                {
+                    Console.WriteLine(e.StackTrace);
+                }
+            }*/
+
             Console.WriteLine(result);
 
             //on retourne la reference du message envoye ou "ERROR" en cas d'erreur
@@ -410,8 +436,8 @@ namespace ServiceSMS
             Console.Out.WriteLine("Deleting all READ messages");
 
             //Status report memory
-            Send("AT+CPMS=\"SR\"");
-            Send("AT+CMGD=1,2");
+            //Send("AT+CPMS=\"SR\"");
+            //Send("AT+CMGD=1,2");
 
             //sim memory
             Send("AT+CPMS=\"SM\"");

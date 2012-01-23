@@ -178,10 +178,17 @@ namespace ServiceSMS
                 //LogHelper.Trace("timerService_Elapsed:" + ex.Message, LogHelper.EnumCategorie.Erreur); 
                 Console.WriteLine("Erreur : " + ex.Message);
                 Console.WriteLine(ex.StackTrace);
+                // On redémarre le service
+                Stop();
+                Start();
             }
         }
 
-        //methode qui communique avec le modem pour une demande d'envoi de SMS avec un message texte
+
+        /// <summary>
+        /// methode qui communique avec le modem pour une demande d'envoi de SMS avec un message texte
+        /// </summary>
+        /// <param name="sms"></param>
         private void envoyerSMS(MessageEnvoi sms)
         {
             //on recupere le statut "ENVOYE"
@@ -250,7 +257,6 @@ namespace ServiceSMS
             }
 
 
-
             //on sauvegarde le sms comme envoye s'il y a une reference d'envoi
             if (reference != null)
             {
@@ -275,7 +281,10 @@ namespace ServiceSMS
 
         }
 
-        //lit les messages presents sur la sim
+
+        /// <summary>
+        /// lit les messages presents sur la sim
+        /// </summary>
         public void readMessagesOnSim()
         {
             //connexion au modem
@@ -323,6 +332,9 @@ namespace ServiceSMS
         }
 
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void getDeliveryReport()
         {
             //on selectionne les messages dont la reception de l'accuse reception est a verifier
@@ -376,7 +388,13 @@ namespace ServiceSMS
 
         }
 
-        //retourne vrai si l'accuse du sms a ete recu par le modem
+
+        /// <summary>
+        /// retourne vrai si l'accuse du sms a ete recu par le modem
+        /// </summary>
+        /// <param name="sms"></param>
+        /// <param name="listeAccusesModem"></param>
+        /// <returns></returns>
         public Boolean verifierAccusePresentDansModem(MessageEnvoi sms, String[][] listeAccusesModem)
         {
             Boolean estPresent = false;
