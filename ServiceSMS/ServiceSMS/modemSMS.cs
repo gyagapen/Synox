@@ -450,9 +450,9 @@ namespace ServiceSMS
 
         public SMS decodeSMSPDU(string message)
         {
-
             //on recupere le sms
             SMS sms = new SMS();
+
             SMS.Fetch(sms, ref message);
             //afficherContenuMessagePDU(sms);
 
