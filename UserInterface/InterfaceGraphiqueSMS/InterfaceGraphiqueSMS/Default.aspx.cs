@@ -17,6 +17,12 @@ namespace InterfaceGraphiqueSMS
 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Request["notel"] != null)
+            {
+                numDestinataire.Text = Request["notel"].ToString();
+            }
+            
             if (!Page.IsPostBack)
             {
                 //on charge tous les encodages
