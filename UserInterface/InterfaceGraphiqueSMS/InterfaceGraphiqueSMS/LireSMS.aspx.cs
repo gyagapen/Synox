@@ -17,12 +17,16 @@ namespace InterfaceGraphiqueSMS
             //initialisation AJAX
             AjaxPro.Utility.RegisterTypeForAjax(typeof(InterfaceGraphiqueSMS.WebForm1));
 
-            //rafraichissement de la page chaque 30 secondes
-            TimerRefresh.Interval = 30000;
-            TimerRefresh.Enabled = true;
-            
+           
             if (!Page.IsPostBack)
             {
+                //rafraichissement de la page chaque 30 secondes
+                TimerRefresh.Interval = 30000;
+                TimerRefresh.Enabled = true;
+            
+                //reinitialisation de la recherche
+                Session["search"] = "";
+
                 populateTableSMSRecus();
             }
         }
@@ -35,18 +39,30 @@ namespace InterfaceGraphiqueSMS
             Session["noSMS"] = idMessage;
         }
 
+        [AjaxPro.AjaxMethod]
+        //enregistre la recherche
+        public void saveSearch(string recherche)
+        {
+            Session["search"] = recherche;
+        }
+
         protected void buttonCache_clicked(object sender, EventArgs e)
         {
             //on va sauvegarde la date de premiere lecture si non renseigné
             populateSMSField(int.Parse(Session["noSMS"].ToString()), true);
-            
+        }
+
+        protected void buttonSearch_clicked(object sender, EventArgs e)
+        {
+            populateTableSMSRecus((Session["search"].ToString()));
+            //on update le panel
+            UpdatePanel2.Update();
 
         }
 
-
         protected void rafraichirPage(object sender, EventArgs e)
         {
-            populateTableSMSRecus();
+            populateTableSMSRecus((Session["search"].ToString()));
             UpdatePanel2.Update();
         }
 
@@ -75,16 +91,21 @@ namespace InterfaceGraphiqueSMS
                 //on va sauvegarde la date de premiere lecture si non renseigné
                 detailsMessage.MessageRecu.dateLecture = DateTime.Now;
                 dbContext.SubmitChanges();
-                populateTableSMSRecus();
+                populateTableSMSRecus(Session["search"].ToString());
                 UpdatePanel2.Update();
             }
         }
 
         //remplit le tableau des SMS
-        private void populateTableSMSRecus()
+        private void populateTableSMSRecus(string elementRecherche = "")
         {
             Message[] listeMessages;
-            listeMessages = (from mess in dbContext.MessageRecu orderby mess.idMessage descending select mess.Message).ToArray();
+            listeMessages = (from mess in dbContext.MessageRecu
+                             where mess.Message.messageTexte.Contains(elementRecherche)
+                             || mess.Message.noEmetteur.Contains(elementRecherche)
+                             || mess.dateReception.ToString().Contains(elementRecherche)
+                             orderby mess.idMessage 
+                             descending select mess.Message).ToArray();
 
             //en tete du tableau
             TableHeaderRow ligneHeader = new TableHeaderRow();
@@ -165,7 +186,7 @@ namespace InterfaceGraphiqueSMS
 
 
                 //on ajoute un evenement javascript pour recuperer le click du tableau
-                ligne.Attributes.Add("ondblclick", "selectTableSMS(" + sms.idMessage + ")");
+                ligne.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
 
 
                 //on ajoute la ligne au tableau

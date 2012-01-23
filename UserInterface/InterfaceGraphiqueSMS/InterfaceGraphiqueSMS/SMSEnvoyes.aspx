@@ -11,43 +11,35 @@
     <script type="text/javascript">
 
 
-        //savoir si c'est le navigateur est chrome ou pas
-        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome')
-
-
-        /**************ISCROLL*****************/
-        var myScroll;
-        var a = 0;
-        function loaded() {
-
-
-        // Please note that the following is the only line needed by iScroll to work. Everything else here is to make this demo fancier.
-        if (is_chrome != -1) {
-        myScroll = new iScroll("<%= TableSMSEnvoyes.ClientID %>", { desktopCompatibility: true });
-        //myScroll = new iScroll("divTable", { desktopCompatibility: true });
-        }
-        }
-
-        // Prevent the whole screen to scroll when dragging elements outside of the scroller (ie:header/footer).
-        // If you want to use iScroll in a portion of the screen and still be able to use the native scrolling, do *not* preventDefault on touchmove.
-        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-        // Load iScroll when DOM content is ready.
-        document.addEventListener('DOMContentLoaded', loaded, false);
-
-        /**************FIN ISCROLL*****************/
-
-
 
         function selectTableSMS(idSMS) {
 
-            //ouverture de la popup
+            //sauvegarde de l'id
             InterfaceGraphiqueSMS.WebForm1.saveIdSMS(idSMS);
 
             $("#<%= buttonCache.ClientID %>").click();
             $("#<%= UpdatePanel1.ClientID %>").modal({ minHeight: 450 });
-         
 
+
+        }
+
+
+        function validSearchForm() {
+
+            // recuperation sauvegarde de la recherche
+            var search = document.getElementById("search").value;
+            InterfaceGraphiqueSMS.WebForm1.saveSearch(search);
+
+            $("#<%= buttonSearch.ClientID %>").click();
+        }
+
+        function FormKeyPressed() {
+
+            //si touche entree
+            if (window.event.keyCode == 13) {
+                $("#submit").click();
+
+            }
         }
 
 
@@ -61,66 +53,49 @@
 <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="true">
     </asp:ScriptManager>
 
-    <h1>
-        SMS envoyés</h1>
+    <h2 align="center">
+        SMS envoyés</h2>
+
+
+    <!-- RECHERCHE -->
+   
+  
+<form id="searchbox">
+
+<center>
+   <input id="search" type="text" placeholder="Rechercher Emetteur, Message, Date Reception (jj/mm/aaaa)" onkeypress="FormKeyPressed()">
+    <input id="submit" type="button" value="Search" onclick="validSearchForm()">
+    
+    </center>
+</form>
+
+
+<br />
+    <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
     <!-- Tableau des SMS envoyes -->
     <div id="divTable">
-    <asp:UpdatePanel ID="UpdatePanel2" runat="server">
-    <ContentTemplate>
- <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto">
- <asp:Timer ID="TimerRefresh" runat="server">
-     
-     
-        </asp:Timer>
+    
+    
+ <asp:Panel ID="Panel1" runat="server" Height="360px" ScrollBars=Auto>
+
                     <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
                     </asp:Table>
                     </asp:Panel>
 
+                            <div style="display:none">
+    <asp:Button ID="buttonSearch" ClientIDMode="Predictable" runat="server" Text="Button"
+                        OnClick="buttonSearch_clicked" />
+                        </div>
 
-                    <uc:Spinner>
-
-    <script type="text/javascript">
-
-        alert("OK");
-
-        //savoir si c'est le navigateur est chrome ou pas
-        var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome')
-
-
-        /**************ISCROLL*****************/
-        var myScroll;
-        var a = 0;
-        function loaded() {
-
-
-            // Please note that the following is the only line needed by iScroll to work. Everything else here is to make this demo fancier.
-            if (is_chrome != -1) {
-                myScroll = new iScroll("<%= TableSMSEnvoyes.ClientID %>", { desktopCompatibility: true });
-                //myScroll = new iScroll("divTable", { desktopCompatibility: true });
-            }
-        }
-
-        // Prevent the whole screen to scroll when dragging elements outside of the scroller (ie:header/footer).
-        // If you want to use iScroll in a portion of the screen and still be able to use the native scrolling, do *not* preventDefault on touchmove.
-        document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
-
-        // Load iScroll when DOM content is ready.
-        document.addEventListener('DOMContentLoaded', loaded, false);
-
-        /**************FIN ISCROLL*****************/
-
-        
-
-    </script>
-
-</uc:Spinner>
+                                <asp:Timer ID="TimerRefresh" runat="server" OnTick="rafraichirPage">  
+                                </asp:Timer>
 
                     </ContentTemplate>
                     </asp:UpdatePanel>
     </div>
 
 
-    
     
     <!-- Fin tableau -->
     
@@ -202,9 +177,16 @@
                 <div style="display: none">
                     <asp:Button ID="buttonCache" ClientIDMode="Predictable" runat="server" Text="Button"
                         OnClick="buttonCache_clicked" />
+
+                        
                 </div>
             </ContentTemplate>
         </asp:UpdatePanel>
+
+
+
+ 
+    
         
     </div>
     <br />

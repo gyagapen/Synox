@@ -54,6 +54,8 @@
   <ItemGroup>
     <Content Include="css\basic.css" />
     <Content Include="css\basic_ie.css" />
+    <Content Include="css\images\searchbg.png" />
+    <Content Include="css\images\searchbtn.png" />
     <Content Include="css\images\ui-bg_diagonals-small_25_c5ddfc_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_20_e69700_40x40.png" />
     <Content Include="css\images\ui-bg_diagonals-thick_22_1484e6_40x40.png" />
@@ -89,8 +91,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="SMSEnvoyes.aspx" />
-    <Content Include="WebForm2.aspx" />
-    <Content Include="WebUserControl1.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UserControl.ascx" />
@@ -127,20 +127,6 @@
     </Compile>
     <Compile Include="SMSEnvoyes.aspx.designer.cs">
       <DependentUpon>SMSEnvoyes.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebForm2.aspx.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebForm2.aspx.designer.cs">
-      <DependentUpon>WebForm2.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebUserControl1.ascx.cs">
-      <DependentUpon>WebUserControl1.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebUserControl1.ascx.designer.cs">
-      <DependentUpon>WebUserControl1.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
