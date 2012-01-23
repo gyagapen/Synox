@@ -15,7 +15,7 @@
             InterfaceGraphiqueSMS.WebForm1.saveIdSMS(idSMS);
 
             $("#<%= buttonCache.ClientID %>").click();
-            $("#<%= UpdatePanel1.ClientID %>").modal({ minHeight: 450 });
+            $("#<%= UpdatePanel1.ClientID %>").modal({ minHeight: 300 });
 
 
         }
@@ -110,14 +110,7 @@
                             <asp:TextBox ID="tbDestinataire" runat="server" ReadOnly="True"></asp:TextBox>
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            Statut :
-                        </td>
-                        <td>
-                            <asp:TextBox ID="tbStatut" runat="server" ReadOnly="True"></asp:TextBox>
-                        </td>
-                    </tr>
+                    
                     <td>
                         Date reception :
                     </td>
