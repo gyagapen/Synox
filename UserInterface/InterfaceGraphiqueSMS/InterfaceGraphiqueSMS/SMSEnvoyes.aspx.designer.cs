@@ -40,15 +40,6 @@ namespace InterfaceGraphiqueSMS {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Contrôle TimerRefresh.
-        /// </summary>
-        /// <remarks>
-        /// Champ généré automatiquement.
-        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
-        /// </remarks>
-        protected global::System.Web.UI.Timer TimerRefresh;
-        
-        /// <summary>
         /// Contrôle TableSMSEnvoyes.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,24 @@ namespace InterfaceGraphiqueSMS {
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Table TableSMSEnvoyes;
+        
+        /// <summary>
+        /// Contrôle buttonSearch.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonSearch;
+        
+        /// <summary>
+        /// Contrôle TimerRefresh.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.Timer TimerRefresh;
         
         /// <summary>
         /// Contrôle UpdatePanel1.

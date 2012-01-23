@@ -18,18 +18,20 @@ namespace InterfaceGraphiqueSMS
         {
             //initialisation AJAX
             AjaxPro.Utility.RegisterTypeForAjax(typeof(InterfaceGraphiqueSMS.WebForm1));
-            
-            
-            //rafraichissement de la page chaque 30 secondes
-            TimerRefresh.Interval = 10000;
-            TimerRefresh.Enabled = true;
-            populateTableSMSEnvoyes();
-            
+
 
             if (!Page.IsPostBack)
             {
-                
 
+                //rafraichissement de la page chaque 30 secondes
+                TimerRefresh.Interval = 30000;
+                TimerRefresh.Enabled = true;
+
+                //reinitialisation de la recherche
+                Session["search"] = "";
+
+
+                populateTableSMSEnvoyes();
             }
         }
 
@@ -42,15 +44,34 @@ namespace InterfaceGraphiqueSMS
             Session["noSMS"] = idMessage;
         }
 
+
+        [AjaxPro.AjaxMethod]
+        //enregistre la recherche
+        public void saveSearch(string recherche)
+        {
+            Session["search"] = recherche;
+        }
+
         protected void buttonCache_clicked(object sender, EventArgs e)
         {
             populateSMSField(int.Parse(Session["noSMS"].ToString()));
           
         }
 
+
+
+        protected void buttonSearch_clicked(object sender, EventArgs e)
+        {
+            populateTableSMSEnvoyes(Session["search"].ToString());
+            //on update le panel
+            UpdatePanel2.Update();
+
+        }
+
         public void populateSMSField(int idMessage)
         {
             Message detailsMessage = (from mess in dbContext.Message where mess.idMessage == idMessage select mess).First();
+
             tbMessage.Text = detailsMessage.messageTexte;
             tbDestinataire.Text = detailsMessage.noDestinataire;
             tbEmetteur.Text = detailsMessage.noEmetteur;
@@ -66,11 +87,32 @@ namespace InterfaceGraphiqueSMS
             tbDateDemande.Text = detailsMessage.MessageEnvoi.dateDemande.ToString();
         }
 
+        protected void rafraichirPage(object sender, EventArgs e)
+        {
+            populateTableSMSEnvoyes(Session["search"].ToString());
+            UpdatePanel2.Update();
+        }
+
+
+        static string addslashes(string txt)
+        {
+            txt.Replace("'", "\\'");
+            txt.Replace("\"", "\\\"");
+            return (txt);
+        }
+
         //remplit le tableau des SMS
-        private void populateTableSMSEnvoyes()
+        private void populateTableSMSEnvoyes(string elementRecherche="")
         {
             Message[] listeMessages;
-            listeMessages = (from mess in dbContext.MessageEnvoi orderby mess.idMessage descending select mess.Message).ToArray();
+            listeMessages = (from mess in dbContext.MessageEnvoi
+                             where mess.Message.messageTexte.Contains(elementRecherche)
+                             || mess.Message.noDestinataire.Contains(elementRecherche)
+                             || mess.dateDemande.ToString().Contains(elementRecherche)
+                             || mess.dateEnvoi.ToString().Contains(elementRecherche)
+                             || mess.Statut.libelleStatut.Contains(elementRecherche)
+                             orderby mess.idMessage descending 
+                             select mess.Message).ToArray();
 
             //en tete du tableau
             TableHeaderRow ligneHeader = new TableHeaderRow();
@@ -155,7 +197,7 @@ namespace InterfaceGraphiqueSMS
                 ligne.Cells.Add(cStatut);
 
                 //on ajoute un evenement javascript pour recuperer le click du tableau
-                ligne.Attributes.Add("ondblclick", "selectTableSMS(" + sms.idMessage + ")");
+                ligne.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
 
 
                 //on ajoute la ligne au tableau
