@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using System.Data.SqlClient;
+using System.Threading;
 
 namespace ServiceSMS
 {
@@ -113,7 +115,7 @@ namespace ServiceSMS
                 if (!_busy)
                 {
                     _busy = true;
-                    // tqche de lecture des sms recus
+                    // tâche de lecture des sms recus
                     if (_dateDerniereLecture.Add(_dureeEntre2Lectures) < DateTime.Now)
                     {
                         //  le process de lecture
@@ -135,18 +137,14 @@ namespace ServiceSMS
                     }
 
 
-                    // tache de envoi des sms
+                    // tache d'envoi des sms
                     if (_dateDerniereEnvoi.Add(_dureeEntre2Envois) < DateTime.Now)
                     {
                         //on recupere tous les message en attente d'envoi dans la base de donnees
 
-
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
                                                          where msg.Statut.libelleStatut == "En attente"
                                                          select msg).ToArray();
-
-
-
 
                         //connexion au modem
                         if (lesSMSAEnvoyer.Length > 0)
@@ -155,16 +153,13 @@ namespace ServiceSMS
                         //pour chaque message a envoyer
                         foreach (MessageEnvoi sms in lesSMSAEnvoyer)
                         {
-          
-                                //on envoie le sms
-                                envoyerSMS(sms);
-
+                            //on envoie le sms
+                            envoyerSMS(sms);
                         }
-
-
 
                         if (lesSMSAEnvoyer.Length > 0)
                             modem.disconnectToModem();
+
                         // to do
                         _dateDerniereEnvoi = DateTime.Now;
                     }
@@ -176,11 +171,10 @@ namespace ServiceSMS
             {
                 //_busy = false;
                 //LogHelper.Trace("timerService_Elapsed:" + ex.Message, LogHelper.EnumCategorie.Erreur); 
-                Console.WriteLine("Erreur : " + ex.Message);
+                Console.WriteLine("Erreur timerService_Elapsed : " + ex.Message);
                 Console.WriteLine(ex.StackTrace);
-                // On redémarre le service
-                Stop();
-                Start();
+                Thread.Sleep(2000);
+                timerService_Elapsed(sender, e);
             }
         }
 
@@ -283,7 +277,7 @@ namespace ServiceSMS
 
 
         /// <summary>
-        /// lit les messages presents sur la sim
+        /// Lit les messages presents sur la SIM
         /// </summary>
         public void readMessagesOnSim()
         {
@@ -333,68 +327,75 @@ namespace ServiceSMS
 
 
         /// <summary>
-        /// 
+        /// Traite les accusés de réception des messages non accusés
         /// </summary>
         public void getDeliveryReport()
         {
             //on selectionne les messages dont la reception de l'accuse reception est a verifier
-            MessageEnvoi[] lesSMSAVerifier = (from msg in dbContext.MessageEnvoi
-                                              where msg.Statut.libelleStatut == "Envoye"
-                                              && msg.Message.accuseReception == 1
-                                              select msg).ToArray();
-
-
-            String[][] accuses = null;
-
-            if (lesSMSAVerifier.Count() > 0)
+            try
             {
-                //connexion modem
-                modem.connectToModem();
+                MessageEnvoi[] lesSMSAVerifier = (from msg in dbContext.MessageEnvoi
+                                                  where msg.Statut.libelleStatut == "Envoye"
+                                                  && msg.Message.accuseReception == 1
+                                                  select msg).ToArray();
+                String[][] accuses = null;
 
-                 //on recupere les accuses du modem
-            /**
-       * Retourne un tableau avec les informations de l'accuse reception
-        * pour le message i
-       * [i]0 - Reference
-       * [i]1 - Destinataire
-       * [i]2 - Date d'envoi SMS
-       * [i]3 - Date Reception
-       * [i]4 - Heure de reception
-       * */
-             accuses = modem.readDeliveryReport();
-            }
-
-           
-
-            //pour chaque message
-            foreach (MessageEnvoi sms in lesSMSAVerifier)
-            {
-                //si on a recu l'accuse
-                if (verifierAccusePresentDansModem(sms, accuses))
+                if (lesSMSAVerifier.Count() > 0)
                 {
-                    //on change le statut
-                    sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Accuse" select stat).First();
-                    sms.accuseReceptionRecu = 1;
+                    //connexion modem
+                    modem.connectToModem();
+
+                    //on recupere les accuses du modem
+                    /**
+                     * Retourne un tableau avec les informations de l'accuse reception
+                     * pour le message i
+                     * [i]0 - Reference
+                     * [i]1 - Destinataire
+                     * [i]2 - Date d'envoi SMS
+                     * [i]3 - Date Reception
+                     * [i]4 - Heure de reception
+                     * */
+                    accuses = modem.readDeliveryReport();
+                }
+
+                //pour chaque message
+                foreach (MessageEnvoi sms in lesSMSAVerifier)
+                {
+                    //Console.WriteLine("=== Verif SMS ===");
+                    //si on a recu l'accuse
+                    if (verifierAccusePresentDansModem(sms, accuses))
+                    {
+                        //Console.WriteLine("===  SMS  OK  ===");
+                        //on change le statut
+                        sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Accuse" select stat).First();
+                        sms.accuseReceptionRecu = 1;
+                    }
+                }
+
+                //on submit les changement
+                dbContext.SubmitChanges();
+
+                if (lesSMSAVerifier.Count() > 0)
+                {
+                    modem.disconnectToModem();
                 }
             }
-
-            //on submit les changement
-            dbContext.SubmitChanges();
-
-            if (lesSMSAVerifier.Count() > 0)
+            catch (SqlException sqle)
             {
+                Console.WriteLine(sqle.Message);
                 modem.disconnectToModem();
+                Thread.Sleep(2000);
+                getDeliveryReport();
             }
-
         }
 
 
         /// <summary>
-        /// retourne vrai si l'accuse du sms a ete recu par le modem
+        /// Retourne vrai si l'accuse du sms a ete recu par le modem
         /// </summary>
-        /// <param name="sms"></param>
-        /// <param name="listeAccusesModem"></param>
-        /// <returns></returns>
+        /// <param name="sms">Le SMS dont on cherche l'accusé</param>
+        /// <param name="listeAccusesModem">Les accusés de réception (voir readDeliveryReport() dans ModemSMS)</param>
+        /// <returns>True si l'accusé du SMS est trouvé, false sinon</returns>
         public Boolean verifierAccusePresentDansModem(MessageEnvoi sms, String[][] listeAccusesModem)
         {
             Boolean estPresent = false;
@@ -404,7 +405,7 @@ namespace ServiceSMS
             {
                 if ((listeAccusesModem[compteur][0] != null) && (sms.referenceEnvoi != null))
                 {
- 
+                    //Console.WriteLine(listeAccusesModem[compteur][0].Trim() + "<=>" + sms.referenceEnvoi.Trim());
                     if (sms.referenceEnvoi.Trim() == listeAccusesModem[compteur][0].Trim())
                     {
                         estPresent = true;
@@ -415,17 +416,13 @@ namespace ServiceSMS
                         DateTime dateReception = DateTime.ParseExact(listeAccusesModem[compteur][3] + " " + listeAccusesModem[compteur][4], "yy/MM/dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
                         sms.dateReceptionAccuse = dateReception;
-
-                        
                     }
-                    
                 }
                 compteur++;
-                
             }
-
             return estPresent;
         }
+
 
         #endregion
     }

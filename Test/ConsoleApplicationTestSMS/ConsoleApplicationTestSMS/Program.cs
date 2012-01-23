@@ -48,11 +48,11 @@ namespace ConsoleApplicationTestSMS
             //modSMS.Send("AT+CNMI=2,1,3,2,1");
 
             //modSMS.Send("AT+CNMI=2,1,1,2,1");
-            modSMS.Send("AT+CNMI?");
+            //modSMS.Send("AT+CNMI?");
             //modSMS.sendSMSPDU(numeroG, "Test accusé réception PDU", true);
             //modSMS.Send("AT+CNMI=1,1,0,0,0");
 
-            //modSMS.sendSMSPDU(numeroY, "Test accusé réception PDU 17h", true);
+            //modSMS.sendSMSPDU(numeroG, "Test accus", true);
             //modSMS.sendSMSPDU("0680787112", "Alors, ca fait quoi d'etre spamme ?", true);
 
             //modSMS.sendSMSText(numeroY, "Test accusé réception PDU 15h");

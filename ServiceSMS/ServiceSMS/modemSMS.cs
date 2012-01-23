@@ -14,9 +14,20 @@ namespace ServiceSMS
         public AutoResetEvent receiveNow;
 
         //variables 
+        /// <summary>
+        /// Le port auquel le modem est connecté
+        /// </summary>
         SerialPort PortCom { get; set; }
+
+        /// <summary>
+        /// Le nom du port
+        /// </summary>
         String serialPortName;
 
+        /// <summary>
+        /// Constructeur
+        /// </summary>
+        /// <param name="port">Le port de connexion au modem</param>
         public modemSMS(String port)
         {
             serialPortName = port;
@@ -42,7 +53,9 @@ namespace ServiceSMS
             }
         }
 
-        //fonction pour connecter le modem
+        /// <summary>
+        /// Connecte le modem
+        /// </summary>
         public void connectToModem()
         {
             PortCom = new SerialPort()
@@ -77,7 +90,10 @@ namespace ServiceSMS
             Console.Out.WriteLine("Modem Connecte");
 
         }
-        //fonction pour connecter le modem
+
+        /// <summary>
+        /// Déconnecte le modem
+        /// </summary>
         public void disconnectToModem()
         {
             if (PortCom != null)
@@ -94,10 +110,10 @@ namespace ServiceSMS
 
 
         /// <summary>
-        /// envoi d'un sms en mode texte
+        /// Envoi d'un sms en mode texte
         /// </summary>
-        /// <param name="no"></param>
-        /// <param name="message"></param>
+        /// <param name="no">Le numéro du destinataire</param>
+        /// <param name="message">Le message texte</param>
         public void sendSMSText(string no, string message)
         {
             //mode text
@@ -110,14 +126,14 @@ namespace ServiceSMS
         }
 
         /// <summary>
-        /// envoi d'un sms en MODE pdu, receipt = accuse de reception
+        /// Envoi d'un sms en mode PDU, receipt = accuse de reception
         /// </summary>
-        /// <param name="no"></param>
-        /// <param name="message"></param>
-        /// <param name="receipt"></param>
-        /// <param name="typeEncodage"></param>
-        /// <param name="validityPeriod"></param>
-        /// <returns></returns>
+        /// <param name="no">le numéro du destinataire</param>
+        /// <param name="message">Le message</param>
+        /// <param name="receipt">true si accusé demandé, false par défaut</param>
+        /// <param name="typeEncodage">"7bits", "8bits" ou "16bits"</param>
+        /// <param name="validityPeriod">La période de validité (-1 par défaut = aucune durée)</param>
+        /// <returns>La référence du message envoyé</returns>
         public String sendSMSPDU(string no, string message, Boolean receipt = false, string typeEncodage = "16bits", int validityPeriod = -1)
         {
             string pduMSG = encodeMsgPDU(message, no, receipt, typeEncodage, validityPeriod);
@@ -157,10 +173,13 @@ namespace ServiceSMS
         }
 
 
-        //envoi d'une TRAME pdu, receipt = accuse de reception
+        /// <summary>
+        /// Envoi une trame PDU
+        /// </summary>
+        /// <param name="trame">La trame PDU à envoyer</param>
+        /// <returns>La référence du message envoyé</returns>
         public String sendTramePDU(string trame)
         {
-
             //mode pdu
             Send("AT+CMGF=0");
 
@@ -184,7 +203,11 @@ namespace ServiceSMS
         }
 
 
-
+        /// <summary>
+        /// Lit tous les SMS
+        /// </summary>
+        /// <remarks>Obsolète</remarks>
+        /// <see cref="readPDUMessage()"/>
         public void readAllSMSText()
         {
             //mode text
@@ -193,26 +216,57 @@ namespace ServiceSMS
             readAllSMS("\"ALL\"");
         }
 
-        //lecture des messages en mode texte
+
+        /// <summary>
+        /// Lecture des messages en mode texte
+        /// </summary>
+        /// <param name="typeLecture">Le type de lecture</param>
+        /// <param name="reponseAutomatique">La réponse automatique</param>
         public void readAllSMS(string typeLecture, int reponseAutomatique = 0)
         {
             Send("AT+CPMS=\"SM\"");
 
             Send("AT+CMGL=" + typeLecture, reponseAutomatique);
-
         }
 
 
 
-        //compte le nombre de message présent sur la sim
+        /// <summary>
+        /// Compte le nombre de message présent sur la SIM
+        /// </summary>
+        /// <returns>Le nombre de SMS sur la SIM</returns>
         public int countSMSOnSim()
         {
-            Send("AT+CPMS?");
+            Send("AT+CPMS=\"SM\"", 1);
+            string rep = Recv(); 
+            int nb;
 
-            return 0;
+            if (int.TryParse(rep.Substring(22, 2), out nb))
+                return nb;
+            else
+                return int.Parse(rep.Substring(22, 1));
         }
 
-        //recoit un message du port com
+        /// <summary>
+        /// Retourne le nombre d'accuses de reception sur le modem
+        /// </summary>
+        /// <returns>Le nombre d'accuses de reception sur le modem</returns>
+        public int countReceiptOnSIM()
+        {
+            Send("AT+CPMS=\"SR\"", 1);
+            string rep = Recv();
+            int nb;
+
+            if (int.TryParse(rep.Substring(22, 2), out nb))
+                return nb;
+            else
+                return int.Parse(rep.Substring(22, 1));
+        }
+
+        /// <summary>
+        /// Reçoit un message du port com
+        /// </summary>
+        /// <returns>Le message reçu</returns>
         public string Recv()
         {
 
@@ -249,9 +303,11 @@ namespace ServiceSMS
 
 
 
-
-
-        //envoie des commandes AT au modem
+        /// <summary>
+        /// Permet d'envoyer des commandes AT au modem
+        /// </summary>
+        /// <param name="query">la commande AT</param>
+        /// <param name="estLu">Si 0 la réponse du modem est lue (Recv()) et affichée, si 1 elle n'est pas traitée</param>
         public void Send(string query, int estLu = 0)
         {
             byte[] buffer = Encoding.Default.GetBytes(query + "\r");
@@ -271,14 +327,13 @@ namespace ServiceSMS
                     //on affiche la reponse de la commande
                     Console.Out.WriteLine(Recv());
                 }
-
-
             }
-
-
         }
 
-        //retourne les SMS recus
+        /// <summary>
+        /// retourne les SMS recus
+        /// </summary>
+        /// <returns>Les SMS reçus</returns>
         public SMS[] readPDUMessage()
         {
             //passage en mode PDU
@@ -326,7 +381,7 @@ namespace ServiceSMS
 
 
 
-            //messages en text brut
+            //messages en texte brut
             string message = Recv();
 
             //on recupere les reponses a decoder
@@ -428,20 +483,27 @@ namespace ServiceSMS
         }
 
 
-        //
-        //supprime tous les messages lus de la sim
-        //
+        
+        /// <summary>
+        /// Supprime les messages lus si la mémoire et pleine ainsi que les accusés de réception si la mémoire est pleine
+        /// </summary>
         public void deleteAllReadSMS()
         {
-            Console.Out.WriteLine("Deleting all READ messages");
+            // Si on est proche de la saturation mémoire des accusés (limitée à 50 accusés)
+            if (countReceiptOnSIM() >= 45)
+            {
+                Console.Out.WriteLine("Deleting all RECEIPTS (" + countReceiptOnSIM().ToString() + ")");
+                Send("AT+CPMS=\"SR\"");
+                Send("AT+CMGD=1,2");
+            }
 
-            //Status report memory
-            //Send("AT+CPMS=\"SR\"");
-            //Send("AT+CMGD=1,2");
-
-            //sim memory
-            Send("AT+CPMS=\"SM\"");
-            Send("AT+CMGD=1,2");
+            // Si il y a de nombreux messages lus sur la SIM
+            /*if (countSMSOnSim() >= 25)
+            {*/
+                Console.Out.WriteLine("Deleting all READ messages (" + countSMSOnSim().ToString() + ")");
+                Send("AT+CPMS=\"SM\"");
+                Send("AT+CMGD=1,2");
+            //}
         }
 
 

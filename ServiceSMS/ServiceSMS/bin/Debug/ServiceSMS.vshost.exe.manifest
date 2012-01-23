@@ -57,14 +57,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServiceSMS.exe" size="48640">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ServiceSMS.exe" size="49664">
       <assemblyIdentity name="ServiceSMS" version="1.0.0.0" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>iHkA8e+122o3IIgSbu7wRiq4wJA=</dsig:DigestValue>
+        <dsig:DigestValue>9hbzf7vLn9Gpk6iS0HQsIXi6wjY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
