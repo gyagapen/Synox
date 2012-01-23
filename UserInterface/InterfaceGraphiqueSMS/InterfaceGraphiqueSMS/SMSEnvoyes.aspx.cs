@@ -18,13 +18,17 @@ namespace InterfaceGraphiqueSMS
         {
             //initialisation AJAX
             AjaxPro.Utility.RegisterTypeForAjax(typeof(InterfaceGraphiqueSMS.WebForm1));
-
+            
+            
+            //rafraichissement de la page chaque 30 secondes
+            TimerRefresh.Interval = 10000;
+            TimerRefresh.Enabled = true;
+            populateTableSMSEnvoyes();
+            
 
             if (!Page.IsPostBack)
             {
-                //UpdatePanel1.Visible = false;
-                populateTableSMSEnvoyes();
-
+                
 
             }
         }

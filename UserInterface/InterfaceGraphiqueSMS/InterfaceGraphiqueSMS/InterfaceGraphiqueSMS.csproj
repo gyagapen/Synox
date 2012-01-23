@@ -90,8 +90,10 @@
     </Content>
     <Content Include="SMSEnvoyes.aspx" />
     <Content Include="WebForm2.aspx" />
+    <Content Include="WebUserControl1.ascx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="UserControl.ascx" />
     <Compile Include="Default.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>EcrireSMS.aspx</DependentUpon>
@@ -132,6 +134,13 @@
     </Compile>
     <Compile Include="WebForm2.aspx.designer.cs">
       <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebUserControl1.ascx.designer.cs">
+      <DependentUpon>WebUserControl1.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

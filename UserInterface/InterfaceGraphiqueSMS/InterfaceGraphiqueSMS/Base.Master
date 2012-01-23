@@ -24,13 +24,14 @@
     <script type="text/javascript">
         $(function () {
             $(".niceButton").button();
+            $("#divTable").show({ effect: "blind", speed: "fast" });
         });
     </script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body id="masterBody">
     <form id="jqtransform" runat="server">
     <!- Zone : En tete ->
     <div class="header">
