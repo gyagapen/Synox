@@ -101,6 +101,32 @@ namespace InterfaceGraphiqueSMS
             return (txt);
         }
 
+        //supprime le message dont l'id est passe en parametre
+        public void supprimerSMS(string idMessage)
+        {
+
+            //on recupere le message
+            Message detailsMessage = (from mess in dbContext.Message where mess.idMessage == int.Parse(idMessage) select mess).First();
+
+
+            //on le supprime
+            dbContext.MessageEnvoi.DeleteOnSubmit(detailsMessage.MessageEnvoi);
+            dbContext.Message.DeleteOnSubmit(detailsMessage);
+
+            dbContext.SubmitChanges();
+
+
+        }
+
+        protected void buttonSupprimer_clicked(object sender, EventArgs e)
+        {
+            supprimerSMS(Session["noSMS"].ToString());
+            populateTableSMSEnvoyes(Session["search"].ToString());
+            //on update le panel
+            UpdatePanel2.Update();
+
+        }
+
         //remplit le tableau des SMS
         private void populateTableSMSEnvoyes(string elementRecherche="")
         {
@@ -144,20 +170,22 @@ namespace InterfaceGraphiqueSMS
             headStatut.Text = "Statut";
             ligneHeader.Cells.Add(headStatut);
 
+            //Actions
+            TableHeaderCell headAction = new TableHeaderCell();
+            headAction.Text = "Action";
+            ligneHeader.Cells.Add(headAction);
+
             TableSMSEnvoyes.Rows.Add(ligneHeader);
 
             foreach (Message sms in listeMessages)
             {
                 TableRow ligne = new TableRow();
                 
-                //reference envoi
-                /*TableCell cRef = new TableCell();
-                cRef.Text = sms.MessageEnvoi.referenceEnvoi;
-                ligne.Cells.Add(cRef);*/
 
                 //no destinataire
                 TableCell cDest = new TableCell();
                 cDest.Text = sms.noDestinataire;
+                cDest.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                 ligne.Cells.Add(cDest);
 
                 //Message
@@ -166,6 +194,7 @@ namespace InterfaceGraphiqueSMS
                 {
                     TableCell cMsg = new TableCell();
                     cMsg.Text = "Trame PDU (Cliquer pour plus de details)";
+                    cMsg.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                     ligne.Cells.Add(cMsg);
                 }
                 else
@@ -178,6 +207,7 @@ namespace InterfaceGraphiqueSMS
                     else
                         cMsg.Text = sms.messageTexte;
 
+                    cMsg.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                     ligne.Cells.Add(cMsg);
                 }
 
@@ -185,25 +215,30 @@ namespace InterfaceGraphiqueSMS
                 //date de demande d'envoi
                 TableCell cDemande = new TableCell();
                 cDemande.Text = sms.MessageEnvoi.dateDemande.ToString();
+                cDemande.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                 ligne.Cells.Add(cDemande);
 
                 //date d'envoi
                 TableCell cEnvoi = new TableCell();
                 cEnvoi.Text = sms.MessageEnvoi.dateEnvoi.ToString();
+                cEnvoi.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                 ligne.Cells.Add(cEnvoi);
-
-
-                //Accusse demande
 
 
 
                 //Etat
                 TableCell cStatut = new TableCell();
                 cStatut.Text = sms.MessageEnvoi.Statut.libelleStatut;
+                cStatut.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
                 ligne.Cells.Add(cStatut);
 
+                //Action
+                TableCell cAction = new TableCell();
+                cAction.Text = "<img src='css\\images\\supprimer.gif' width='20' onclick='supprimerSMS(" + sms.idMessage + ")' style='cursor:pointer'/>";
+                ligne.Cells.Add(cAction);
+
                 //on ajoute un evenement javascript pour recuperer le click du tableau
-                ligne.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
+                //ligne.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
 
 
                 //on ajoute la ligne au tableau

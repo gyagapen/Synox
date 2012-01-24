@@ -241,12 +241,7 @@ namespace InterfaceGraphiqueSMS
                     ligne.Cells.Add(cAccuse);
 
 
-
-
-                    //on ajoute un evenement javascript pour recuperer le click du tableau
-                    //ligne.Attributes.Add("onclick", "selectTableSMS(" + sms.idMessage + ")");
-
-                    //Accusse demande
+                    //Action
                     TableCell cAction = new TableCell();
                     cAction.Text = "<img src='css\\images\\repondre.jpg' width='25' onclick='repondreSMS(" + sms.noEmetteur + ")' style='cursor:pointer'/><img src='css\\images\\supprimer.gif' width='20' onclick='supprimerSMS(" + sms.idMessage + ")' style='cursor:pointer'/>";
                     ligne.Cells.Add(cAction);

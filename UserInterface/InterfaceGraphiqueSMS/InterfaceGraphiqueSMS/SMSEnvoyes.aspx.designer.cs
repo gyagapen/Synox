@@ -58,6 +58,15 @@ namespace InterfaceGraphiqueSMS {
         protected global::System.Web.UI.WebControls.Button buttonSearch;
         
         /// <summary>
+        /// Contrôle buttonSupprimer.
+        /// </summary>
+        /// <remarks>
+        /// Champ généré automatiquement.
+        /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button buttonSupprimer;
+        
+        /// <summary>
         /// Contrôle TimerRefresh.
         /// </summary>
         /// <remarks>
