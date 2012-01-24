@@ -126,10 +126,12 @@ namespace ServiceSMS
                         getDeliveryReport();
 
                         //lecture des messages
+                        Console.WriteLine("Lecture des messages");
                         readMessagesOnSim();
 
                         //on supprime tous les messages lus du modem
                         modem.connectToModem();
+                        Console.WriteLine("Suppression des messages lus");
                         modem.deleteAllReadSMS();
                         modem.disconnectToModem();
 
@@ -154,6 +156,7 @@ namespace ServiceSMS
                         foreach (MessageEnvoi sms in lesSMSAEnvoyer)
                         {
                             //on envoie le sms
+                            Console.WriteLine("Envoi d'un message");
                             envoyerSMS(sms);
                         }
 
@@ -297,47 +300,56 @@ namespace ServiceSMS
         /// </summary>
         public void readMessagesOnSim()
         {
-            //connexion au modem
-            modem.connectToModem();
-            
-            //on recupere les messages sur la sim
-            SMS[] lesMessagesSurSIM = modem.readPDUMessage();
-
-            //pour chaque message
-            foreach (SMS sms in lesMessagesSurSIM)
+            try
             {
-                //on fait le mapping avec un nouvel objet de la BD
-                
-                //initialisation
-                MessageRecu msg = new MessageRecu();
-                msg.Message = new Message();
+                //connexion au modem
+                modem.connectToModem();
 
-                //remplissage
-                msg.dateReception = sms.ServiceCenterTimeStamp;
-                msg.Message.messageTexte = sms.Message;
-                msg.Message.noEmetteur = sms.PhoneNumber;
-                msg.Message.noDestinataire = numeroModem;
-                msg.Message.accuseReception = 0; //faux par defaut
+                //on recupere les messages sur la sim
+                SMS[] lesMessagesSurSIM = modem.readPDUMessage();
 
-                Console.WriteLine("lecture message : " + sms.Message);
+                //pour chaque message
+                foreach (SMS sms in lesMessagesSurSIM)
+                {
+                    //on fait le mapping avec un nouvel objet de la BD
 
-                if (sms.StatusReportIndication)
-                    msg.Message.accuseReception =1;
-              
-                //encodage
-                msg.Message.Encodage = (from enc in dbContext.Encodage where enc.libelleEncodage == "PDU" select enc).First();
+                    //initialisation
+                    MessageRecu msg = new MessageRecu();
+                    msg.Message = new Message();
+
+                    //remplissage
+                    msg.dateReception = sms.ServiceCenterTimeStamp;
+                    msg.Message.messageTexte = sms.Message;
+                    msg.Message.noEmetteur = sms.PhoneNumber;
+                    msg.Message.noDestinataire = numeroModem;
+                    msg.Message.accuseReception = 0; //faux par defaut
+
+                    Console.WriteLine("lecture message : " + sms.Message);
+
+                    if (sms.StatusReportIndication)
+                        msg.Message.accuseReception = 1;
+
+                    //encodage
+                    msg.Message.Encodage = (from enc in dbContext.Encodage where enc.libelleEncodage == "PDU" select enc).First();
 
 
-                //enregistre du message
-                dbContext.Message.InsertOnSubmit(msg.Message);
-                dbContext.MessageRecu.InsertOnSubmit(msg);
+                    //enregistre du message
+                    dbContext.Message.InsertOnSubmit(msg.Message);
+                    dbContext.MessageRecu.InsertOnSubmit(msg);
+                }
+
+                //sauvegarde des changements
+                dbContext.SubmitChanges();
+
+                //deconnexion
+                modem.disconnectToModem();
             }
-
-            //sauvegarde des changements
-            dbContext.SubmitChanges();
-
-            //deconnexion
-            modem.disconnectToModem();
+            catch (SqlException sqle)
+            {
+                Console.WriteLine(sqle.Message);
+                Thread.Sleep(2000);
+                readMessagesOnSim();
+            }
             
         }
 
