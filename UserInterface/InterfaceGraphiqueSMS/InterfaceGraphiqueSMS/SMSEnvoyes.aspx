@@ -42,6 +42,14 @@
             }
         }
 
+        function supprimerSMS(idSMS) {
+
+            if (confirm("Voulez-vous vraiment supprimer ce SMS ?")) {
+                InterfaceGraphiqueSMS.WebForm1.saveIdSMS(idSMS);
+                $("#<%= buttonSupprimer.ClientID %>").click();
+            }
+        }
+
 
 
     </script>
@@ -86,6 +94,8 @@
                             <div style="display:none">
     <asp:Button ID="buttonSearch" ClientIDMode="Predictable" runat="server" Text="Button"
                         OnClick="buttonSearch_clicked" />
+                        <asp:Button ID="buttonSupprimer" ClientIDMode="Predictable" runat="server" Text="Button"
+                        OnClick="buttonSupprimer_clicked" />
                         </div>
 
                                 <asp:Timer ID="TimerRefresh" runat="server" OnTick="rafraichirPage">  
