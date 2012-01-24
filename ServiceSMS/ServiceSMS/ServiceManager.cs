@@ -185,94 +185,110 @@ namespace ServiceSMS
         /// <param name="sms"></param>
         private void envoyerSMS(MessageEnvoi sms)
         {
-            //on recupere le statut "ENVOYE"
-            Statut statutEnvoye = (from stat in dbContext.Statut where stat.libelleStatut == "Envoye" select stat).First();
-
-            //on recupere le booleen concernant la demande d'accuse reception
-            Boolean demandeAccuse = true; //par defaut a vrai
-
-            if (sms.Message.accuseReception == 0) //si specifier le contraire en BD, on change la valeur
+            try
             {
-                demandeAccuse = false;
+                //on recupere le statut "ENVOYE"
+                Statut statutEnvoye = (from stat in dbContext.Statut where stat.libelleStatut == "Envoye" select stat).First();
+
+                //on recupere le booleen concernant la demande d'accuse reception
+                Boolean demandeAccuse = true; //par defaut a vrai
+
+                if (sms.Message.accuseReception == 0) //si specifier le contraire en BD, on change la valeur
+                {
+                    demandeAccuse = false;
+                }
+
+                //on determine le message a envoyer
+                String messageAEnvoyer = null;
+
+                //pour sauvegarder la reference du SMS envoye
+                String reference = null;
+
+                //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
+                if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)  //TRAME PDU
+                {
+                    messageAEnvoyer = sms.Message.messagePDU;
+                    //on recupere la reference du message envoye
+                    reference = modem.sendTramePDU(messageAEnvoyer);
+
+                    //decodage de la trame PDU
+                    SMS smsPDU;
+
+                    smsPDU = modem.decodeSMSPDU(messageAEnvoyer); // Peut lever une exception si la trame PDU n'est pas correct
+
+                    sms.Message.messageTexte = smsPDU.Message;
+                    sms.Message.noDestinataire = smsPDU.PhoneNumber;
+                    sms.dureeValidite = modem.calculValidityPeriod(smsPDU.ValidityPeriod);
+
+                    //status report
+                    if (smsPDU.StatusReportIndication)
+                        sms.Message.accuseReception = 1;
+                    else
+                        sms.Message.accuseReception = 0;
+
+                }
+                else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
+                {
+                    messageAEnvoyer = sms.Message.messageTexte;
+
+                    //on recupere la duree de validite
+
+                    int dureeValiditite = -1;
+
+                    if (sms.dureeValidite.HasValue)
+                        dureeValiditite = sms.dureeValidite.Value;
+
+
+                    //on recupere la reference du message envoye
+
+                    reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
+
+                }
+
+                //verifie s'il y a une erreur
+                if (reference.Contains("ERROR"))
+                {
+                    //on passe le statut du sms a erreur
+                    sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+                }
+                else //on sauvegarde la reference en BD
+                {
+                    sms.referenceEnvoi = reference;
+                }
+
+
+                //on sauvegarde le sms comme envoye s'il y a une reference d'envoi
+                if (reference != null)
+                {
+                    //on complete les informations sur l'envoi des SMS
+                    sms.Message.noEmetteur = numeroModem;
+                    sms.accuseReceptionRecu = 0; //pas encore recu
+
+                    //on passe le sms en statut envoye
+                    sms.Statut = statutEnvoye;
+                    sms.dateEnvoi = DateTime.Now; //date du jour
+
+                }
+                else // erreur
+                {
+                    //on passe le statut du sms a erreur
+                    sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+                }
+
+
+                //on valide les changements dans la BD
+                dbContext.SubmitChanges();
             }
-
-            //on determine le message a envoyer
-            String messageAEnvoyer = null;
-
-            //pour sauvegarder la reference du SMS envoye
-            String reference = null;
-
-            //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
-            if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)  //TRAME PDU
+            catch (ApplicationException ae)
             {
-                messageAEnvoyer = sms.Message.messagePDU;
-                //on recupere la reference du message envoye
-                reference = modem.sendTramePDU(messageAEnvoyer);
-
-                //decodage de la trame PDU
-                SMS smsPDU = modem.decodeSMSPDU(messageAEnvoyer);
-
-                sms.Message.messageTexte = smsPDU.Message;
-                sms.Message.noDestinataire = smsPDU.PhoneNumber;
-                sms.dureeValidite = modem.calculValidityPeriod(smsPDU.ValidityPeriod);
-
-                //status report
-                if(smsPDU.StatusReportIndication)
-                    sms.Message.accuseReception = 1;
-                else
-                    sms.Message.accuseReception = 0;
-
+                Console.WriteLine(ae.Message);
+                envoyerSMS(sms);
             }
-            else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
+            catch (Exception e)
             {
-                messageAEnvoyer = sms.Message.messageTexte;
-
-                //on recupere la duree de validite
-
-                int dureeValiditite = -1; 
-                
-                if (sms.dureeValidite.HasValue)
-                    dureeValiditite= sms.dureeValidite.Value;
-
-
-                //on recupere la reference du message envoye
-                reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
-            }
-
-            //verifie s'il y a une erreur
-            if (reference.Contains("ERROR"))
-            {
-                //on passe le statut du sms a erreur
                 sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
+                dbContext.SubmitChanges();
             }
-            else //on sauvegarde la reference en BD
-            {
-                sms.referenceEnvoi = reference;
-            }
-
-
-            //on sauvegarde le sms comme envoye s'il y a une reference d'envoi
-            if (reference != null)
-            {
-                //on complete les informations sur l'envoi des SMS
-                sms.Message.noEmetteur = numeroModem;
-                sms.accuseReceptionRecu = 0; //pas encore recu
-
-                //on passe le sms en statut envoye
-                sms.Statut = statutEnvoye;
-                sms.dateEnvoi = DateTime.Now; //date du jour
-
-            }
-            else // erreur
-            {
-                //on passe le statut du sms a erreur
-                sms.Statut = (from stat in dbContext.Statut where stat.libelleStatut == "Erreur" select stat).First();
-            }
-
-
-            //on valide les changements dans la BD
-            dbContext.SubmitChanges();
-
         }
 
 
