@@ -130,7 +130,8 @@ namespace InterfaceGraphiqueSMS
         //remplit le tableau des SMS
         private void populateTableSMSEnvoyes(string elementRecherche="")
         {
-            Message[] listeMessages;
+            try{
+                Message[] listeMessages;
             listeMessages = (from mess in dbContext.MessageEnvoi
                              where mess.Message.messageTexte.Contains(elementRecherche)
                              || mess.Message.noDestinataire.Contains(elementRecherche)
@@ -180,7 +181,7 @@ namespace InterfaceGraphiqueSMS
             foreach (Message sms in listeMessages)
             {
                 TableRow ligne = new TableRow();
-                
+
 
                 //no destinataire
                 TableCell cDest = new TableCell();
@@ -243,7 +244,18 @@ namespace InterfaceGraphiqueSMS
 
                 //on ajoute la ligne au tableau
                 TableSMSEnvoyes.Rows.Add(ligne);
+           
 
+            }
+
+            }
+            catch (Exception ex)
+            {
+
+                if (ex.Message.Contains("transport"))
+                {
+                    populateTableSMSEnvoyes(elementRecherche);
+                }
             }
 
         }
