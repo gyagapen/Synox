@@ -60,9 +60,9 @@ namespace ServiceSMS
         {
             PortCom = new SerialPort()
             {
-                PortName = serialPortName,
-                BaudRate = 115200,
-                DataBits = 8,
+                PortName = serialPortName, //no de port, ex : COM11
+                BaudRate = 115200, //vitesse a laquelle on envoie/recoit les donnees (bps)
+                DataBits = 8, //longueur standard des bits de données par octet
                 StopBits = StopBits.One,
                 RtsEnable = true
             };
@@ -150,20 +150,10 @@ namespace ServiceSMS
             Send(pduMSG + char.ConvertFromUtf32(26), 1);
 
             //recuperation et affichage de la reponse
-            //Boolean rcvok = false;
+
             string result = null;
-            /*while(!rcvok)
-            {
-                try
-                {*/
-                    result = Recv();
-                    //rcvok = true;
-                /*}
-                catch (ApplicationException e)
-                {
-                    Console.WriteLine(e.StackTrace);
-                }
-            }*/
+
+            result = Recv();
 
             Console.WriteLine(result);
 
@@ -283,7 +273,6 @@ namespace ServiceSMS
                     //on l'ajoute a la reponse car on n'est pas sur que le message soit complet
                     response += message;
 
-                    //Console.Out.WriteLine("message en cours : " + response);
                 }
                 else
                 {
@@ -320,6 +309,9 @@ namespace ServiceSMS
                 //reinitialisation de l'evenement
                 receiveNow.Reset();
 
+                //buffer : Tableau d'octets qui contient les données à écrire sur le port. 
+                //offset : 0, index du buffer partir duquel commencer la copie des octets vers le port.
+                //buffer.length : Nombre d'octets à écrire sur le port
                 PortCom.Write(buffer, 0, buffer.Length);
 
                 if (estLu == 0)
@@ -625,6 +617,35 @@ namespace ServiceSMS
             TimeSpan resultat = new TimeSpan(jours, heures, minutes,0);
 
             return resultat;
+        }
+
+
+
+        public string Recv()
+        {
+
+            string response = "";
+
+            do //tantque la reponse n'est pas complete
+            {
+                //si le signal comme quoi on a recu un message est active dans les 10 prochaines secondes
+                if (receiveNow.WaitOne(10000, false))
+                {
+                    //on recupere les donnees presentes sur le port serie
+                    string message = PortCom.ReadExisting();
+
+                    //on l'ajoute a la reponse car on n'est pas sur que le message soit complet
+                    response += message;
+                }
+                else
+                {
+                    //message incomplet ...
+                }
+
+            }
+            while (!response.EndsWith("\r\nOK\r\n") && !response.EndsWith("\r\nERROR\r\n"));
+
+            return response;
         }
 
     }
