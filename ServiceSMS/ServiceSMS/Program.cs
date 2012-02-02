@@ -14,16 +14,18 @@ namespace ServiceSMS
         static void Main(string[] args)
         {
 
-            
+            //si mode debug on passe un argument a l'application     
 #if DEBUG
             args = new string[1] { "/cons" };
 #endif
-            if (args.Length > 0)
+            if (args.Length > 0) //si un argument est passé à l'application
             {
-
+                //on lance l'application en mode console
                 ServiceManager serverSync = new ServiceManager();
                 serverSync.Start();
 
+
+                //boucle qui permet de passer des commandes a l'application pendant l'execution
                 #region Attend une saisie de la commande 'quit' pour sortir
                 string quit = string.Empty;
                 Console.Title = "Service SMS";
@@ -61,7 +63,7 @@ namespace ServiceSMS
                         case "test vp":
                             modemSMS modSMSVP = new modemSMS("COM11");
 
-                            TimeSpan tim = new TimeSpan(1,0,0,0);
+                            TimeSpan tim = new TimeSpan(1, 0, 0, 0);
 
                             int intValue = modSMSVP.calculValidityPeriod(tim);
                             Console.WriteLine("INT VALUE : " + intValue);
@@ -79,12 +81,16 @@ namespace ServiceSMS
                 serverSync.Stop();
                 serverSync.Dispose();
             }
-            else{
+            else //on lance l'application en tant que service windows
+            {
+                //on instancie le service
                 ServiceBase[] ServicesToRun;
                 ServicesToRun = new ServiceBase[] 
-			{ 
-				new ServiceSMS() 
-			};
+			    { 
+				            new ServiceSMS() 
+			    };
+                
+                //on lance le service
                 ServiceBase.Run(ServicesToRun);
             }
         }
