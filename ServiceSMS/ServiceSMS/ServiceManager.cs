@@ -15,7 +15,6 @@ namespace ServiceSMS
         /// Flag pour savoir si les services sont démarrés
         /// </summary>
         public bool IsStarted = false;
-
         /// <summary>
         /// Timer Général
         /// </summary>
@@ -29,7 +28,7 @@ namespace ServiceSMS
         /// </summary>
         private DateTime _dateDerniereLecture;
         /// <summary>
-        /// Initialisé à 1 heure
+        /// Initialisé à 15 secondes
         /// </summary>
         private TimeSpan _dureeEntre2Lectures = new TimeSpan(0, 0, 15);
         /// <summary>
@@ -37,7 +36,7 @@ namespace ServiceSMS
         /// </summary>
         private DateTime _dateDerniereEnvoi;
         /// <summary>
-        /// Initialisé à 1 heure
+        /// Initialisé à 15 secondes
         /// </summary>
         private TimeSpan _dureeEntre2Envois = new TimeSpan(0, 0, 15);
 
@@ -48,7 +47,7 @@ namespace ServiceSMS
 
         //informations sur le modem
         private const String numeroModem = "+33604655154";
-        private const String noPortModem = "COM5";
+        private const String noPortModem = "COM4";
 
         //Reference vers la base de donnees
         private DBSMSContextDataContext dbContext = new DBSMSContextDataContext();
@@ -58,7 +57,7 @@ namespace ServiceSMS
         /// </summary>
         public ServiceManager()
         {
-            // Taches de fons toutes les 2 secondes
+            // Taches de fonds toutes les 2 secondes
             _timerService = new System.Timers.Timer();
             _timerService.Interval = 2000;
             _timerService.Elapsed += new ElapsedEventHandler(timerService_Elapsed);
@@ -66,8 +65,7 @@ namespace ServiceSMS
             _dateDerniereLecture = DateTime.Now;
         }
 
-
-        #region Start / Stop
+        #region start/stop
         /// <summary>
         /// Lancement du Timer
         /// </summary>
@@ -76,7 +74,6 @@ namespace ServiceSMS
             // Démarrage des taches de fond
             IsStarted = true;
             this._timerService.Start();
-
 
             //on initialise le modem
             modem = new modemSMS(noPortModem);
@@ -92,6 +89,7 @@ namespace ServiceSMS
             modem = null;
             IsStarted = false;
         }
+
         /// <summary>
         /// Arret des thread en cours
         /// </summary>
@@ -143,25 +141,26 @@ namespace ServiceSMS
                     if (_dateDerniereEnvoi.Add(_dureeEntre2Envois) < DateTime.Now)
                     {
                         //on recupere tous les message en attente d'envoi dans la base de donnees
-
                         MessageEnvoi[] lesSMSAEnvoyer = (from msg in dbContext.MessageEnvoi
                                                          where msg.Statut.libelleStatut == "En attente"
                                                          select msg).ToArray();
 
-                        //connexion au modem
+                        // S'il y a des messages à envoyer
                         if (lesSMSAEnvoyer.Length > 0)
+                        {
+                            //connexion au modem
                             modem.connectToModem();
 
-                        //pour chaque message a envoyer
-                        foreach (MessageEnvoi sms in lesSMSAEnvoyer)
-                        {
-                            //on envoie le sms
-                            Console.WriteLine("Envoi d'un message");
-                            envoyerSMS(sms);
-                        }
+                            //pour chaque message a envoyer
+                            foreach (MessageEnvoi sms in lesSMSAEnvoyer)
+                            {
+                                //on envoie le sms
+                                Console.WriteLine("Envoi d'un message"); // Pour le débuggage
+                                envoyerSMS(sms);
+                            }
 
-                        if (lesSMSAEnvoyer.Length > 0)
                             modem.disconnectToModem();
+                        }
 
                         // to do
                         _dateDerniereEnvoi = DateTime.Now;
@@ -207,14 +206,16 @@ namespace ServiceSMS
                 //pour sauvegarder la reference du SMS envoye
                 String reference = null;
 
-                //si message Texte est nul alors c'est une trame PDU (si pas nul aussi)
+                //si message Texte est nul alors c'est une trame PDU (si non nul aussi)
                 if (sms.Message.messageTexte == null && sms.Message.messagePDU != null)  //TRAME PDU
                 {
                     messageAEnvoyer = sms.Message.messagePDU;
                     //on recupere la reference du message envoye
                     reference = modem.sendTramePDU(messageAEnvoyer);
 
+                    //
                     //decodage de la trame PDU
+                    //
                     SMS smsPDU;
 
                     smsPDU = modem.decodeSMSPDU(messageAEnvoyer); // Peut lever une exception si la trame PDU n'est pas correct
@@ -230,7 +231,9 @@ namespace ServiceSMS
                         sms.Message.accuseReception = 0;
 
                 }
-                else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) //si trame PDU est nul alors c'est un message Texte (si pas nul aussi)
+                //si trame PDU est nulle alors c'est un message Texte (si pas nul aussi)
+                else if (sms.Message.messageTexte != null && sms.Message.messagePDU == null) 
+                    //si trame PDU est nulle alors c'est un message Texte (si non nulle aussi)
                 {
                     messageAEnvoyer = sms.Message.messageTexte;
 
@@ -244,7 +247,8 @@ namespace ServiceSMS
 
                     //on recupere la reference du message envoye
 
-                    reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
+                    reference = modem.sendSMSPDU(sms.Message.noDestinataire, messageAEnvoyer, 
+                        demandeAccuse, sms.Message.Encodage.libelleEncodage, dureeValiditite);
 
                 }
 
