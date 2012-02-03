@@ -85,7 +85,7 @@
     <div id="divTable">
     
     
- <asp:Panel ID="Panel1" runat="server" Height="360px" ScrollBars=Auto>
+ <asp:Panel ID="Panel1" runat="server" Height="320px" ScrollBars=Auto>
 
                     <asp:Table ID="TableSMSEnvoyes" runat="server" CssClass="tableauSMS">
                     </asp:Table>

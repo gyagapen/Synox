@@ -6,19 +6,22 @@ namespace ServiceSMS
 {
 	public class SMS : SMSBase
 	{
-		#region Members
-		protected bool _moreMessagesToSend;
-		protected bool _rejectDuplicates;
-		protected byte _messageReference;
-		protected string _phoneNumber;
+        //membres de la classe SMS issue de la librairie ATSMS
+		#region Members 
+
+		protected bool _moreMessagesToSend; //indique si c'est le dernier message
+		protected bool _rejectDuplicates; 
+		protected byte _messageReference; //la reference du message sur le modem GSM
+		protected string _phoneNumber; //numero du destinataire /emetteur
 		protected byte _protocolIdentifier;
-		protected byte _dataCodingScheme;
-		protected byte _validityPeriod;
-		protected DateTime _serviceCenterTimeStamp;
-		protected string _userData;
-		protected byte[] _userDataHeader;
-		protected string _message;
-		#endregion
+		protected byte _dataCodingScheme; //encodage du message
+		protected byte _validityPeriod; //periode de validite
+		protected DateTime _serviceCenterTimeStamp; //date a laquelle le CMSG a recu le sms
+		protected string _userData; //donnees utilisateurs
+		protected byte[] _userDataHeader; //entete des donnees utilisateurs
+		protected string _message; // message a envoyer
+		
+        #endregion
 
 		#region Properties
 		public DateTime ServiceCenterTimeStamp { get { return _serviceCenterTimeStamp; } }

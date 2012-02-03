@@ -65,7 +65,7 @@ namespace InterfaceGraphiqueSMS
                 // Message PDU
                 msg.messagePDU = contenuSMS.Text;
 
-                // Encodage PDU, pas propre !!!
+                // Encodage PDU
                 msg.Encodage = (from enc in dbContext.Encodage where enc.idEncodage == 4 select enc).First(); 
             }
 

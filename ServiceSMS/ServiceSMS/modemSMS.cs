@@ -410,7 +410,7 @@ namespace ServiceSMS
             sms.Message = message;
 
             //accuse de recepetion
-            sms.StatusReportIndication = true;
+            sms.StatusReportIndication = receipt;
 
 
             //periode de validite 
