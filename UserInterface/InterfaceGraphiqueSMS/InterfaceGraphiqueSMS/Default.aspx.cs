@@ -158,6 +158,7 @@ namespace InterfaceGraphiqueSMS
             }
         }
 
+        //lorsqu'on choisit un encodage
         protected void DropDownEncodage_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (DropDownEncodage.SelectedValue)

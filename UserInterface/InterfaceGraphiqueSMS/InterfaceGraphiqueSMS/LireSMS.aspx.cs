@@ -52,6 +52,7 @@ namespace InterfaceGraphiqueSMS
             populateSMSField(int.Parse(Session["noSMS"].ToString()), true);
         }
 
+        
         protected void buttonSearch_clicked(object sender, EventArgs e)
         {
             populateTableSMSRecus(Session["search"].ToString());

@@ -77,16 +77,18 @@
                         <td><asp:TextBox runat=server ID="numDestinataire"></asp:TextBox></td>
                     </tr>
                     <tr>
+                        <!-- ENCODAGE -->
                         <td>Encodage :</td>
                         <td>
-                            <asp:DropDownList ID="DropDownEncodage" runat="server" AutoPostBack="True" onselectedindexchanged="DropDownEncodage_SelectedIndexChanged" onChange="verifLongueurMessage()"></asp:DropDownList>&nbsp;&nbsp;&nbsp; 
-                            <asp:CheckBox ID="CheckBoxAccuse" runat="server" 
-                                Text="Demander un accusé de réception" />
+                            <asp:DropDownList ID="DropDownEncodage" onselectedindexchanged="DropDownEncodage_SelectedIndexChanged" runat="server" AutoPostBack="True"  onChange="verifLongueurMessage()"></asp:DropDownList>&nbsp;&nbsp;&nbsp;                       
                         </td>
+                        <!-- FIN ENCODAGE -->
                     </tr>
                     <tr>
                         <td>Date de validité :</td>
                         <td>
+                          <asp:CheckBox ID="CheckBoxAccuse" runat="server" 
+                                Text="Demander un accusé de réception" />
                             <asp:TextBox ID="tbJours" runat="server" CssClass="style2" Width="24px" 
                             AutoPostBack="True" MaxLength="3" ontextchanged="tbJours_TextChanged"></asp:TextBox>
                             jours
