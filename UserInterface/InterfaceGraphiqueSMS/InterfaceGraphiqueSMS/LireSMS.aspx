@@ -38,6 +38,8 @@
             }
         }
 
+        //l'utilisateur veut repondre a l'emetteur
+        //noTel = numero de l'emetteur
         function repondreSMS(noTel) {
 
             //on renvoie sur le formulaire d'ecriture
