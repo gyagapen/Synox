@@ -47,11 +47,8 @@ namespace ServiceSMS
 
         //informations sur le modem
         private const String numeroModem = "+33604655154";
-<<<<<<< HEAD
-        private const String noPortModem = "COM11";
-=======
-        private const String noPortModem = "COM4";
->>>>>>> 32ee51f381b4325a59c07d371dbe7b06fa4614d4
+
+        private const String noPortModem = "COM5";
 
         //Reference vers la base de donnees
         private DBSMSContextDataContext dbContext = new DBSMSContextDataContext();
