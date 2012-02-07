@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMS_DBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityContainer Name="SMS_DBModelStoreContainer">
+    <EntitySet Name="Encodage" EntityType="SMS_DBModel.Store.Encodage" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Message" EntityType="SMS_DBModel.Store.Message" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MessageEnvoi" EntityType="SMS_DBModel.Store.MessageEnvoi" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MessageRecu" EntityType="SMS_DBModel.Store.MessageRecu" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Statut" EntityType="SMS_DBModel.Store.Statut" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="SMS_DBModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Message_Encodage" Association="SMS_DBModel.Store.FK_Message_Encodage">
+      <End Role="Encodage" EntitySet="Encodage" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_Statut" Association="SMS_DBModel.Store.FK_Message_Statut">
+      <End Role="Statut" EntitySet="Statut" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageEnvoi_Message" Association="SMS_DBModel.Store.FK_MessageEnvoi_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageEnvoi" EntitySet="MessageEnvoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageRecu_Message" Association="SMS_DBModel.Store.FK_MessageRecu_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageRecu" EntitySet="MessageRecu" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Encodage">
+    <Key>
+      <PropertyRef Name="idEncodage" />
+    </Key>
+    <Property Name="idEncodage" Type="int" Nullable="false" />
+    <Property Name="libelleEncodage" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="int" Nullable="false" />
+    <Property Name="messageTexte" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="messagePDU" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="accuseReception" Type="int" Nullable="false" />
+    <Property Name="noDestinataire" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="noEmetteur" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="idEncodage" Type="int" Nullable="false" />
+    <Property Name="idStatut" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MessageEnvoi">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="int" Nullable="false" />
+    <Property Name="dureeValidite" Type="date" />
+    <Property Name="dateDemande" Type="date" Nullable="false" />
+    <Property Name="dateEnvoi" Type="date" />
+  </EntityType>
+  <EntityType Name="MessageRecu">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="int" Nullable="false" />
+    <Property Name="dateReception" Type="date" Nullable="false" />
+    <Property Name="dateLecture" Type="date" />
+  </EntityType>
+  <EntityType Name="Statut">
+    <Key>
+      <PropertyRef Name="idStatut" />
+    </Key>
+    <Property Name="idStatut" Type="int" Nullable="false" />
+    <Property Name="libelleStatut" Type="nvarchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Message_Encodage">
+    <End Role="Encodage" Type="SMS_DBModel.Store.Encodage" Multiplicity="1" />
+    <End Role="Message" Type="SMS_DBModel.Store.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Encodage">
+        <PropertyRef Name="idEncodage" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="idEncodage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Message_Statut">
+    <End Role="Statut" Type="SMS_DBModel.Store.Statut" Multiplicity="1" />
+    <End Role="Message" Type="SMS_DBModel.Store.Message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statut">
+        <PropertyRef Name="idStatut" />
+      </Principal>
+      <Dependent Role="Message">
+        <PropertyRef Name="idStatut" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageEnvoi_Message">
+    <End Role="Message" Type="SMS_DBModel.Store.Message" Multiplicity="1" />
+    <End Role="MessageEnvoi" Type="SMS_DBModel.Store.MessageEnvoi" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="idMessage" />
+      </Principal>
+      <Dependent Role="MessageEnvoi">
+        <PropertyRef Name="idMessage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageRecu_Message">
+    <End Role="Message" Type="SMS_DBModel.Store.Message" Multiplicity="1" />
+    <End Role="MessageRecu" Type="SMS_DBModel.Store.MessageRecu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="idMessage" />
+      </Principal>
+      <Dependent Role="MessageRecu">
+        <PropertyRef Name="idMessage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

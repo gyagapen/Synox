@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SMS_DBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="SMS_DBEntities">
+    <EntitySet Name="Encodage" EntityType="SMS_DBModel.Encodage" />
+    <EntitySet Name="Message" EntityType="SMS_DBModel.Message" />
+    <EntitySet Name="MessageEnvoi" EntityType="SMS_DBModel.MessageEnvoi" />
+    <EntitySet Name="MessageRecu" EntityType="SMS_DBModel.MessageRecu" />
+    <EntitySet Name="Statut" EntityType="SMS_DBModel.Statut" />
+    <EntitySet Name="sysdiagrams" EntityType="SMS_DBModel.sysdiagrams" />
+    <AssociationSet Name="FK_Message_Encodage" Association="SMS_DBModel.FK_Message_Encodage">
+      <End Role="Encodage" EntitySet="Encodage" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Message_Statut" Association="SMS_DBModel.FK_Message_Statut">
+      <End Role="Statut" EntitySet="Statut" />
+      <End Role="Message" EntitySet="Message" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageEnvoi_Message" Association="SMS_DBModel.FK_MessageEnvoi_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageEnvoi" EntitySet="MessageEnvoi" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MessageRecu_Message" Association="SMS_DBModel.FK_MessageRecu_Message">
+      <End Role="Message" EntitySet="Message" />
+      <End Role="MessageRecu" EntitySet="MessageRecu" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Encodage">
+    <Key>
+      <PropertyRef Name="idEncodage" />
+    </Key>
+    <Property Name="idEncodage" Type="Int32" Nullable="false" />
+    <Property Name="libelleEncodage" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Message" Relationship="SMS_DBModel.FK_Message_Encodage" FromRole="Encodage" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="Message">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="Int32" Nullable="false" />
+    <Property Name="messageTexte" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="messagePDU" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="accuseReception" Type="Int32" Nullable="false" />
+    <Property Name="noDestinataire" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="noEmetteur" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Encodage" Relationship="SMS_DBModel.FK_Message_Encodage" FromRole="Message" ToRole="Encodage" />
+    <NavigationProperty Name="Statut" Relationship="SMS_DBModel.FK_Message_Statut" FromRole="Message" ToRole="Statut" />
+    <NavigationProperty Name="MessageEnvoi" Relationship="SMS_DBModel.FK_MessageEnvoi_Message" FromRole="Message" ToRole="MessageEnvoi" />
+    <NavigationProperty Name="MessageRecu" Relationship="SMS_DBModel.FK_MessageRecu_Message" FromRole="Message" ToRole="MessageRecu" />
+  </EntityType>
+  <EntityType Name="MessageEnvoi">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="Int32" Nullable="false" />
+    <Property Name="dureeValidite" Type="DateTime" />
+    <Property Name="dateDemande" Type="DateTime" Nullable="false" />
+    <Property Name="dateEnvoi" Type="DateTime" />
+    <NavigationProperty Name="Message" Relationship="SMS_DBModel.FK_MessageEnvoi_Message" FromRole="MessageEnvoi" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="MessageRecu">
+    <Key>
+      <PropertyRef Name="idMessage" />
+    </Key>
+    <Property Name="idMessage" Type="Int32" Nullable="false" />
+    <Property Name="dateReception" Type="DateTime" Nullable="false" />
+    <Property Name="dateLecture" Type="DateTime" />
+    <NavigationProperty Name="Message" Relationship="SMS_DBModel.FK_MessageRecu_Message" FromRole="MessageRecu" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="Statut">
+    <Key>
+      <PropertyRef Name="idStatut" />
+    </Key>
+    <Property Name="idStatut" Type="Int32" Nullable="false" />
+    <Property Name="libelleStatut" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Message" Relationship="SMS_DBModel.FK_Message_Statut" FromRole="Statut" ToRole="Message" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Message_Encodage">
+    <End Role="Encodage" Type="SMS_DBModel.Encodage" Multiplicity="1" />
+    <End Role="Message" Type="SMS_DBModel.Message" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_Message_Statut">
+    <End Role="Statut" Type="SMS_DBModel.Statut" Multiplicity="1" />
+    <End Role="Message" Type="SMS_DBModel.Message" Multiplicity="*" />
+  </Association>
+  <Association Name="FK_MessageEnvoi_Message">
+    <End Role="Message" Type="SMS_DBModel.Message" Multiplicity="1" />
+    <End Role="MessageEnvoi" Type="SMS_DBModel.MessageEnvoi" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="idMessage" />
+      </Principal>
+      <Dependent Role="MessageEnvoi">
+        <PropertyRef Name="idMessage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MessageRecu_Message">
+    <End Role="Message" Type="SMS_DBModel.Message" Multiplicity="1" />
+    <End Role="MessageRecu" Type="SMS_DBModel.MessageRecu" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Message">
+        <PropertyRef Name="idMessage" />
+      </Principal>
+      <Dependent Role="MessageRecu">
+        <PropertyRef Name="idMessage" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

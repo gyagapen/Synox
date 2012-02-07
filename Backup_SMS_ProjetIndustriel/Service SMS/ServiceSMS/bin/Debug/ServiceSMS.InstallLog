@@ -1,0 +1,13 @@
+﻿Installation de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
+Installation du service Service1 en cours...
+Création d'une source EventLog Service1 dans le journal Application...
+Restauration de l'assembly 'C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe'.
+Les paramètres affectés sont :
+   logtoconsole = 
+   logfile = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.InstallLog
+   assemblypath = C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\ServiceSMS\ServiceSMS\bin\Debug\ServiceSMS.exe
+Restauration de l'état précédent du journal des événements pour la source Service1.

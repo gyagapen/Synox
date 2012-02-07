@@ -1,0 +1,60 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Base.Master.cs" Inherits="InterfaceGraphiqueSMS.Site1" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Gestion de l'envoi et la r&eacute;ception des SMS</title>
+
+    <link href="ThemeSMS.css" rel="Stylesheet" type="text/css" />
+    <link type='text/css' href='css/basic.css' rel='stylesheet' media='screen' />
+    <!-- IE6 "fix" for the close png image -->
+    <!--[if lt IE 7]>
+<link type='text/css' href='css/basic_ie.css' rel='stylesheet' media='screen' />
+<![endif]-->
+    <script type="text/javascript" src="Scripts/JQuery-1.7.1.js"></script>
+    <script type='text/javascript' src='Scripts/jquery.simplemodal.js'></script>
+    <script type='text/javascript' src='Scripts/basic.js'></script> 
+
+
+     <!-- JQUERY -->
+        <link type="text/css" href="css/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+        <script type="text/javascript" src="Scripts/jquery-ui-1.8.17.custom.min.js"></script>
+    <!-- JQUERY -->
+
+    <script type="text/javascript">
+        $(function () {
+            $(".niceButton").button();
+            $("#divTable").show({ effect: "blind", speed: "fast" });
+        });
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body id="masterBody">
+    <form id="jqtransform" runat="server">
+    <!- Zone : En tete ->
+    <div class="header">
+        <h1>
+            Gestion des SMS</h1>
+        <!- Zone : Menu ->
+        <div id="navbar_ex8">
+        
+            <ul>
+            <center>
+                <li><a href="EcrireSMS.aspx">Ecrire SMS</a></li>
+                <li><a href="SMSEnvoyes.aspx">Boite d'envoi</a></li>
+                <li><a href="LireSMS.aspx">Boite de r&eacute;ception</a></li>
+                </center>
+            </ul>
+            
+        </div>
+    </div>
+    <!- Zone : Contenu ->
+    <div class="contenu">
+        <asp:ContentPlaceHolder ID="Main" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>

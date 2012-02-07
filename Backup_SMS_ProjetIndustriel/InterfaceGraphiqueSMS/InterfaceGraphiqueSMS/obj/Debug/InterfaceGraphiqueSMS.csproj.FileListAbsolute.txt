@@ -1,0 +1,12 @@
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.pdb
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\ResolveAssemblyReference.cache
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.dll
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.pdb
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.dll
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\InterfaceGraphiqueSMS.pdb
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.dll
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\obj\Debug\InterfaceGraphiqueSMS.pdb
+F:\Internet\public_space\Polytech\Synox\GitHub\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\AjaxPro.2.dll
+C:\Users\Guillaume\Etudes\Polytech'Montpellier\IG5\PIFE Synox\workspace\Synox\UserInterface\InterfaceGraphiqueSMS\InterfaceGraphiqueSMS\bin\AjaxPro.2.dll

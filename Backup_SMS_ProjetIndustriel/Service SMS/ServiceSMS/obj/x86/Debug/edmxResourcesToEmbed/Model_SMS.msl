@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="SMS_DBModelStoreContainer" CdmEntityContainer="SMS_DBEntities">
+    <EntitySetMapping Name="Encodage">
+      <EntityTypeMapping TypeName="SMS_DBModel.Encodage">
+        <MappingFragment StoreEntitySet="Encodage">
+          <ScalarProperty Name="idEncodage" ColumnName="idEncodage" />
+          <ScalarProperty Name="libelleEncodage" ColumnName="libelleEncodage" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Message">
+      <EntityTypeMapping TypeName="SMS_DBModel.Message">
+        <MappingFragment StoreEntitySet="Message">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="messageTexte" ColumnName="messageTexte" />
+          <ScalarProperty Name="messagePDU" ColumnName="messagePDU" />
+          <ScalarProperty Name="accuseReception" ColumnName="accuseReception" />
+          <ScalarProperty Name="noDestinataire" ColumnName="noDestinataire" />
+          <ScalarProperty Name="noEmetteur" ColumnName="noEmetteur" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageEnvoi">
+      <EntityTypeMapping TypeName="SMS_DBModel.MessageEnvoi">
+        <MappingFragment StoreEntitySet="MessageEnvoi">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="dureeValidite" ColumnName="dureeValidite" />
+          <ScalarProperty Name="dateDemande" ColumnName="dateDemande" />
+          <ScalarProperty Name="dateEnvoi" ColumnName="dateEnvoi" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MessageRecu">
+      <EntityTypeMapping TypeName="SMS_DBModel.MessageRecu">
+        <MappingFragment StoreEntitySet="MessageRecu">
+          <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+          <ScalarProperty Name="dateReception" ColumnName="dateReception" />
+          <ScalarProperty Name="dateLecture" ColumnName="dateLecture" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Statut">
+      <EntityTypeMapping TypeName="SMS_DBModel.Statut">
+        <MappingFragment StoreEntitySet="Statut">
+          <ScalarProperty Name="idStatut" ColumnName="idStatut" />
+          <ScalarProperty Name="libelleStatut" ColumnName="libelleStatut" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="SMS_DBModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="FK_Message_Encodage" TypeName="SMS_DBModel.FK_Message_Encodage" StoreEntitySet="Message">
+      <EndProperty Name="Encodage">
+        <ScalarProperty Name="idEncodage" ColumnName="idEncodage" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_Message_Statut" TypeName="SMS_DBModel.FK_Message_Statut" StoreEntitySet="Message">
+      <EndProperty Name="Statut">
+        <ScalarProperty Name="idStatut" ColumnName="idStatut" />
+      </EndProperty>
+      <EndProperty Name="Message">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MessageEnvoi_Message" TypeName="SMS_DBModel.FK_MessageEnvoi_Message" StoreEntitySet="MessageEnvoi">
+      <EndProperty Name="Message">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+      <EndProperty Name="MessageEnvoi">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="FK_MessageRecu_Message" TypeName="SMS_DBModel.FK_MessageRecu_Message" StoreEntitySet="MessageRecu">
+      <EndProperty Name="Message">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+      <EndProperty Name="MessageRecu">
+        <ScalarProperty Name="idMessage" ColumnName="idMessage" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

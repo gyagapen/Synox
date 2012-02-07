@@ -23,8 +23,8 @@ namespace InterfaceGraphiqueSMS
             if (!Page.IsPostBack)
             {
 
-                //rafraichissement de la page chaque 30 secondes
-                TimerRefresh.Interval = 30000;
+                //rafraichissement de la page chaque 15 secondes
+                TimerRefresh.Interval = 15000;
                 TimerRefresh.Enabled = true;
 
                 //reinitialisation de la recherche
